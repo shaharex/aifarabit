@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
+        child: ChatPage(),
       ),
     );
   }
