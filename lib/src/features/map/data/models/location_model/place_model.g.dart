@@ -8,14 +8,16 @@ part of 'place_model.dart';
 
 _$PlaceModelImpl _$$PlaceModelImplFromJson(Map<String, dynamic> json) =>
     _$PlaceModelImpl(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] as String,
       placeName: json['placeName'] as String,
-      rating: (json['rating'] as num).toDouble(),
+      rating: (json['rating'] as num).toInt(),
       description: json['description'] as String,
-      photoURLs:
-          (json['photoURLs'] as List<dynamic>).map((e) => e as String).toList(),
-      comments:
-          (json['comments'] as List<dynamic>).map((e) => e as String).toList(),
+      photoURLs: (json['photoURLs'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       longitude: (json['longitude'] as num).toDouble(),
       latitude: (json['latitude'] as num).toDouble(),
     );

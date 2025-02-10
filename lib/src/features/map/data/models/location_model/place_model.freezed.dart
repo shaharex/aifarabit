@@ -20,12 +20,12 @@ PlaceModel _$PlaceModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PlaceModel {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get placeName => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
+  int get rating => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<String> get photoURLs => throw _privateConstructorUsedError;
-  List<String> get comments => throw _privateConstructorUsedError;
+  List<String>? get photoURLs => throw _privateConstructorUsedError;
+  List<String>? get comments => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
 
@@ -46,12 +46,12 @@ abstract class $PlaceModelCopyWith<$Res> {
       _$PlaceModelCopyWithImpl<$Res, PlaceModel>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String placeName,
-      double rating,
+      int rating,
       String description,
-      List<String> photoURLs,
-      List<String> comments,
+      List<String>? photoURLs,
+      List<String>? comments,
       double longitude,
       double latitude});
 }
@@ -75,8 +75,8 @@ class _$PlaceModelCopyWithImpl<$Res, $Val extends PlaceModel>
     Object? placeName = null,
     Object? rating = null,
     Object? description = null,
-    Object? photoURLs = null,
-    Object? comments = null,
+    Object? photoURLs = freezed,
+    Object? comments = freezed,
     Object? longitude = null,
     Object? latitude = null,
   }) {
@@ -84,7 +84,7 @@ class _$PlaceModelCopyWithImpl<$Res, $Val extends PlaceModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       placeName: null == placeName
           ? _value.placeName
           : placeName // ignore: cast_nullable_to_non_nullable
@@ -92,19 +92,19 @@ class _$PlaceModelCopyWithImpl<$Res, $Val extends PlaceModel>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      photoURLs: null == photoURLs
+      photoURLs: freezed == photoURLs
           ? _value.photoURLs
           : photoURLs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      comments: null == comments
+              as List<String>?,
+      comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       longitude: null == longitude
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
@@ -126,12 +126,12 @@ abstract class _$$PlaceModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String placeName,
-      double rating,
+      int rating,
       String description,
-      List<String> photoURLs,
-      List<String> comments,
+      List<String>? photoURLs,
+      List<String>? comments,
       double longitude,
       double latitude});
 }
@@ -153,8 +153,8 @@ class __$$PlaceModelImplCopyWithImpl<$Res>
     Object? placeName = null,
     Object? rating = null,
     Object? description = null,
-    Object? photoURLs = null,
-    Object? comments = null,
+    Object? photoURLs = freezed,
+    Object? comments = freezed,
     Object? longitude = null,
     Object? latitude = null,
   }) {
@@ -162,7 +162,7 @@ class __$$PlaceModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       placeName: null == placeName
           ? _value.placeName
           : placeName // ignore: cast_nullable_to_non_nullable
@@ -170,19 +170,19 @@ class __$$PlaceModelImplCopyWithImpl<$Res>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      photoURLs: null == photoURLs
+      photoURLs: freezed == photoURLs
           ? _value._photoURLs
           : photoURLs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      comments: null == comments
+              as List<String>?,
+      comments: freezed == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       longitude: null == longitude
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
@@ -203,8 +203,8 @@ class _$PlaceModelImpl implements _PlaceModel {
       required this.placeName,
       required this.rating,
       required this.description,
-      required final List<String> photoURLs,
-      required final List<String> comments,
+      final List<String>? photoURLs,
+      final List<String>? comments,
       required this.longitude,
       required this.latitude})
       : _photoURLs = photoURLs,
@@ -214,27 +214,31 @@ class _$PlaceModelImpl implements _PlaceModel {
       _$$PlaceModelImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String placeName;
   @override
-  final double rating;
+  final int rating;
   @override
   final String description;
-  final List<String> _photoURLs;
+  final List<String>? _photoURLs;
   @override
-  List<String> get photoURLs {
+  List<String>? get photoURLs {
+    final value = _photoURLs;
+    if (value == null) return null;
     if (_photoURLs is EqualUnmodifiableListView) return _photoURLs;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_photoURLs);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<String> _comments;
+  final List<String>? _comments;
   @override
-  List<String> get comments {
+  List<String>? get comments {
+    final value = _comments;
+    if (value == null) return null;
     if (_comments is EqualUnmodifiableListView) return _comments;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comments);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -294,22 +298,16 @@ class _$PlaceModelImpl implements _PlaceModel {
       this,
     );
   }
-  
-  @override
-  PlaceEntity toEntity() {
-    // TODO: implement toEntity
-    throw UnimplementedError();
-  }
 }
 
 abstract class _PlaceModel implements PlaceModel {
   const factory _PlaceModel(
-      {required final int id,
+      {required final String id,
       required final String placeName,
-      required final double rating,
+      required final int rating,
       required final String description,
-      required final List<String> photoURLs,
-      required final List<String> comments,
+      final List<String>? photoURLs,
+      final List<String>? comments,
       required final double longitude,
       required final double latitude}) = _$PlaceModelImpl;
 
@@ -317,17 +315,17 @@ abstract class _PlaceModel implements PlaceModel {
       _$PlaceModelImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get placeName;
   @override
-  double get rating;
+  int get rating;
   @override
   String get description;
   @override
-  List<String> get photoURLs;
+  List<String>? get photoURLs;
   @override
-  List<String> get comments;
+  List<String>? get comments;
   @override
   double get longitude;
   @override
