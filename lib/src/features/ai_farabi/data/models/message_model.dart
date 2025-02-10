@@ -1,4 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jihc_hack/src/features/ai_farabi/domain/enitity/message.dart';
 
 class MessageModel {
