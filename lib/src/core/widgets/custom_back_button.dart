@@ -6,6 +6,9 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+      },
       child: Container(
         width: 40,
         height: 40,

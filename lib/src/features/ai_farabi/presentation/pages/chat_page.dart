@@ -111,6 +111,7 @@ class _ChatViewState extends State<ChatView> {
         ),
       ),
       floatingActionButton: InputField(
+        hintText: 'Send a message...',
         controller: _chatController,
         onPressed: () {
           if (_chatController.text.isNotEmpty) {
