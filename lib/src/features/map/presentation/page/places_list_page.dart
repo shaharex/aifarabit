@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+
+class PlacesListPage extends StatefulWidget {
+  const PlacesListPage({super.key});
+
+  @override
+  State<PlacesListPage> createState() => _PlacesListPageState();
+}
+
+class _PlacesListPageState extends State<PlacesListPage> {
+  @override
+  void initState() {
+    
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SizedBox()
+    );
+  }
+}
