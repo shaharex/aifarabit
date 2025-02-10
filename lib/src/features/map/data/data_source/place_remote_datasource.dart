@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:jihc_hack/src/features/home/data/models/location_model/place_model.dart';
+import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
 
 
 abstract class PlaceRemoteDataSource {
