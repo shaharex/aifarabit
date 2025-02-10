@@ -11,8 +11,7 @@ import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/input_fiel
 import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.place});
-  final String place;
+  const ChatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +23,13 @@ class ChatPage extends StatelessWidget {
           ),
         ),
       ),
-      child: ChatView(
-        place: place,
-      ),
+      child: ChatView(),
     );
   }
 }
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key, required this.place});
-  final String place;
+  const ChatView({super.key});
 
   @override
   State<ChatView> createState() => _ChatViewState();
