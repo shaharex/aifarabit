@@ -1,5 +1,5 @@
-import 'package:jihc_hack/src/features/home/data/data_source/place_remote_datasource.dart';
-import 'package:jihc_hack/src/features/home/domain/entity/place_entity.dart';
+import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
+import 'package:jihc_hack/src/features/map/domain/entity/place_entity.dart';
 
 import '../../domain/repositories/place_repository.dart';
 
