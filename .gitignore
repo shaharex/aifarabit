@@ -30,6 +30,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+# api key for groq
+/lib/src/core/constants/api_key.dart
 
 # Symbolication related
 app.*.symbols
