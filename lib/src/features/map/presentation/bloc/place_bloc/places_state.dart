@@ -12,6 +12,6 @@ class PlacesState with _$PlacesState {
 @freezed
 class PlacesViewModel with _$PlacesViewModel {
   factory PlacesViewModel({
-    List<PlaceEntity>? cartItems,
+    List<PlaceModel>? cartItems,
   }) = _PlacesViewModel;
 }
