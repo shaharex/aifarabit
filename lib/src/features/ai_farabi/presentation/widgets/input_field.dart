@@ -5,12 +5,14 @@ import '../../../../core/constants/constants.dart';
 class InputField extends StatelessWidget {
   InputField({
     super.key,
+    required this.hintText,
     required this.controller,
     required this.textChanged,
     required this.onPressed,
     required this.iconShow,
   });
 
+  final String hintText;
   final TextEditingController controller;
   Function(String)? textChanged;
   Function()? onPressed;
@@ -39,7 +41,7 @@ class InputField extends StatelessWidget {
               Radius.circular(13),
             ),
           ),
-          hintText: 'Send a message...',
+          hintText: hintText,
           hintStyle: TextStyle(color: AppColors.iconsColor, fontSize: 16),
           suffixIcon: IconButton(
             onPressed: iconShow ? onPressed : null,

@@ -26,7 +26,7 @@ class UserMessage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Image.asset(
-                  '/astronavt.jpg',
+                  'assets/astronavt.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
