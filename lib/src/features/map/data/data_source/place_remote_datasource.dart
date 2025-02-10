@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
 
@@ -8,13 +10,26 @@ abstract class PlaceRemoteDataSource {
 
 class PlaceRemoteDataSourceImpl implements PlaceRemoteDataSource {
   final Dio dio;
-  final String baseUrl = "https://hackaton-isn7.onrender.com";
+  // final String baseUrl = "https://hackaton-isn7.onrender.com";
 
   PlaceRemoteDataSourceImpl(this.dio);
 
-  @override
+    @override
   Future<List<PlaceModel>> getPlaces() async {
-    final response = await dio.get("$baseUrl/places");
-    return (response.data as List).map((json) => PlaceModel.fromJson(json)).toList();
+  try {
+    print(' fetching');
+    final response = await dio.get('https://hackaton-isn7.onrender.com/places');
+
+    if (response.data is String) {
+      response.data = jsonDecode(response.data); 
+    }
+
+    final places = (response.data as List).map((e) => PlaceModel.fromJson(e)).toList();
+    return places;
+  } catch (e) {
+    print(e);
+    return [];
   }
+}
+
 }
