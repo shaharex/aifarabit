@@ -11,7 +11,8 @@ import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/input_fiel
 import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({super.key, required this.place});
+  final String place;
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +24,23 @@ class ChatPage extends StatelessWidget {
           ),
         ),
       ),
-      child: ChatView(),
+      child: ChatView(
+        place: place,
+      ),
     );
   }
 }
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key});
+  const ChatView({super.key, required this.place});
+  final String place;
 
   @override
   State<ChatView> createState() => _ChatViewState();
 }
 
 class _ChatViewState extends State<ChatView> {
-  final ScrollController _scrollController = ScrollController(); 
+  final ScrollController _scrollController = ScrollController();
   final TextEditingController _chatController = TextEditingController();
   bool iconShow = false;
 
@@ -84,7 +88,10 @@ class _ChatViewState extends State<ChatView> {
                     );
                   }
                   if (state is AiGeneratingState) {
-                    return const Center(child: CircularProgressIndicator.adaptive(backgroundColor: Colors.black,));
+                    return const Center(
+                        child: CircularProgressIndicator.adaptive(
+                      backgroundColor: Colors.black,
+                    ));
                   }
 
                   return ListView.builder(

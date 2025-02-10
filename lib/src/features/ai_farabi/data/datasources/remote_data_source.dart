@@ -27,7 +27,7 @@ class RemoteDataSource {
             },
             {
               "role": "user",
-              "content": "$message. Ответь только на русском языке."
+              "content": "$message. Отвечай только на русском языке."
             }
           ],
           "model": "llama-3.3-70b-versatile"
@@ -35,12 +35,10 @@ class RemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        print(response.body);
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         log(data.toString());
         if (data['choices'] is List && data['choices'].isNotEmpty) {
           final messageContent = data['choices'][0]['message'];
-          print(MessageModel.fromJson(messageContent));
           return MessageModel.fromJson(messageContent);
         }
         throw Exception('Invalid API response format');
