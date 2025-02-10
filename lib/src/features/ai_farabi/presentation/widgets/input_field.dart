@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constants.dart';
 
+// ignore: must_be_immutable
 class InputField extends StatelessWidget {
   InputField({
     super.key,
