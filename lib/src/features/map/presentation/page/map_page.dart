@@ -122,6 +122,9 @@ class _MapPickPageState extends State<MapPickPage> {
       body: Stack(
         children: [
           GoogleMap(
+            compassEnabled: true,
+            trafficEnabled: true,
+            // mapToolbarEnabled: false,
             initialCameraPosition: CameraPosition(
               target: LatLng(42.8991, 71.3674),
               zoom: 12,
@@ -148,7 +151,7 @@ class _MapPickPageState extends State<MapPickPage> {
               children: [
                 _buildSearchField(
                   controller: _fromController,
-                  hintText: "Откуда",
+                  hintText: "Жамбыл Инновациялык Жогаргы колледжра",
                   onChanged: (text) {
                     setState(() {
                       _isFromFieldActive = true;
