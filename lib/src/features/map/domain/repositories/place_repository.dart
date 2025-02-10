@@ -1,5 +1,6 @@
-import 'package:jihc_hack/src/features/map/domain/entity/place_entity.dart';
+import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
+
 
 abstract class PlaceRepository {
-  Future<List<PlaceEntity>> getPlaces();
+  Future<List<PlaceModel>> getPlaces();
 }

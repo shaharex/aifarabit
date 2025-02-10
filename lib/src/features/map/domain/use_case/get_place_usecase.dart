@@ -1,4 +1,4 @@
-import 'package:jihc_hack/src/features/map/domain/entity/place_entity.dart';
+import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
 import '../repositories/place_repository.dart';
 
 class GetPlacesUseCase {
@@ -6,7 +6,10 @@ class GetPlacesUseCase {
 
   GetPlacesUseCase(this.repository);
 
-  Future<List<PlaceEntity>> call() async {
-    return await repository.getPlaces();
-  }
+  Future<List<PlaceModel>> call() async {
+  final places = await repository.getPlaces();
+  print('places: $places'); 
+  return places;
+}
+
 }
