@@ -36,7 +36,7 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  final ScrollController _scrollController = ScrollController(); // Add this
+  final ScrollController _scrollController = ScrollController(); 
   final TextEditingController _chatController = TextEditingController();
   bool iconShow = false;
 
@@ -84,7 +84,7 @@ class _ChatViewState extends State<ChatView> {
                     );
                   }
                   if (state is AiGeneratingState) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator.adaptive(backgroundColor: Colors.black,));
                   }
 
                   return ListView.builder(
