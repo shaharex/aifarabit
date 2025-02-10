@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/features/auth/presentation/pages/auth_page.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 
 void main() {
@@ -11,7 +12,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MapPickPage()
+      debugShowCheckedModeBanner: false,
+      home: MapPickPage(),
     );
   }
 }

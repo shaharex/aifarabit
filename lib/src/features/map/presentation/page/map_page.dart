@@ -48,7 +48,8 @@ class _MapPickPageState extends State<MapPickPage> {
     });
   }
 
-  Future<void> getPredictions(String input, TextEditingController controller) async {
+  Future<void> getPredictions(
+      String input, TextEditingController controller) async {
     final url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$_googleApiKey';
 
