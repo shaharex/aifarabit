@@ -16,7 +16,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: ChatPage(
+        place: "АЙша Биби",
+      ),
     );
   }
 }
