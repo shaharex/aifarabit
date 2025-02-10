@@ -9,6 +9,7 @@ import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
+
 void main() {
   final getIt = GetIt.instance;
 

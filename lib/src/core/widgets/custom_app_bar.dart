@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/constants.dart';
+import 'package:jihc_hack/src/core/widgets/custom_back_button.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -13,32 +14,7 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              padding: const EdgeInsets.only(left: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xffD3D1D8).withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 23,
-                    offset: const Offset(3, 5),
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                size: 26,
-              ),
-            ),
-          ),
+          const CustomBackButton(),
           Text(
             "AI Farabi",
             style: TextStyle(
