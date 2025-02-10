@@ -1,4 +1,4 @@
-import 'package:jihc_hack/src/features/home/domain/entity/place_entity.dart';
+import 'package:jihc_hack/src/features/map/domain/entity/place_entity.dart';
 import '../repositories/place_repository.dart';
 
 class GetPlacesUseCase {

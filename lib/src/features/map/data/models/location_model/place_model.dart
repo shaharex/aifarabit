@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jihc_hack/src/features/home/domain/entity/place_entity.dart';
+import 'package:jihc_hack/src/features/map/domain/entity/place_entity.dart';
 
 part 'place_model.freezed.dart';
 part 'place_model.g.dart';
