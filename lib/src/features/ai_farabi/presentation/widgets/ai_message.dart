@@ -9,10 +9,12 @@ class AiMessage extends StatelessWidget {
     super.key,
     required this.message,
     required this.index,
+    required this.destination,
   });
 
   final String message;
   final int index;
+  final String destination;
 
   @override
   Widget build(BuildContext context) {
