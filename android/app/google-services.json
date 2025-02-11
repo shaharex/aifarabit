@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203885778373",
+    "project_id": "send-me-2104c",
+    "storage_bucket": "send-me-2104c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203885778373:android:c1819cac292ac4f7b327ac",
+        "android_client_info": {
+          "package_name": "com.example.jihc_hack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACjkf1jEbpHhUILbPysBaHQX-wwvoDxRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

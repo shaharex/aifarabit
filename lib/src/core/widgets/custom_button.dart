@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
   });
 
   final String text;
-  void Function()? onTap;
+  final VoidCallback onTap;
   final Color textColor;
   final Color btnColor;
   final double? borderRadius;
@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 55,
         width: double.infinity,
