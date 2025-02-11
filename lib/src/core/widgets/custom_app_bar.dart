@@ -3,7 +3,9 @@ import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/widgets/custom_back_button.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, required this.text});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,17 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const CustomBackButton(),
-          Text(
-            "AI Farabi",
-            style: TextStyle(
-              color: AppColors.chatTextColor,
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.chatTextColor,
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Icon(

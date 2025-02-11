@@ -7,33 +7,99 @@ class MainPage extends StatelessWidget {
   MainPage({super.key});
 
   List historicPlaces = [
-    ["Мавзолей Айши-Биби", "Священная красота", Icons.mosque],
-    ["Мавзолей Бабаджи-Хатун", "Мистическое наследие", Icons.account_balance],
-    ["Мавзолей Карахан", "Королевское наследие", Icons.location_city],
-    ["Архитектурный комплекс «Тектурмас»", "Древняя панорама", Icons.landscape],
+    [
+      "Мавзолей Айши-Биби",
+      "Священная красота",
+      Icons.mosque,
+      "Айша-Биби, Kazakhstan"
+    ],
+    [
+      "Мавзолей Бабаджи-Хатун",
+      "Мистическое наследие",
+      Icons.account_balance,
+      "Айша-Биби, Kazakhstan"
+    ],
+    [
+      "Мавзолей Карахан",
+      "Королевское наследие",
+      Icons.location_city,
+      'Мавзолей Карахана, Taraz, Kazakhstan'
+    ],
+    [
+      "Архитектурный комплекс «Тектурмас»",
+      "Древняя панорама",
+      Icons.landscape,
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
+    ],
     [
       "«Акиртас»",
       "Великолепный Дворцовый комплекс ",
-      Icons.account_balance_outlined
+      Icons.account_balance_outlined,
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
     ]
   ];
 
   List modernPlaces = [
-    ["Рынок «Шахристан»", "Яркий базар", Icons.store],
-    ["Центральный стадион Тараза", "Спортивный дух", Icons.sports_soccer],
-    ["Дендрологический парк", "Зелёный оазис", Icons.park]
+    [
+      "Рынок «Шахристан»",
+      "Яркий базар",
+      Icons.store,
+      "Шахристан, Taraz, Kazakhstan"
+    ],
+    [
+      "Центральный стадион Тараза",
+      "Спортивный дух",
+      Icons.sports_soccer,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ],
+    [
+      "Дендрологический парк",
+      "Зелёный оазис",
+      Icons.park,
+      "Шахристан, Taraz, Kazakhstan"
+    ]
   ];
 
   List stayToPlaces = [
-    ["Отель «Жамбыл»", "Элегантный комфорт", Icons.hotel],
-    ["Отель «Газовик»", "Тёплое гостеприимство", Icons.king_bed],
-    ["Отель «Уют»", "Уютное убежище", Icons.home]
+    [
+      "Отель «Жамбыл»",
+      "Элегантный комфорт",
+      Icons.hotel,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ],
+    [
+      "Отель «Газовик»",
+      "Тёплое гостеприимство",
+      Icons.king_bed,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ],
+    [
+      "Отель «Уют»",
+      "Уютное убежище",
+      Icons.home,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ]
   ];
 
   List eatToPlaces = [
-    ["Ресторан «Арасан»", "Изысканные вкусы", Icons.restaurant],
-    ["Ресторан «Кишлак»", "Традиционный вкус", Icons.local_dining],
-    ["Кафе «Салам»", "Местные деликатесы", Icons.local_cafe]
+    [
+      "Ресторан «Арасан»",
+      "Изысканные вкусы",
+      Icons.restaurant,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ],
+    [
+      "Ресторан «Кишлак»",
+      "Традиционный вкус",
+      Icons.local_dining,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ],
+    [
+      "Кафе «Салам»",
+      "Местные деликатесы",
+      Icons.local_cafe,
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+    ]
   ];
 
   @override
@@ -106,6 +172,7 @@ class MainPage extends StatelessWidget {
               return InfoListTile(
                 placeName: place[0],
                 placeDescription: place[1],
+                placeDestination: place[3],
                 placeIcon: place[2],
               );
             },

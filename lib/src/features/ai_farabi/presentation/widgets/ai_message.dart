@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 
 import '../../../../core/constants/constants.dart';
 
@@ -8,10 +9,12 @@ class AiMessage extends StatelessWidget {
     super.key,
     required this.message,
     required this.index,
+    required this.destination,
   });
 
   final String message;
   final int index;
+  final String destination;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +81,16 @@ class AiMessage extends StatelessWidget {
                               ),
                               const SizedBox(width: 5),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MapPickPage(),
+                                    ),
+                                  );
+                                },
                                 icon: Icon(
-                                  Icons.share_rounded,
+                                  Icons.map,
                                   color: AppColors.iconsColor,
                                   size: 25,
                                 ),
