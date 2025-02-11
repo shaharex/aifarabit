@@ -42,8 +42,10 @@ class _PlacesListPageState extends State<PlacesListPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ChatPage(place: place.placeName)));
+                              builder: (context) => ChatPage(
+                                    place: place.placeName,
+                                    destination: '',
+                                  )));
                     },
                     title: Text(place.placeName),
                     subtitle: Text('Rating: ${place.rating}'),
