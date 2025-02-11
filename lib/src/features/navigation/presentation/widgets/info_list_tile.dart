@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 
 class InfoListTile extends StatelessWidget {
   const InfoListTile({
     super.key,
     required this.placeName,
     required this.placeDescription,
+    required this.placeDestination,
     required this.placeIcon,
   });
   final String placeName;
   final String placeDescription;
+  final String placeDestination;
   final IconData placeIcon;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        // );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                place: placeName,
+                destination: placeDestination,
+              ),
+            ));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
