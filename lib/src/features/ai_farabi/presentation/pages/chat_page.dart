@@ -27,14 +27,16 @@ class ChatPage extends StatelessWidget {
       ),
       child: ChatView(
         place: place,
+        destination: destination,
       ),
     );
   }
 }
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key, required this.place});
+  const ChatView({super.key, required this.place, required this.destination});
   final String place;
+  final String destination;
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -44,11 +46,6 @@ class _ChatViewState extends State<ChatView> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _chatController = TextEditingController();
   bool iconShow = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +93,7 @@ class _ChatViewState extends State<ChatView> {
                     );
                   }
                   if (state is AiGeneratingState) {
-                    return Center(
+                    return const Center(
                         child: CircularProgressIndicator.adaptive(
                       backgroundColor: Colors.black,
                     ));
@@ -112,6 +109,7 @@ class _ChatViewState extends State<ChatView> {
                         return AiMessage(
                           message: message.content,
                           index: index,
+                          destination: widget.destination,
                         );
                       } else {
                         return UserMessage(message: message.content);
