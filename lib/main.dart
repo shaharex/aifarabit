@@ -1,16 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jihc_hack/firebase_options.dart';
+import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 // import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
 import 'package:jihc_hack/src/features/map/data/repositories/place_repository_impl.dart';
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
-import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
 
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final getIt = GetIt.instance;
 
   getIt.registerLazySingleton<Dio>(() => Dio());
@@ -36,7 +44,8 @@ class MainApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetIt.instance<PlacesBloc>(),
       child: MaterialApp(
-        home: PlacesListPage(),
+        debugShowCheckedModeBanner: false,
+        home: LoginPage(),
       ),
     );
   }
