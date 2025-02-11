@@ -11,7 +11,8 @@ import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/input_fiel
 import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({super.key, required this.place});
+  final String place;
 
   @override
   Widget build(BuildContext context) {
