@@ -122,13 +122,15 @@ class _MapPickPageState extends State<MapPickPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios)),
+      ),
       body: Stack(
         children: [
           GoogleMap(
             compassEnabled: true,
             trafficEnabled: true,
             myLocationButtonEnabled: false,
-            // mapToolbarEnabled: true,
             initialCameraPosition: CameraPosition(
               target: LatLng(42.917986, 71.373036),
               zoom: 15,
@@ -239,8 +241,15 @@ class _MapPickPageState extends State<MapPickPage> {
                         });
                       },
                       child: Container(
-                        
-                        child: Text(prediction.description),
+                        width: double.infinity,
+                        height: 55,
+                        margin: EdgeInsets.only(top: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(14)
+                        ),
+
+                        child: Center(child: Text(prediction.description, textAlign: TextAlign.center, style: TextStyle(color: Colors.white),)),
                       ),
                     );
                     

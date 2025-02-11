@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jihc_hack/firebase_options.dart';
+import 'package:jihc_hack/src/features/auth/presentation/pages/auth_gate.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 // import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
@@ -46,7 +47,7 @@ class MainApp extends StatelessWidget {
       create: (context) => GetIt.instance<PlacesBloc>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MapPickPage(),
+        home: InitializePage(),
       ),
     );
   }
