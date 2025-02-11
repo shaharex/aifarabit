@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
+import 'package:jihc_hack/src/features/auth/presentation/pages/register_page.dart';
+import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key, required this.showRegisterPage});
-  final VoidCallback showRegisterPage;
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -14,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isObscure = false;
+  final FirebaseServices _auth = FirebaseServices();
 
   @override
   void dispose() {
@@ -86,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 30),
                       CustomButton(
-                        onTap: () {},
+                        onTap: _stateLogin,
                         text: "Войти",
                         textColor: Colors.white,
                         btnColor: AppColors.chatTextColor,
@@ -101,7 +105,9 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 16, color: Color(0xffACADB9)),
                           ),
                           GestureDetector(
-                            onTap: widget.showRegisterPage,
+                            onTap: (){
+                           Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
+                        },
                             child: const Text(
                               'Зарегистрироваться',
                               style: TextStyle(
@@ -161,4 +167,19 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  _stateLogin() async {
+    String password = _passwordController.text;
+    String email = _emailController.text;
+
+    User? user = await _auth.signInWithEmail(email, password);
+
+    if (user != null) {
+      print('signed in');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => PlacesListPage()));
+    } else {
+      print("failed");
+    }
+  }
+
 }

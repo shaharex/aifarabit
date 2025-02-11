@@ -764,7 +764,7 @@ abstract class _Loaded implements PlacesState {
 
 /// @nodoc
 mixin _$PlacesViewModel {
-  List<PlaceEntity>? get cartItems => throw _privateConstructorUsedError;
+  List<PlaceModel>? get cartItems => throw _privateConstructorUsedError;
 
   /// Create a copy of PlacesViewModel
   /// with the given fields replaced by the non-null parameter values.
@@ -779,7 +779,7 @@ abstract class $PlacesViewModelCopyWith<$Res> {
           PlacesViewModel value, $Res Function(PlacesViewModel) then) =
       _$PlacesViewModelCopyWithImpl<$Res, PlacesViewModel>;
   @useResult
-  $Res call({List<PlaceEntity>? cartItems});
+  $Res call({List<PlaceModel>? cartItems});
 }
 
 /// @nodoc
@@ -803,7 +803,7 @@ class _$PlacesViewModelCopyWithImpl<$Res, $Val extends PlacesViewModel>
       cartItems: freezed == cartItems
           ? _value.cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PlaceEntity>?,
+              as List<PlaceModel>?,
     ) as $Val);
   }
 }
@@ -816,7 +816,7 @@ abstract class _$$PlacesViewModelImplCopyWith<$Res>
       __$$PlacesViewModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<PlaceEntity>? cartItems});
+  $Res call({List<PlaceModel>? cartItems});
 }
 
 /// @nodoc
@@ -838,7 +838,7 @@ class __$$PlacesViewModelImplCopyWithImpl<$Res>
       cartItems: freezed == cartItems
           ? _value._cartItems
           : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PlaceEntity>?,
+              as List<PlaceModel>?,
     ));
   }
 }
@@ -846,12 +846,12 @@ class __$$PlacesViewModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlacesViewModelImpl implements _PlacesViewModel {
-  _$PlacesViewModelImpl({final List<PlaceEntity>? cartItems})
+  _$PlacesViewModelImpl({final List<PlaceModel>? cartItems})
       : _cartItems = cartItems;
 
-  final List<PlaceEntity>? _cartItems;
+  final List<PlaceModel>? _cartItems;
   @override
-  List<PlaceEntity>? get cartItems {
+  List<PlaceModel>? get cartItems {
     final value = _cartItems;
     if (value == null) return null;
     if (_cartItems is EqualUnmodifiableListView) return _cartItems;
@@ -888,11 +888,11 @@ class _$PlacesViewModelImpl implements _PlacesViewModel {
 }
 
 abstract class _PlacesViewModel implements PlacesViewModel {
-  factory _PlacesViewModel({final List<PlaceEntity>? cartItems}) =
+  factory _PlacesViewModel({final List<PlaceModel>? cartItems}) =
       _$PlacesViewModelImpl;
 
   @override
-  List<PlaceEntity>? get cartItems;
+  List<PlaceModel>? get cartItems;
 
   /// Create a copy of PlacesViewModel
   /// with the given fields replaced by the non-null parameter values.
