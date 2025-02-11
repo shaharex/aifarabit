@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
   });
 
   final String text;
-  void Function()? onTap;
+  final VoidCallback onTap;
   final Color textColor;
   final Color btnColor;
   final double? borderRadius;
