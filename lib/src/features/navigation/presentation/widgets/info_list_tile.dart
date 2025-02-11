@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
+import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 
 class InfoListTile extends StatelessWidget {
   const InfoListTile({
