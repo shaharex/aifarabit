@@ -9,14 +9,7 @@ class PlacesListPage extends StatefulWidget {
 
 class _PlacesListPageState extends State<PlacesListPage> {
   @override
-  void initState() {
-    
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox()
-    );
+    return Scaffold(body: SizedBox());
   }
 }
