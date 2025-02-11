@@ -14,8 +14,7 @@ import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dar
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
