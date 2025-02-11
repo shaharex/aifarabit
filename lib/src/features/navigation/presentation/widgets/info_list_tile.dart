@@ -19,7 +19,7 @@ class InfoListTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ChatPage(),
+            builder: (context) => ChatPage(place: placeName,),
           ),
         );
       },
