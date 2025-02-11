@@ -4,10 +4,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:jihc_hack/src/core/widgets/widgets.dart';
 
 class MapPickPage extends StatefulWidget {
+  
   @override
   State<MapPickPage> createState() => _MapPickPageState();
+
 }
 
 class _MapPickPageState extends State<MapPickPage> {
@@ -33,17 +36,16 @@ class _MapPickPageState extends State<MapPickPage> {
     setState(() {
       _markers.addAll([
         Marker(
-          markerId: MarkerId('aysha_bibi'),
-          position: LatLng(42.8535, 71.3748),
+          markerId: MarkerId('JIHC'),
+          position: LatLng(42.917986, 71.373036),
           infoWindow: InfoWindow(
-            title: 'Мавзолей Айша Биби',
+            title: 'JIHC',
             onTap: () => _showPlaceInfo(
-              'Мавзолей Айша Биби',
-              'Уникальный памятник XI-XII веков, расположенный недалеко от Тараза.',
+              'JIHC',
+              'Jambyl innovation high college',
             ),
           ),
         ),
-        // Add more markers if needed
       ]);
     });
   }
@@ -125,10 +127,11 @@ class _MapPickPageState extends State<MapPickPage> {
           GoogleMap(
             compassEnabled: true,
             trafficEnabled: true,
-            // mapToolbarEnabled: false,
+            myLocationButtonEnabled: false,
+            // mapToolbarEnabled: true,
             initialCameraPosition: CameraPosition(
-              target: LatLng(42.8991, 71.3674),
-              zoom: 12,
+              target: LatLng(42.917986, 71.373036),
+              zoom: 15,
             ),
             onMapCreated: (controller) {
               _mapController = controller;
@@ -152,12 +155,12 @@ class _MapPickPageState extends State<MapPickPage> {
               children: [
                 _buildSearchField(
                   controller: _fromController,
-                  hintText: "Жамбыл Инновациялык Жогаргы колледжра",
+                  hintText: "Откуда",
                   onChanged: (text) {
                     setState(() {
                       _isFromFieldActive = true;
                     });
-                    getPredictions(text, _fromController);
+                    getPredictions("ЖАМБЫЛ ИННОВАЦИЯЛЫҚ ЖОҒАРЫ КОЛЛЕДЖІ, Пушкина, Taraz, Kazakhstan", _fromController);
                   },
                 ),
                 const SizedBox(height: 10),
@@ -172,8 +175,21 @@ class _MapPickPageState extends State<MapPickPage> {
                   },
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () async {
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     final from = _fromController.text;
+                //     final to = _toController.text;
+
+                //     if (from.isNotEmpty && to.isNotEmpty) {
+                //       await getRoute(from, to);
+                //       _predictions.clear();
+                //     }
+                //   },
+                //   child: Text('Найти маршрут'),
+                // ),
+                CustomButton(
+                  text: 'Найти маршрут', 
+                  onTap: () async {
                     final from = _fromController.text;
                     final to = _toController.text;
 
@@ -181,9 +197,12 @@ class _MapPickPageState extends State<MapPickPage> {
                       await getRoute(from, to);
                       _predictions.clear();
                     }
-                  },
-                  child: Text('Найти маршрут'),
+                  }, 
+                  textColor: Colors.white, 
+                  btnColor: Colors.black
                 ),
+                
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -207,8 +226,8 @@ class _MapPickPageState extends State<MapPickPage> {
                 ),
                 if (_predictions.isNotEmpty)
                   ..._predictions.map((prediction) {
-                    return ListTile(
-                      title: Text(prediction.description),
+                    return GestureDetector(
+                      behavior: HitTestBehavior.translucent,
                       onTap: () {
                         setState(() {
                           if (_isFromFieldActive) {
@@ -219,7 +238,27 @@ class _MapPickPageState extends State<MapPickPage> {
                           _predictions.clear();
                         });
                       },
+                      child: Container(
+                        
+                        child: Text(prediction.description),
+                      ),
                     );
+                    
+                    // ListTile(
+                    //   hoverColor: Colors.black,
+                      
+                    //   title: Text(prediction.description),
+                      // onTap: () {
+                      //   setState(() {
+                      //     if (_isFromFieldActive) {
+                      //       _fromController.text = prediction.description;
+                      //     } else {
+                      //       _toController.text = prediction.description;
+                      //     }
+                      //     _predictions.clear();
+                      //   });
+                      // },
+                    // );
                   }).toList(),
               ],
             ),
