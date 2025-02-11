@@ -10,6 +10,8 @@ import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dar
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
 
+import 'src/features/navigation/presentation/pages/navigation_page.dart';
+
 void main() {
   final getIt = GetIt.instance;
 
@@ -33,10 +35,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.instance<PlacesBloc>(),
-      child: MaterialApp(
-        home: PlacesListPage(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
+        child: NavigationPage(),
       ),
     );
   }
