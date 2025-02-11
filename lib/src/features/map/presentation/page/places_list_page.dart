@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
 
 class PlacesListPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class _PlacesListPageState extends State<PlacesListPage> {
   void initState() {
     super.initState();
     GetIt.instance.get<PlacesBloc>().add(PlacesEvent.getPlaces());
-    // GetIt.read<PlacesBloc>().add(PlacesEvent.getPlaces());
   }
 
   @override
@@ -27,7 +27,9 @@ class _PlacesListPageState extends State<PlacesListPage> {
         builder: (context, state) {
           return state.when(
             initial: () => Center(child: Text('loading...')),
-            loading: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator.adaptive(
+                      backgroundColor: Colors.black,
+                    )),
             loaded: (viewModel) {
               print('Loaded state triggered! Data: ${viewModel.cartItems}');
               return ListView.builder(
@@ -35,6 +37,9 @@ class _PlacesListPageState extends State<PlacesListPage> {
                 itemBuilder: (context, index) {
                   final place = viewModel.cartItems![index];
                   return ListTile(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(place: place.placeName)));
+                    },
                     title: Text(place.placeName),
                     subtitle: Text('Rating: ${place.rating}'),
                   );
