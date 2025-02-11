@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -15,20 +17,17 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        Center(
-          child: Text("The first page"),
-        ),
-        Center(
-          child: Text("The map page"),
-        ),
-        Center(
+        MainPage(),
+        MapPickPage(),
+        const Center(
           child: Text("The third page"),
         ),
-        Center(
+        const Center(
           child: Text("The fourth page"),
         ),
       ][currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           onTap: (value) {
