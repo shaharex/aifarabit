@@ -109,6 +109,7 @@ class _ChatViewState extends State<ChatView> {
                                 color: AppColors.chatTextColor,
                               ),
                             ),
+                            
                             Text(
                               "Ask me anything",
                               style: TextStyle(
@@ -129,10 +130,31 @@ class _ChatViewState extends State<ChatView> {
             
                       return ListView.builder(
                         controller: _scrollController,
-                        itemCount: state.messages.length,
+                        itemCount: state.messages.length + 1,
                         itemBuilder: (context, index) {
+                          if (index == state.messages.length) { 
+                            if (state is Thinking) {
+                              return Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircularProgressIndicator.adaptive(
+                                        backgroundColor: AppColors.iconsColor,
+                                      ),
+                                      Text('I am thinking....', style: TextStyle(color: AppColors.iconsColor),)
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          }
+
                           final message = state.messages[index];
-            
+
                           if (message.role == 'assistant') {
                             return AiMessage(
                               message: message.content,
@@ -144,6 +166,8 @@ class _ChatViewState extends State<ChatView> {
                           }
                         },
                       );
+
+                      
                     },
                   ),
                 ),

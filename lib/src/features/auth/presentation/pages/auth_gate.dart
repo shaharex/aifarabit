@@ -49,7 +49,7 @@ class InitializePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => MainPage()),
           );
         } else {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
           );

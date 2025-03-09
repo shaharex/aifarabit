@@ -128,27 +128,27 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          onTap: () {},
-                          text: "GOOGLE",
-                          textColor: const Color(0xffD44638),
-                          btnColor: const Color(0xffD44638).withOpacity(0.2),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: CustomButton(
-                          onTap: () {},
-                          text: "FACEBOOK",
-                          textColor: const Color(0xff4267B2),
-                          btnColor: const Color(0xff4267B2).withOpacity(0.2),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: CustomButton(
+                  //         onTap: () {},
+                  //         text: "GOOGLE",
+                  //         textColor: const Color(0xffD44638),
+                  //         btnColor: const Color(0xffD44638).withOpacity(0.2),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(width: 10),
+                  //     Expanded(
+                  //       child: CustomButton(
+                  //         onTap: () {},
+                  //         text: "FACEBOOK",
+                  //         textColor: const Color(0xff4267B2),
+                  //         btnColor: const Color(0xff4267B2).withOpacity(0.2),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

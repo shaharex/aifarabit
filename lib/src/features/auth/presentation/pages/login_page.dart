@@ -4,7 +4,7 @@ import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/register_page.dart';
-import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       print('signed in');
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => PlacesListPage()));
+          context, MaterialPageRoute(builder: (context) => MainPage()));
     } else {
       print("failed");
     }
