@@ -10,7 +10,6 @@ import 'package:jihc_hack/src/features/map/data/repositories/place_repository_im
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
-import 'package:jihc_hack/src/features/transtator/translation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +43,7 @@ class MainApp extends StatelessWidget {
       create: (context) => GetIt.instance<PlacesBloc>(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: TranslationPage(),
+        home: InitializePage(),
       ),
     );
   }
