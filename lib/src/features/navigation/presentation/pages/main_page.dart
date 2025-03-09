@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
+// ignore: must_be_immutable
 class MainPage extends StatelessWidget {
   MainPage({super.key});
 
@@ -115,14 +116,7 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
-        title: Text(
-          "AI Farabi",
-          style: TextStyle(
-            color: AppColors.chatTextColor,
-            fontSize: 26,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: Image.asset('assets/logo.png', width: 70,),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -148,18 +142,19 @@ class MainPage extends StatelessWidget {
             Text(
               placesInfo[0],
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            const Icon(
+            Icon(
               Icons.arrow_forward_sharp,
+              color: AppColors.iconsColor,
               size: 28,
             ),
           ],
         ),
         SizedBox(
-          height: 200,
+          height: 250,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: placesInfo[1].length,
