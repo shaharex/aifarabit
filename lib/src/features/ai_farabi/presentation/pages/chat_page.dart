@@ -90,6 +90,9 @@ class _ChatViewState extends State<ChatView> {
                 Expanded(
                   child: BlocBuilder<AiBloc, AiState>(
                     builder: (context, state) {
+                      if (state.messages.isNotEmpty) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+                      }
                       if (state.messages.isEmpty) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,16 +139,18 @@ class _ChatViewState extends State<ChatView> {
                             if (state is Thinking) {
                               return Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircularProgressIndicator.adaptive(
-                                        backgroundColor: AppColors.iconsColor,
-                                      ),
-                                      Text('I am thinking....', style: TextStyle(color: AppColors.iconsColor),)
-                                    ],
-                                  ),
+                                  padding: const EdgeInsets.all(0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 80,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      // borderRadius: BorderRadius.circular(15)
+                                    ),
+                                    child: Center(
+                                      child: CircularProgressIndicator.adaptive(backgroundColor: AppColors.iconsColor,),
+                                    ),
+                                  )
                                 ),
                               );
                             } else {
@@ -206,4 +211,16 @@ class _ChatViewState extends State<ChatView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+  void _scrollToBottom() {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  });
+}
+
 }
