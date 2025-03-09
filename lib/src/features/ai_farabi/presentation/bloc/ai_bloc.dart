@@ -17,7 +17,8 @@ class AiBloc extends Bloc<AiEvent, AiState> {
     final updatedMessages = List<Message>.from(state.messages)
       ..add(event.message);
 
-    emit(AiGeneratingState(updatedMessages));
+    // emit(AiGeneratingState(updatedMessages));
+    emit(Thinking(updatedMessages));
 
     try {
       final aiResponse =
