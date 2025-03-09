@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
 
 class UserMessage extends StatelessWidget {
   const UserMessage({super.key, required this.message});

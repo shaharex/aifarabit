@@ -23,12 +23,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: TextStyle(color: AppColors.chatTextColor),
+      style: TextStyle(color: AppColors.iconsColor),
       controller: controller,
       onChanged: textChanged,
       obscureText: isObscure ?? false,
       decoration: InputDecoration(
-        fillColor: const Color(0xffFFFFFF),
+        fillColor: Colors.black,
         filled: true,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Color(0xff494949)),
@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffFFFFFF), width: 1),
+          borderSide: BorderSide(color: Colors.white, width: 1),
           borderRadius: BorderRadius.all(
             Radius.circular(13),
           ),
@@ -46,7 +46,7 @@ class CustomTextField extends StatelessWidget {
             ? null
             : IconButton(
                 onPressed: onObscure,
-                icon: const Icon(Icons.remove_red_eye_outlined)),
+                icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.white,)),
         prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle: TextStyle(color: AppColors.iconsColor, fontSize: 16),

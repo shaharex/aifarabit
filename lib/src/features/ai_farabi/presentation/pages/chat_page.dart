@@ -142,7 +142,7 @@ class _ChatViewState extends State<ChatView> {
                                   padding: const EdgeInsets.all(0),
                                   child: Container(
                                     width: double.infinity,
-                                    height: 80,
+                                    height: 100,
                                     decoration: const BoxDecoration(
                                       color: Colors.black,
                                       // borderRadius: BorderRadius.circular(15)
