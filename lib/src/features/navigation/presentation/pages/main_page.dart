@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
 // ignore: must_be_immutable
@@ -114,6 +116,10 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          FirebaseAuth.instance.signOut();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        }, icon: Icon(Icons.exit_to_app, color: AppColors.iconsColor,)),
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
         title: Image.asset('assets/logo.png', width: 70,),
