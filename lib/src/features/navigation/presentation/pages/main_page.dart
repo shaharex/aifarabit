@@ -124,16 +124,88 @@ class MainPage extends StatelessWidget {
         backgroundColor: AppColors.backgroundColor,
         title: Image.asset('assets/logo.png', width: 70,),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            return _buildPlacesList(placesList[index]);
-          },
-          separatorBuilder: (_, index) {
-            return const SizedBox(height: 20);
-          },
-          itemCount: placesList.length,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2 - 30,
+                    height:  MediaQuery.of(context).size.width / 2 - 30,
+                    decoration: BoxDecoration(
+                      // color: AppColors.iconsColor,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: AppColors.iconsColor)
+                    ),
+                    child: Center(
+                      child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2 - 30,
+                    height:  MediaQuery.of(context).size.width / 2 - 30,
+                    decoration: BoxDecoration(
+                      color: AppColors.iconsColor,
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Center(
+                      child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+                  
+              //     Container(
+              //       width: MediaQuery.of(context).size.width / 2 - 30,
+              //       height:  MediaQuery.of(context).size.width / 2 - 30,
+              //       decoration: BoxDecoration(
+              //         color: AppColors.iconsColor,
+              //         borderRadius: BorderRadius.circular(15)
+              //       ),
+              //       child: Center(
+              //         child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+              //       ),
+              //     ),
+              //     Container(
+              //       width: MediaQuery.of(context).size.width / 2 - 30,
+              //       height:  MediaQuery.of(context).size.width / 2 - 30,
+              //       decoration: BoxDecoration(
+              //         // color: AppColors.iconsColor,
+              //         borderRadius: BorderRadius.circular(15),
+              //         border: Border.all(color: AppColors.iconsColor)
+              //       ),
+              //       child: Center(
+              //         child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
+              //       ),
+              //     )
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              Container(
+                height: placesList.length * 220,
+                child: ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  
+                  itemBuilder: (context, index) {
+                    return _buildPlacesList(placesList[index]);
+                  },
+                  separatorBuilder: (_, index) {
+                    return const SizedBox(height: 20);
+                  },
+                  itemCount: placesList.length,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
