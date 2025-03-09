@@ -3,6 +3,10 @@ class ApiKey {
       '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';
 }
 
+class DeepLKey {
+  static const String apiKey = "b04fd492-2615-488b-935e-241c083b3004:fx";
+}
+
 final class ApiHeaderKeys {
   static const String authorization = 'Authorization';
   static const String contentType = 'Content-Type';
