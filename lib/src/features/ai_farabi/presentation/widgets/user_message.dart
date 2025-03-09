@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jihc_hack/src/core/constants/constants.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 
 class UserMessage extends StatelessWidget {
   const UserMessage({super.key, required this.message});
@@ -35,7 +36,7 @@ class UserMessage extends StatelessWidget {
                 child: Text(
                   message,
                   style:
-                      TextStyle(color: AppColors.chatTextColor, fontSize: 20),
+                      TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ],
