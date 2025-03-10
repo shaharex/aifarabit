@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
 
@@ -29,7 +30,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
             initial: () => Center(child: Text('loading...')),
             loading: () => Center(
                 child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.black,
+              backgroundColor: AppColors.iconsColor,
             )),
             loaded: (viewModel) {
               print('Loaded state triggered! Data: ${viewModel.cartItems}');

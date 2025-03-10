@@ -4,54 +4,38 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 
 class MapPickPage extends StatefulWidget {
-  
   @override
   State<MapPickPage> createState() => _MapPickPageState();
-
 }
 
 class _MapPickPageState extends State<MapPickPage> {
   final Completer<GoogleMapController> _completer = Completer();
   late GoogleMapController _mapController;
+  String _mapTheme = '';
   List<LatLng> _polylineCoordinates = [];
   TextEditingController _fromController = TextEditingController();
   TextEditingController _toController = TextEditingController();
   List<Prediction> _predictions = [];
   final String _googleApiKey = 'AIzaSyBqzMrs0fNGm16PWp3izxXQ0cToMK_lgzA';
   bool _isFromFieldActive = true;
-  String _travelMode = "driving";
-
-  final List<Marker> _markers = [];
 
   @override
   void initState() {
     super.initState();
-    _initializeMarkers();
-  }
-
-  void _initializeMarkers() {
-    setState(() {
-      _markers.addAll([
-        Marker(
-          markerId: MarkerId('JIHC'),
-          position: LatLng(42.917986, 71.373036),
-          infoWindow: InfoWindow(
-            title: 'JIHC',
-            onTap: () => _showPlaceInfo(
-              'JIHC',
-              'Jambyl innovation high college',
-            ),
-          ),
-        ),
-      ]);
+    DefaultAssetBundle.of(context)
+        .loadString("assets/map_theme/dark_theme.json")
+        .then((value) {
+      setState(() {
+        _mapTheme = value;
+      });
     });
   }
 
-  Future<void> getPredictions(
-      String input, TextEditingController controller) async {
+  Future<void> getPredictions(String input, TextEditingController controller) async {
     final url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$_googleApiKey';
 
@@ -67,57 +51,52 @@ class _MapPickPageState extends State<MapPickPage> {
     }
   }
 
-  Future<void> getRoute(String from, String to) async {
-    final url =
-        "https://maps.googleapis.com/maps/api/directions/json?origin=$from&destination=$to&mode=$_travelMode&key=$_googleApiKey";
 
-    final response = await http.get(Uri.parse(url));
+  String _distance = '';
+  String _duration = '';
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+Future<void> getRoute(String from, String to) async {
+  final url =
+      "https://maps.googleapis.com/maps/api/directions/json?origin=$from&destination=$to&key=$_googleApiKey";
 
-      if (data['routes'].isNotEmpty) {
-        final route = data['routes'][0]['legs'][0]['steps'];
+  final response = await http.get(Uri.parse(url));
 
-        List<LatLng> newPolylineCoordinates = [];
-        for (var step in route) {
-          final startLat = step['start_location']['lat'];
-          final startLng = step['start_location']['lng'];
-          newPolylineCoordinates.add(LatLng(startLat, startLng));
-        }
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
 
-        setState(() {
-          _polylineCoordinates = newPolylineCoordinates;
-        });
+    if (data['routes'].isNotEmpty) {
+      final route = data['routes'][0]['legs'][0];
 
-        final bounds = LatLngBounds(
-          southwest: LatLng(data['routes'][0]['bounds']['southwest']['lat'],
-              data['routes'][0]['bounds']['southwest']['lng']),
-          northeast: LatLng(data['routes'][0]['bounds']['northeast']['lat'],
-              data['routes'][0]['bounds']['northeast']['lng']),
-        );
-        _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+      setState(() {
+        _distance = route['distance']['text'];
+        _duration = route['duration']['text'];
+      });
+
+      List<LatLng> newPolylineCoordinates = [];
+      for (var step in route['steps']) {
+        final startLat = step['start_location']['lat'];
+        final startLng = step['start_location']['lng'];
+        newPolylineCoordinates.add(LatLng(startLat, startLng));
       }
-    } else {
-      throw Exception('error');
-    }
-  }
 
-  void _showPlaceInfo(String title, String description) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(description),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Закрыть'),
-          ),
-        ],
-      ),
-    );
+      setState(() {
+        _polylineCoordinates = newPolylineCoordinates;
+      });
+
+      // Adjust camera bounds
+      final bounds = LatLngBounds(
+        southwest: LatLng(data['routes'][0]['bounds']['southwest']['lat'],
+            data['routes'][0]['bounds']['southwest']['lng']),
+        northeast: LatLng(data['routes'][0]['bounds']['northeast']['lat'],
+            data['routes'][0]['bounds']['northeast']['lng']),
+      );
+      _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+    }
+  } else {
+    throw Exception('Failed to fetch route');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -125,28 +104,51 @@ class _MapPickPageState extends State<MapPickPage> {
       body: Stack(
         children: [
           GoogleMap(
-            compassEnabled: true,
-            trafficEnabled: true,
-            myLocationButtonEnabled: false,
-            // mapToolbarEnabled: true,
+            // mapType: MapType.terrain,
             initialCameraPosition: CameraPosition(
-              target: LatLng(42.917986, 71.373036),
-              zoom: 15,
+              target: LatLng(43.238949, 76.889709),
+              zoom: 12,
             ),
             onMapCreated: (controller) {
               _mapController = controller;
+              controller.setMapStyle(_mapTheme);
               _completer.complete(controller);
             },
-            markers: Set<Marker>.of(_markers),
             polylines: {
               Polyline(
                 polylineId: const PolylineId('route'),
-                color: Colors.red,
+                color: AppColors.iconsColor,
                 width: 5,
                 points: _polylineCoordinates,
               ),
             },
           ),
+          Positioned(
+  bottom: 20,
+  left: 16,
+  right: 16,
+  child: Column(
+    children: [
+      if (_distance.isNotEmpty && _duration.isNotEmpty)
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(15)
+          ),
+          child:  Text(
+              'Distance: $_distance\nDuration: $_duration',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: AppColors.iconsColor, fontSize: 20),
+              
+            ),
+          
+          
+          width: double.infinity,
+        ),
+    ],
+  ),
+),
+
           Positioned(
             top: 50,
             left: 16,
@@ -154,17 +156,21 @@ class _MapPickPageState extends State<MapPickPage> {
             child: Column(
               children: [
                 _buildSearchField(
+                  text: TextStyle(color: Colors.white),
+                  color: Colors.black,
                   controller: _fromController,
                   hintText: "Откуда",
                   onChanged: (text) {
                     setState(() {
                       _isFromFieldActive = true;
                     });
-                    getPredictions("ЖАМБЫЛ ИННОВАЦИЯЛЫҚ ЖОҒАРЫ КОЛЛЕДЖІ, Пушкина, Taraz, Kazakhstan", _fromController);
+                    getPredictions(text, _fromController);
                   },
                 ),
                 const SizedBox(height: 10),
                 _buildSearchField(
+                  text: TextStyle(color: Colors.white),
+                  color: Colors.black,
                   controller: _toController,
                   hintText: "Куда",
                   onChanged: (text) {
@@ -175,20 +181,10 @@ class _MapPickPageState extends State<MapPickPage> {
                   },
                 ),
                 const SizedBox(height: 10),
-                // ElevatedButton(
-                //   onPressed: () async {
-                //     final from = _fromController.text;
-                //     final to = _toController.text;
-
-                //     if (from.isNotEmpty && to.isNotEmpty) {
-                //       await getRoute(from, to);
-                //       _predictions.clear();
-                //     }
-                //   },
-                //   child: Text('Найти маршрут'),
-                // ),
                 CustomButton(
-                  text: 'Найти маршрут', 
+                  btnColor: Colors.black,
+                  textColor: Colors.white,
+                  text: "Search", 
                   onTap: () async {
                     final from = _fromController.text;
                     final to = _toController.text;
@@ -197,68 +193,31 @@ class _MapPickPageState extends State<MapPickPage> {
                       await getRoute(from, to);
                       _predictions.clear();
                     }
-                  }, 
-                  textColor: Colors.white, 
-                  btnColor: Colors.black
+                  },
                 ),
                 
-                
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _travelMode = "driving";
-                        });
-                      },
-                      child: Text("Driving"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _travelMode = "walking";
-                        });
-                      },
-                      child: Text("Walking"),
-                    ),
-                  ],
-                ),
                 if (_predictions.isNotEmpty)
                   ..._predictions.map((prediction) {
                     return GestureDetector(
-                      behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        setState(() {
-                          if (_isFromFieldActive) {
-                            _fromController.text = prediction.description;
-                          } else {
-                            _toController.text = prediction.description;
-                          }
-                          _predictions.clear();
-                        });
-                      },
+                          setState(() {
+                            if (_isFromFieldActive) {
+                              _fromController.text = prediction.description;
+                            } else {
+                              _toController.text = prediction.description;
+                            }
+                            _predictions.clear();
+                          });
+                        },
                       child: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(prediction.description, style: TextStyle(color: Colors.white),),
+                        color: AppColors.backgroundColor,
+                        width: double.infinity,
                         
-                        child: Text(prediction.description),
                       ),
                     );
                     
-                    // ListTile(
-                    //   hoverColor: Colors.black,
-                      
-                    //   title: Text(prediction.description),
-                      // onTap: () {
-                      //   setState(() {
-                      //     if (_isFromFieldActive) {
-                      //       _fromController.text = prediction.description;
-                      //     } else {
-                      //       _toController.text = prediction.description;
-                      //     }
-                      //     _predictions.clear();
-                      //   });
-                      // },
-                    // );
                   }).toList(),
               ],
             ),
@@ -268,18 +227,22 @@ class _MapPickPageState extends State<MapPickPage> {
     );
   }
 
-  Widget _buildSearchField({
-    required TextEditingController controller,
-    required String hintText,
-    required Function(String) onChanged,
-  }) {
+  Widget _buildSearchField(
+      {required TextEditingController controller,
+      required String hintText,
+      required Color color,
+      required TextStyle text,
+      required Function(String) onChanged}) {
     return TextField(
       controller: controller,
       onChanged: onChanged,
+      style: text,
       decoration: InputDecoration(
         hintText: hintText,
+        prefixIcon: Icon(Icons.search, color: Colors.white,),
         filled: true,
-        fillColor: Colors.white,
+        
+        fillColor: color,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,

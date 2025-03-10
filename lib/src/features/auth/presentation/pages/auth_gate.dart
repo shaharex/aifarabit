@@ -1,38 +1,9 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
-import 'package:jihc_hack/src/features/map/presentation/page/places_list_page.dart';
-
-// class AuthPage extends StatefulWidget {
-//   const AuthPage({super.key});
-
-//   @override
-//   State<AuthPage> createState() => _AuthPageState();
-// }
-
-// class _AuthPageState extends State<AuthPage> {
-//   // initially, show the login page
-//   bool showLoginPage = true;
-
-//   void toggleScreens() {
-//     setState(() {
-//       showLoginPage = !showLoginPage;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     if (showLoginPage) {
-//       return LoginPage(
-//         showRegisterPage: toggleScreens,
-//       );
-//     } else {
-//       return RegisterPage(
-//         showRegisterPage: toggleScreens,
-//       );
-//     }
-//   }
-// }
+import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 
 class InitializePage extends StatelessWidget {
   const InitializePage({super.key});
@@ -44,10 +15,10 @@ class InitializePage extends StatelessWidget {
         if (user != null) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => PlacesListPage()),
+            MaterialPageRoute(builder: (context) => MainPage()),
           );
         } else {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
           );
@@ -56,7 +27,7 @@ class InitializePage extends StatelessWidget {
     });
 
     return Scaffold(
-      body: CircularProgressIndicator()
+      body: CircularProgressIndicator.adaptive(backgroundColor: AppColors.iconsColor,)
           // Center(child: Lottie.asset('assets/animations/loading_hamster.json')),
     );
   }
