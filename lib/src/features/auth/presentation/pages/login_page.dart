@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 20,
+          vertical: 30,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,9 +105,12 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 16, color: Color(0xffACADB9)),
                           ),
                           GestureDetector(
-                            onTap: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
-                        },
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => RegisterPage()));
+                            },
                             child: const Text(
                               'Зарегистрироваться',
                               style: TextStyle(
@@ -167,6 +170,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
   _stateLogin() async {
     String password = _passwordController.text;
     String email = _emailController.text;
@@ -181,5 +185,4 @@ class _LoginPageState extends State<LoginPage> {
       print("failed");
     }
   }
-
 }

@@ -22,6 +22,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: AppColors.backgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: TextField(
         style: TextStyle(color: AppColors.chatTextColor),
