@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 
-
 // ignore: must_be_immutable
 class InputField extends StatelessWidget {
   InputField({
@@ -22,10 +21,12 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: AppColors.backgroundColor,
+      color: AppColors.backgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: TextField(
-        style: TextStyle(color: AppColors.iconsColor, ),
+        style: TextStyle(
+          color: AppColors.iconsColor,
+        ),
         controller: controller,
         onChanged: textChanged,
         decoration: InputDecoration(

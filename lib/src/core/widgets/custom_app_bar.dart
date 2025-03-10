@@ -30,11 +30,11 @@ class CustomAppBar extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          // Icon(
-          //   Icons.more_horiz_outlined,
-          //   color: AppColors.iconsColor,
-          //   size: 40,
-          // ),
+          Icon(
+            Icons.more_horiz_outlined,
+            color: AppColors.iconsColor,
+            size: 40,
+          ),
         ],
       ),
     );

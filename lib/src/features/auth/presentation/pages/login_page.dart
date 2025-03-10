@@ -5,6 +5,7 @@ import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/register_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -16,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool isObscure = false;
+  bool isObscure = true;
   final FirebaseServices _auth = FirebaseServices();
 
   @override
@@ -29,35 +30,34 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // const CustomBackButton(),
-            SizedBox(
-              height: 100,
-            ),
-            Center(
-              child: Image.asset('assets/logo.png', width: 150,),
-            ),
-            Expanded(
+      backgroundColor: AppColors.primaryColor,
+      body: LayoutBuilder(builder: (_, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 30,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // const SizedBox(height: 40),
-                  // const Text(
-                  //   "Войти в Аккаунт",
-                  //   style: TextStyle(
-                  //       color: Colors.white,
-                  //       fontSize: 38,
-                  //       fontWeight: FontWeight.w500),
-                  // ),
-                  // const SizedBox(height: 40),
+                  Center(
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 150,
+                    ),
+                  ),
+                  const Text(
+                    "Войти в Аккаунт",
+                    style: TextStyle(
+                      fontSize: 38,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: AppColors.iconsColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       CustomTextField(
                         hintText: "Пароль",
                         controller: _passwordController,
@@ -90,14 +90,25 @@ class _LoginPageState extends State<LoginPage> {
                           color: AppColors.iconsColor,
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
                       CustomButton(
                         onTap: _stateLogin,
                         text: "Войти",
-                        textColor: _passwordController.text.isEmpty || _emailController.text.isEmpty ? Colors.white : Colors.black,
-                        btnColor: _passwordController.text.isEmpty || _emailController.text.isEmpty ? AppColors.backgroundColor : AppColors.iconsColor,
+                        textColor: _passwordController.text.isEmpty ||
+                                _emailController.text.isEmpty
+                            ? const Color(0xffB1B1B1)
+                            : Colors.white,
+                        btnColor: _passwordController.text.isEmpty ||
+                                _emailController.text.isEmpty
+                            ? const Color(0xffE3E3E3)
+                            : Colors.black,
                       ),
                       const SizedBox(height: 10),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -107,70 +118,69 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 16, color: Color(0xffACADB9)),
                           ),
                           GestureDetector(
-                            onTap: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
-                        },
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => RegisterPage()));
+                            },
                             child: Text(
                               'Зарегистрироваться',
                               style: TextStyle(
-                                color: AppColors.iconsColor,
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                  color: AppColors.iconsColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                           )
                         ],
                       ),
+                      const SizedBox(height: 13),
+                      const Divider(),
+                      const SizedBox(height: 13),
+                      const Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Продолжить с",
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xffACADB9)),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              onTap: () {},
+                              text: "GOOGLE",
+                              textColor: const Color(0xffD44638),
+                              btnColor: const Color(0xffD44638)
+                                  .withValues(alpha: 0.2),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: CustomButton(
+                              onTap: () {},
+                              text: "FACEBOOK",
+                              textColor: const Color(0xff4267B2),
+                              btnColor: const Color(0xff4267B2)
+                                  .withValues(alpha: 0.2),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  ),
-                  // Column(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     const SizedBox(height: 13),
-                  //     const Divider(),
-                  //     const SizedBox(height: 13),
-                  //     const Align(
-                  //       alignment: Alignment.center,
-                  //       child: Text(
-                  //         "Продолжить с",
-                  //         textAlign: TextAlign.center,
-                  //         style:
-                  //             TextStyle(fontSize: 16, color: Color(0xffACADB9)),
-                  //       ),
-                  //     ),
-                  //     const SizedBox(height: 10),
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: CustomButton(
-                      //         onTap: () {},
-                      //         text: "GOOGLE",
-                      //         textColor: const Color(0xffD44638),
-                      //         btnColor:
-                      //             const Color(0xffD44638).withOpacity(0.2),
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 10),
-                      //     Expanded(
-                      //       child: CustomButton(
-                      //         onTap: () {},
-                      //         text: "FACEBOOK",
-                      //         textColor: const Color(0xff4267B2),
-                      //         btnColor:
-                      //             const Color(0xff4267B2).withOpacity(0.2),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                  //   ],
-                  // )
+                  )
                 ],
               ),
             ),
-            SizedBox(height: 50,)
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
+
   _stateLogin() async {
     String password = _passwordController.text;
     String email = _emailController.text;
@@ -180,10 +190,9 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       print('signed in');
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MainPage()));
+          context, MaterialPageRoute(builder: (context) => NavigationPage()));
     } else {
       print("failed");
     }
   }
-
 }

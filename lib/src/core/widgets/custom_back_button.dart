@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
 
 class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({super.key});
+  const CustomBackButton({
+    super.key,
+    this.onTap,
+  });
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
+      onTap: onTap ??
+          () {
+            Navigator.pop(context);
+          },
       child: Container(
         width: 40,
         height: 40,
         padding: const EdgeInsets.only(left: 10),
         decoration: BoxDecoration(
-          color: AppColors.iconsColor,
+          color: const Color(0xffFFFFFF),
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xffFFE6A6).withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.1),
               spreadRadius: 2,
               blurRadius: 23,
               offset: const Offset(3, 5),
