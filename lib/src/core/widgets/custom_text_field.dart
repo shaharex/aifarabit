@@ -11,7 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.onObscure,
     this.isObscure,
     required this.prefixIcon,
-    this.maxLine,
+    this.maxLine = 1,
   });
 
   final String hintText;
@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
   void Function()? onObscure;
   final bool? isObscure;
   final Widget? prefixIcon;
-  int? maxLine = 1;
+  final int? maxLine;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObscure ?? false,
       maxLines: maxLine,
       decoration: InputDecoration(
-        fillColor: Colors.black,
+        fillColor: AppColors.backgroundColor,
         filled: true,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Color(0xff494949)),
@@ -49,10 +49,15 @@ class CustomTextField extends StatelessWidget {
             ? null
             : IconButton(
                 onPressed: onObscure,
-                icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.white,)),
+                icon: const Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: Colors.white,
+                ),
+              ),
         prefixIcon: prefixIcon,
+        prefixIconColor: AppColors.inactiveColor,
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.iconsColor, fontSize: 16),
+        hintStyle: TextStyle(color: AppColors.inactiveColor, fontSize: 16),
       ),
     );
   }
