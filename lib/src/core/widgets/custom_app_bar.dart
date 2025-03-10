@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/constants.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/widgets/custom_back_button.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.chatTextColor,
+                color: AppColors.iconsColor,
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
@@ -30,11 +30,11 @@ class CustomAppBar extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          Icon(
-            Icons.more_horiz_outlined,
-            color: AppColors.iconsColor,
-            size: 40,
-          ),
+          // Icon(
+          //   Icons.more_horiz_outlined,
+          //   color: AppColors.iconsColor,
+          //   size: 40,
+          // ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 
 class InfoListTile extends StatelessWidget {
@@ -32,7 +32,7 @@ class InfoListTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         width: 150,
         decoration: BoxDecoration(
-          color: const Color(0xffF7F7F8),
+          color: Colors.black,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -41,20 +41,22 @@ class InfoListTile extends StatelessWidget {
             Icon(
               placeIcon,
               size: 40,
+              color: AppColors.iconsColor,
             ),
             Text(
               placeName,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w400,
+                color: AppColors.iconsColor,
                 fontSize: 20,
               ),
             ),
             Text(
               textAlign: TextAlign.center,
               placeDescription,
-              style: const TextStyle(
-                  color: Color(0xffA0A0A5),
+              style: TextStyle(
+                  color: AppColors.iconsColor,
                   fontSize: 14,
                   fontWeight: FontWeight.w600),
             ),
@@ -64,11 +66,10 @@ class InfoListTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xffA0A0A5),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_forward_rounded,
-                color: Colors.white,
+                color: AppColors.iconsColor,
                 size: 20,
               ),
             )

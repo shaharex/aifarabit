@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});
@@ -14,11 +15,11 @@ class CustomBackButton extends StatelessWidget {
         height: 40,
         padding: const EdgeInsets.only(left: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.iconsColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xffD3D1D8).withOpacity(0.3),
+              color: const Color(0xffFFE6A6).withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 23,
               offset: const Offset(3, 5),

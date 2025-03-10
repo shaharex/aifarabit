@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
-
-import '../../../../core/constants/constants.dart';
 
 class AiMessage extends StatelessWidget {
   const AiMessage({
@@ -23,7 +22,7 @@ class AiMessage extends StatelessWidget {
         vertical: 15,
         horizontal: 20,
       ),
-      decoration: const BoxDecoration(color: Color(0xffF7F7F8)),
+      decoration: const BoxDecoration(color: Colors.black),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,14 +31,15 @@ class AiMessage extends StatelessWidget {
             height: 35,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: AppColors.chatTextColor,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(
-              Icons.diversity_2,
-              size: 20,
-              color: Colors.white,
-            ),
+            child: Image.asset('assets/logo.png'),
+            // child: const Icon(
+            //   Icons.diversity_2,
+            //   size: 20,
+            //   color: Colors.black,
+            // ),
           ),
           const SizedBox(width: 15),
           Expanded(
@@ -50,7 +50,7 @@ class AiMessage extends StatelessWidget {
                 Text(
                   message,
                   style:
-                      TextStyle(color: AppColors.chatTextColor, fontSize: 20),
+                      TextStyle(color: AppColors.iconsColor, fontSize: 20),
                 ),
                 const SizedBox(height: 10),
                 index != 0

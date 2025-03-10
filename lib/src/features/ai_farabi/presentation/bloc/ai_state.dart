@@ -16,6 +16,9 @@ class AiInitialState extends AiState {
 class AiGeneratingState extends AiState {
   AiGeneratingState(List<Message> messages) : super(messages);
 }
+class Thinking extends AiState {
+  Thinking(super.messages);
+}
 
 class AiSuccessState extends AiState {
   AiSuccessState(List<Message> messages) : super(messages);
