@@ -1,19 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jihc_hack/firebase_options.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/auth_gate.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
 import 'package:jihc_hack/src/features/map/data/repositories/place_repository_impl.dart';
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
-import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
+import 'package:jihc_hack/src/features/transtator/translation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +46,7 @@ class MainApp extends StatelessWidget {
       create: (context) => GetIt.instance<PlacesBloc>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainPage(),
+        home: NavigationPage(),
       ),
     );
   }

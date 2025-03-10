@@ -30,26 +30,26 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 30,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // const CustomBackButton(),
-            SizedBox(
-              height: 100,
-            ),
-            Center(
-              child: Image.asset(
-                'assets/logo.png',
-                width: 150,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 30,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // const CustomBackButton(),
+              SizedBox(
+                height: 100,
               ),
-            ),
-            Expanded(
-              child: Column(
+              Center(
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 150,
+                ),
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // const SizedBox(height: 40),
@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                                   MaterialPageRoute(
                                       builder: (_) => RegisterPage()));
                             },
-                            child: const Text(
+                            child: Text(
                               'Зарегистрироваться',
                               style: TextStyle(
                                   color: AppColors.iconsColor,
@@ -177,11 +177,11 @@ class _LoginPageState extends State<LoginPage> {
                   // )
                 ],
               ),
-            ),
-            SizedBox(
-              height: 50,
-            )
-          ],
+              SizedBox(
+                height: 50,
+              )
+            ],
+          ),
         ),
       ),
     );
