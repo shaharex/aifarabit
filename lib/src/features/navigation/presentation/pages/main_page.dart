@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
@@ -116,52 +117,32 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          FirebaseAuth.instance.signOut();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-        }, icon: Icon(Icons.exit_to_app, color: AppColors.iconsColor,)),
+        leading: Padding(
+          padding: const EdgeInsets.all(8),
+          child: CustomBackButton(
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+          ),
+        ),
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
-        title: Image.asset('assets/logo.png', width: 70,),
+        title: Image.asset(
+          'assets/logo.png',
+          width: 70,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2 - 30,
-                    height:  MediaQuery.of(context).size.width / 2 - 30,
-                    decoration: BoxDecoration(
-                      // color: AppColors.iconsColor,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: AppColors.iconsColor)
-                    ),
-                    child: Center(
-                      child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2 - 30,
-                    height:  MediaQuery.of(context).size.width / 2 - 30,
-                    decoration: BoxDecoration(
-                      color: AppColors.iconsColor,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Center(
-                      child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [
-                  
+
               //     Container(
               //       width: MediaQuery.of(context).size.width / 2 - 30,
               //       height:  MediaQuery.of(context).size.width / 2 - 30,
@@ -190,11 +171,10 @@ class MainPage extends StatelessWidget {
               // SizedBox(
               //   height: 20,
               // ),
-              Container(
+              SizedBox(
                 height: placesList.length * 220,
                 child: ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
-                  
                   itemBuilder: (context, index) {
                     return _buildPlacesList(placesList[index]);
                   },
@@ -220,7 +200,7 @@ class MainPage extends StatelessWidget {
             Text(
               placesInfo[0],
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 22,
                 fontWeight: FontWeight.w400,
               ),
             ),

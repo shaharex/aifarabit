@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
+import 'package:jihc_hack/src/features/transtator/translation_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -19,14 +21,13 @@ class _NavigationPageState extends State<NavigationPage> {
       body: [
         MainPage(),
         MapPickPage(),
-        const Center(
-          child: Text("The third page"),
-        ),
+        TranslationPage(),
         const Center(
           child: Text("The fourth page"),
         ),
       ][currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: AppColors.primaryColor,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,

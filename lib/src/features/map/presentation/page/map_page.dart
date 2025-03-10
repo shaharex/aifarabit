@@ -26,16 +26,17 @@ class _MapPickPageState extends State<MapPickPage> {
   @override
   void initState() {
     super.initState();
-    DefaultAssetBundle.of(context)
-        .loadString("assets/map_theme/dark_theme.json")
-        .then((value) {
-      setState(() {
-        _mapTheme = value;
-      });
-    });
+    // DefaultAssetBundle.of(context)
+    //     .loadString("assets/map_theme/dark_theme.json")
+    //     .then((value) {
+    //   setState(() {
+    //     _mapTheme = value;
+    //   });
+    // });
   }
 
-  Future<void> getPredictions(String input, TextEditingController controller) async {
+  Future<void> getPredictions(
+      String input, TextEditingController controller) async {
     final url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$_googleApiKey';
 
@@ -51,52 +52,50 @@ class _MapPickPageState extends State<MapPickPage> {
     }
   }
 
-
   String _distance = '';
   String _duration = '';
 
-Future<void> getRoute(String from, String to) async {
-  final url =
-      "https://maps.googleapis.com/maps/api/directions/json?origin=$from&destination=$to&key=$_googleApiKey";
+  Future<void> getRoute(String from, String to) async {
+    final url =
+        "https://maps.googleapis.com/maps/api/directions/json?origin=$from&destination=$to&key=$_googleApiKey";
 
-  final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url));
 
-  if (response.statusCode == 200) {
-    final data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
 
-    if (data['routes'].isNotEmpty) {
-      final route = data['routes'][0]['legs'][0];
+      if (data['routes'].isNotEmpty) {
+        final route = data['routes'][0]['legs'][0];
 
-      setState(() {
-        _distance = route['distance']['text'];
-        _duration = route['duration']['text'];
-      });
+        setState(() {
+          _distance = route['distance']['text'];
+          _duration = route['duration']['text'];
+        });
 
-      List<LatLng> newPolylineCoordinates = [];
-      for (var step in route['steps']) {
-        final startLat = step['start_location']['lat'];
-        final startLng = step['start_location']['lng'];
-        newPolylineCoordinates.add(LatLng(startLat, startLng));
+        List<LatLng> newPolylineCoordinates = [];
+        for (var step in route['steps']) {
+          final startLat = step['start_location']['lat'];
+          final startLng = step['start_location']['lng'];
+          newPolylineCoordinates.add(LatLng(startLat, startLng));
+        }
+
+        setState(() {
+          _polylineCoordinates = newPolylineCoordinates;
+        });
+
+        // Adjust camera bounds
+        final bounds = LatLngBounds(
+          southwest: LatLng(data['routes'][0]['bounds']['southwest']['lat'],
+              data['routes'][0]['bounds']['southwest']['lng']),
+          northeast: LatLng(data['routes'][0]['bounds']['northeast']['lat'],
+              data['routes'][0]['bounds']['northeast']['lng']),
+        );
+        _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
       }
-
-      setState(() {
-        _polylineCoordinates = newPolylineCoordinates;
-      });
-
-      // Adjust camera bounds
-      final bounds = LatLngBounds(
-        southwest: LatLng(data['routes'][0]['bounds']['southwest']['lat'],
-            data['routes'][0]['bounds']['southwest']['lng']),
-        northeast: LatLng(data['routes'][0]['bounds']['northeast']['lat'],
-            data['routes'][0]['bounds']['northeast']['lng']),
-      );
-      _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+    } else {
+      throw Exception('Failed to fetch route');
     }
-  } else {
-    throw Exception('Failed to fetch route');
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,67 +123,61 @@ Future<void> getRoute(String from, String to) async {
             },
           ),
           Positioned(
-  bottom: 20,
-  left: 16,
-  right: 16,
-  child: Column(
-    children: [
-      if (_distance.isNotEmpty && _duration.isNotEmpty)
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(15)
-          ),
-          child:  Text(
-              'Distance: $_distance\nDuration: $_duration',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.iconsColor, fontSize: 20),
-              
+            bottom: 20,
+            left: 16,
+            right: 16,
+            child: Column(
+              children: [
+                if (_distance.isNotEmpty && _duration.isNotEmpty)
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Text(
+                      'Distance: $_distance\nDuration: $_duration',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: AppColors.iconsColor, fontSize: 20),
+                    ),
+                    width: double.infinity,
+                  ),
+              ],
             ),
-          
-          
-          width: double.infinity,
-        ),
-    ],
-  ),
-),
-
+          ),
           Positioned(
             top: 50,
             left: 16,
             right: 16,
             child: Column(
               children: [
-                _buildSearchField(
-                  text: TextStyle(color: Colors.white),
-                  color: Colors.black,
-                  controller: _fromController,
+                CustomTextField(
                   hintText: "Откуда",
-                  onChanged: (text) {
+                  controller: _fromController,
+                  textChanged: (text) {
                     setState(() {
                       _isFromFieldActive = true;
                     });
                     getPredictions(text, _fromController);
                   },
+                  prefixIcon: const Icon(Icons.search),
                 ),
                 const SizedBox(height: 10),
-                _buildSearchField(
-                  text: TextStyle(color: Colors.white),
-                  color: Colors.black,
-                  controller: _toController,
+                CustomTextField(
                   hintText: "Куда",
-                  onChanged: (text) {
+                  controller: _fromController,
+                  textChanged: (text) {
                     setState(() {
                       _isFromFieldActive = false;
                     });
                     getPredictions(text, _toController);
                   },
+                  prefixIcon: const Icon(Icons.search),
                 ),
                 const SizedBox(height: 10),
                 CustomButton(
                   btnColor: Colors.black,
                   textColor: Colors.white,
-                  text: "Search", 
+                  text: "Find Route",
                   onTap: () async {
                     final from = _fromController.text;
                     final to = _toController.text;
@@ -195,58 +188,34 @@ Future<void> getRoute(String from, String to) async {
                     }
                   },
                 ),
-                
                 if (_predictions.isNotEmpty)
                   ..._predictions.map((prediction) {
                     return GestureDetector(
                       onTap: () {
-                          setState(() {
-                            if (_isFromFieldActive) {
-                              _fromController.text = prediction.description;
-                            } else {
-                              _toController.text = prediction.description;
-                            }
-                            _predictions.clear();
-                          });
-                        },
+                        setState(() {
+                          if (_isFromFieldActive) {
+                            _fromController.text = prediction.description;
+                          } else {
+                            _toController.text = prediction.description;
+                          }
+                          _predictions.clear();
+                        });
+                      },
                       child: Container(
                         margin: EdgeInsets.only(top: 10),
-                        child: Text(prediction.description, style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          prediction.description,
+                          style: TextStyle(color: Colors.white),
+                        ),
                         color: AppColors.backgroundColor,
                         width: double.infinity,
-                        
                       ),
                     );
-                    
                   }).toList(),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSearchField(
-      {required TextEditingController controller,
-      required String hintText,
-      required Color color,
-      required TextStyle text,
-      required Function(String) onChanged}) {
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      style: text,
-      decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(Icons.search, color: Colors.white,),
-        filled: true,
-        
-        fillColor: color,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
       ),
     );
   }

@@ -21,19 +21,20 @@ class _TranslationPageState extends State<TranslationPage> {
   String _translatedText = "";
   String _sourceLang = "EN";
   String _targetLang = "RU";
-  final String _baseUrl = 'https://api-free.deepl.com/v2/usage';
+  final String _baseUrl = 'https://api-free.deepl.com/v2/translate';
 
   Future<String> translateTextWeb() async {
     final response = await http.post(
       Uri.parse(_baseUrl),
       headers: {
         'Authorization': 'DeepL-Auth-Key ${DeepLKey.apiKey}',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': 'deepl_dart/2.0.0',
       },
-      body: {
-        'detected_source_language': "EN",
-        'text': _inputController.text,
-      },
+      body: json.encode({
+        "text": [_inputController.text],
+        "target_lang": _targetLang,
+      }),
     );
 
     if (response.statusCode == 200) {
@@ -74,7 +75,7 @@ class _TranslationPageState extends State<TranslationPage> {
       backgroundColor: AppColors.backgroundColor,
       // appBar: AppBar(title: const Text("Translator")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           children: [
             SizedBox(
@@ -82,7 +83,7 @@ class _TranslationPageState extends State<TranslationPage> {
             ),
             Image.asset(
               'assets/logo.png',
-              width: 80,
+              width: 150,
             ),
             SizedBox(
               height: 50,
@@ -91,7 +92,7 @@ class _TranslationPageState extends State<TranslationPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DropdownButton<String>(
-                  dropdownColor: AppColors.chatTextColor,
+                  dropdownColor: AppColors.primaryColor,
                   iconEnabledColor: AppColors.iconsColor,
                   style: TextStyle(color: AppColors.iconsColor),
                   value: _sourceLang,
@@ -115,7 +116,7 @@ class _TranslationPageState extends State<TranslationPage> {
                   color: AppColors.iconsColor,
                 ),
                 DropdownButton<String>(
-                  dropdownColor: AppColors.chatTextColor,
+                  dropdownColor: AppColors.primaryColor,
                   iconEnabledColor: AppColors.iconsColor,
                   style: TextStyle(color: AppColors.iconsColor),
                   value: _targetLang,
@@ -165,16 +166,22 @@ class _TranslationPageState extends State<TranslationPage> {
             const SizedBox(height: 16),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: AppColors.iconsColor)),
+                  border: Border.all(
+                      color: _translatedText.isEmpty
+                          ? Colors.grey
+                          : AppColors.iconsColor)),
               child: Text(
-                _translatedText,
+                _translatedText.isEmpty ? 'Translation' : _translatedText,
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.iconsColor),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: _translatedText.isEmpty
+                      ? Colors.grey
+                      : AppColors.iconsColor,
+                ),
               ),
             )
           ],
