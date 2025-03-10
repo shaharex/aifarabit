@@ -19,10 +19,9 @@ class TranslateTextField extends StatelessWidget {
     return TextField(
       style: TextStyle(color: AppColors.iconsColor),
       controller: controller,
-      
       maxLines: maxLine,
       decoration: InputDecoration(
-        fillColor: Colors.black,
+        fillColor: AppColors.primaryColor,
         filled: true,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Color(0xff494949)),
@@ -36,7 +35,6 @@ class TranslateTextField extends StatelessWidget {
             Radius.circular(13),
           ),
         ),
-        
         hintText: hintText,
         hintStyle: TextStyle(color: AppColors.iconsColor, fontSize: 16),
       ),

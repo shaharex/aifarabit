@@ -22,7 +22,7 @@ class AiMessage extends StatelessWidget {
         vertical: 15,
         horizontal: 20,
       ),
-      decoration: const BoxDecoration(color: Colors.black),
+      decoration: BoxDecoration(color: AppColors.primaryColor),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -49,8 +49,7 @@ class AiMessage extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   message,
-                  style:
-                      TextStyle(color: AppColors.iconsColor, fontSize: 20),
+                  style: TextStyle(color: AppColors.iconsColor, fontSize: 20),
                 ),
                 const SizedBox(height: 10),
                 index != 0

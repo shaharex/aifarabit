@@ -32,7 +32,7 @@ class InfoListTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -66,10 +66,11 @@ class InfoListTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
+                color: Color(0xffA0A0A5),
               ),
               child: Icon(
                 Icons.arrow_forward_rounded,
-                color: AppColors.iconsColor,
+                color: AppColors.primaryColor,
                 size: 20,
               ),
             )
