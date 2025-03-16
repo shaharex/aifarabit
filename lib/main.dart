@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jihc_hack/firebase_options.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/auth_gate.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
 import 'package:jihc_hack/src/features/map/data/repositories/place_repository_impl.dart';
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
