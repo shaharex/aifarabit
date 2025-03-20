@@ -1,5 +1,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geolocator/geolocator.dart';
 
 class FirebaseServices {
   final _auth = FirebaseAuth.instance;
@@ -39,5 +40,15 @@ class FirebaseServices {
       print("Registration Error: ${e.toString()}");
     }
     return null;
+  }
+}
+
+
+
+class LocationService {
+  // final Geolocator _geolocator = Geolocator();
+
+  Future<Position> getCurrentLocation() async {
+    return await Geolocator.getCurrentPosition();
   }
 }
