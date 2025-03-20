@@ -164,7 +164,7 @@ class _MapPickPageState extends State<MapPickPage> {
                 const SizedBox(height: 10),
                 CustomTextField(
                   hintText: "Куда",
-                  controller: _fromController,
+                  controller: _toController,
                   textChanged: (text) {
                     setState(() {
                       _isFromFieldActive = false;
