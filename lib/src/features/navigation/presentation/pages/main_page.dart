@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
@@ -14,31 +15,36 @@ class MainPage extends StatelessWidget {
       "Мавзолей Айши-Биби",
       "Священная красота",
       Icons.mosque,
-      "Айша-Биби, Kazakhstan"
+      "Айша-Биби, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Мавзолей Бабаджи-Хатун",
       "Мистическое наследие",
       Icons.account_balance,
-      "Айша-Биби, Kazakhstan"
+      "Айша-Биби, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Мавзолей Карахан",
       "Королевское наследие",
       Icons.location_city,
-      'Мавзолей Карахана, Taraz, Kazakhstan'
+      'Мавзолей Карахана, Taraz, Kazakhstan',
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Архитектурный комплекс «Тектурмас»",
       "Древняя панорама",
       Icons.landscape,
-      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "«Акиртас»",
       "Великолепный Дворцовый комплекс ",
       Icons.account_balance_outlined,
-      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -47,19 +53,22 @@ class MainPage extends StatelessWidget {
       "Рынок «Шахристан»",
       "Яркий базар",
       Icons.store,
-      "Шахристан, Taraz, Kazakhstan"
+      "Шахристан, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Центральный стадион Тараза",
       "Спортивный дух",
       Icons.sports_soccer,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Дендрологический парк",
       "Зелёный оазис",
       Icons.park,
-      "Шахристан, Taraz, Kazakhstan"
+      "Шахристан, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -68,19 +77,22 @@ class MainPage extends StatelessWidget {
       "Отель «Жамбыл»",
       "Элегантный комфорт",
       Icons.hotel,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Отель «Газовик»",
       "Тёплое гостеприимство",
       Icons.king_bed,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Отель «Уют»",
       "Уютное убежище",
       Icons.home,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -89,19 +101,22 @@ class MainPage extends StatelessWidget {
       "Ресторан «Арасан»",
       "Изысканные вкусы",
       Icons.restaurant,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Ресторан «Кишлак»",
       "Традиционный вкус",
       Icons.local_dining,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Кафе «Салам»",
       "Местные деликатесы",
       Icons.local_cafe,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -186,6 +201,7 @@ class MainPage extends StatelessWidget {
                 placeDescription: place[1],
                 placeDestination: place[3],
                 placeIcon: place[2],
+                latLng: place[4],
               );
             },
           ),

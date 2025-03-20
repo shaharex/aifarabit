@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
@@ -28,7 +29,7 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       body: [
         MainPage(),
-        MapPickPage(),
+        MapPickPage(latLng: LatLng(0, 0)),
         TranslationPage(),
         ProfilePage(),
       ][currentIndex],

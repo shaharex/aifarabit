@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jihc_hack/firebase_options.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/auth_gate.dart';
@@ -10,7 +11,6 @@ import 'package:jihc_hack/src/features/map/data/repositories/place_repository_im
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final getIt = GetIt.instance;
+  await Geolocator.requestPermission();
 
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<PlaceRemoteDataSource>(
