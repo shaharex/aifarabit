@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/api_key.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/pages/city_info_page.dart';
 
 class ChooseCityPage extends StatefulWidget {
   const ChooseCityPage({
@@ -66,9 +66,23 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
                   : ListView.builder(
                       itemCount: cities.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(cities[index]['city'] ?? ''),
-                          subtitle: Text(cities[index]['reason'] ?? ''),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CityInfoPage(
+                                  city: cities[index]['city'] ?? '',
+                                  country: _cityController.text,
+                                  preferences: widget.preferences,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            title: Text(cities[index]['city'] ?? ''),
+                            subtitle: Text(cities[index]['reason'] ?? ''),
+                          ),
                         );
                       },
                     ),
@@ -101,7 +115,7 @@ Future<List<Map<String, String>>> getCanadianCities(
         {
           "role": "user",
           "content":
-              "Given that I am interested in $preferences provide a list of cities in $country that are best suited for these types of travel. The response should be a JSON array with city names and a brief reason why they are suitable. Response should not contain any other symbols, words, sentences except JSON array with city names."
+              "Given that I am interested in $preferences provide a list of cities in $country that are best suited for these types of travel. The response should be a JSON array with city names and a brief reason why they are suitable. Response should not contain any other symbols, words, sentences except JSON."
         }
       ],
       "temperature": 0.2,
@@ -110,17 +124,15 @@ Future<List<Map<String, String>>> getCanadianCities(
 
   if (response.statusCode == 200) {
     String jsonString = response.data["choices"][0]["message"]["content"];
-    print(jsonString);
     jsonString = jsonString.trim();
     if (jsonString.startsWith("```json")) {
       jsonString =
           jsonString.replaceAll("```json", "").replaceAll("```", "").trim();
     }
 
-    String data = jsonDecode(jsonString);
-    print(data.runtimeType);
-
-    return List<Map<String, String>>.from(jsonDecode(jsonString));
+    return (jsonDecode(jsonString) as List)
+        .map((item) => Map<String, String>.from(item))
+        .toList();
   } else {
     throw Exception("Failed to get response: ${response.statusCode}");
   }

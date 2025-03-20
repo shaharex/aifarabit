@@ -11,12 +11,7 @@ import 'package:jihc_hack/src/features/map/data/repositories/place_repository_im
 import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
 import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:jihc_hack/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
-<<<<<<< HEAD
-import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/pages/choose_city_page.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
-=======
->>>>>>> 397c8c4cdedd5bec6f372885e771f6e9836e8895
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +46,7 @@ class MainApp extends StatelessWidget {
       create: (context) => GetIt.instance<PlacesBloc>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: NavigationPage(),
+        home: PreferencesPage(),
       ),
     );
   }
