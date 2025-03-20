@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 
@@ -9,11 +10,13 @@ class AiMessage extends StatelessWidget {
     required this.message,
     required this.index,
     required this.destination,
+    required this.latLng,
   });
 
   final String message;
   final int index;
   final String destination;
+  final LatLng latLng;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,7 @@ class AiMessage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => MapPickPage(),
+                                      builder: (context) => MapPickPage(latLng: latLng),
                                     ),
                                   );
                                 },
