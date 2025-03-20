@@ -32,7 +32,7 @@ class _TranslationPageState extends State<TranslationPage> {
         'User-Agent': 'deepl_dart/2.0.0',
       },
       body: json.encode({
-        "text": [_inputController.text],
+        "text": _inputController.text,
         "target_lang": _targetLang,
       }),
     );
@@ -74,119 +74,136 @@ class _TranslationPageState extends State<TranslationPage> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       // appBar: AppBar(title: const Text("Translator")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 80,
-            ),
-            Image.asset(
-              'assets/logo.png',
-              width: 150,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DropdownButton<String>(
-                  dropdownColor: AppColors.primaryColor,
-                  iconEnabledColor: AppColors.iconsColor,
-                  style: TextStyle(color: AppColors.iconsColor),
-                  value: _sourceLang,
-                  onChanged: (newLang) {
-                    setState(() {
-                      _sourceLang = newLang!;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(value: "EN", child: Text("English")),
-                    DropdownMenuItem(value: "RU", child: Text("Russian")),
-                    DropdownMenuItem(value: "DE", child: Text("German")),
-                    DropdownMenuItem(value: "FR", child: Text("France")),
-                    DropdownMenuItem(value: "ZH", child: Text("China")),
-                    DropdownMenuItem(value: "KO", child: Text("Korean")),
-                    DropdownMenuItem(value: "TR", child: Text("Turkish")),
-                  ],
-                ),
-                Icon(
-                  Icons.swap_horiz,
-                  color: AppColors.iconsColor,
-                ),
-                DropdownButton<String>(
-                  dropdownColor: AppColors.primaryColor,
-                  iconEnabledColor: AppColors.iconsColor,
-                  style: TextStyle(color: AppColors.iconsColor),
-                  value: _targetLang,
-                  onChanged: (newLang) {
-                    setState(() {
-                      _targetLang = newLang!;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(value: "EN", child: Text("English")),
-                    DropdownMenuItem(value: "RU", child: Text("Russian")),
-                    DropdownMenuItem(value: "DE", child: Text("German")),
-                    DropdownMenuItem(value: "FR", child: Text("France")),
-                    DropdownMenuItem(value: "ZH", child: Text("China")),
-                    DropdownMenuItem(value: "KO", child: Text("Korean")),
-                    DropdownMenuItem(value: "TR", child: Text("Turkish")),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            TranslateTextField(
-              maxLine: 5,
-              hintText: "Напишите",
-              controller: _inputController,
-            ),
-            // TextField(
-            //   controller: _inputController,
-            //   decoration: const InputDecoration(
-            //     border: OutlineInputBorder(),
-            //     hintText: "Enter text to translate",
-            //   ),
-            //   maxLines: 5,
-            // ),
-            const SizedBox(height: 16),
-            CustomButton(
-                text: 'Translate',
-                onTap: () {
-                  if (kIsWeb) {
-                    translateTextWeb();
-                  } else {
-                    _translateText();
-                  }
-                },
-                textColor: AppColors.backgroundColor,
-                btnColor: AppColors.iconsColor),
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                      color: _translatedText.isEmpty
-                          ? Colors.grey
-                          : AppColors.iconsColor)),
-              child: Text(
-                _translatedText.isEmpty ? 'Translation' : _translatedText,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: _translatedText.isEmpty
-                      ? Colors.grey
-                      : AppColors.iconsColor,
-                ),
+      body: LayoutBuilder(builder: (_, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Image.asset(
+                        'assets/logo.png',
+                        width: 150,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        alignment: Alignment.bottomCenter,
+                        child: const Text('translate'),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DropdownButton<String>(
+                        dropdownColor: AppColors.primaryColor,
+                        iconEnabledColor: AppColors.iconsColor,
+                        style: TextStyle(color: AppColors.iconsColor),
+                        value: _sourceLang,
+                        onChanged: (newLang) {
+                          setState(() {
+                            _sourceLang = newLang!;
+                          });
+                        },
+                        items: const [
+                          DropdownMenuItem(value: "EN", child: Text("English")),
+                          DropdownMenuItem(value: "RU", child: Text("Russian")),
+                          DropdownMenuItem(value: "DE", child: Text("German")),
+                          DropdownMenuItem(value: "FR", child: Text("France")),
+                          DropdownMenuItem(value: "ZH", child: Text("China")),
+                          DropdownMenuItem(value: "KO", child: Text("Korean")),
+                          DropdownMenuItem(value: "TR", child: Text("Turkish")),
+                        ],
+                      ),
+                      Icon(
+                        Icons.swap_horiz,
+                        color: AppColors.iconsColor,
+                      ),
+                      DropdownButton<String>(
+                        dropdownColor: AppColors.primaryColor,
+                        iconEnabledColor: AppColors.iconsColor,
+                        style: TextStyle(color: AppColors.iconsColor),
+                        value: _targetLang,
+                        onChanged: (newLang) {
+                          setState(() {
+                            _targetLang = newLang!;
+                          });
+                        },
+                        items: const [
+                          DropdownMenuItem(value: "EN", child: Text("English")),
+                          DropdownMenuItem(value: "RU", child: Text("Russian")),
+                          DropdownMenuItem(value: "DE", child: Text("German")),
+                          DropdownMenuItem(value: "FR", child: Text("France")),
+                          DropdownMenuItem(value: "ZH", child: Text("China")),
+                          DropdownMenuItem(value: "KO", child: Text("Korean")),
+                          DropdownMenuItem(value: "TR", child: Text("Turkish")),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  TranslateTextField(
+                    maxLine: 5,
+                    hintText: "Напишите",
+                    controller: _inputController,
+                  ),
+                  // TextField(
+                  //   controller: _inputController,
+                  //   decoration: const InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //     hintText: "Enter text to translate",
+                  //   ),
+                  //   maxLines: 5,
+                  // ),
+                  const SizedBox(height: 16),
+                  CustomButton(
+                      text: 'Translate',
+                      onTap: () {
+                        if (kIsWeb) {
+                          translateTextWeb();
+                        } else {
+                          _translateText();
+                        }
+                      },
+                      textColor: AppColors.backgroundColor,
+                      btnColor: AppColors.iconsColor),
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                            color: _translatedText.isEmpty
+                                ? Colors.grey
+                                : AppColors.iconsColor)),
+                    child: Text(
+                      _translatedText.isEmpty ? 'Translation' : _translatedText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: _translatedText.isEmpty
+                            ? Colors.grey
+                            : AppColors.iconsColor,
+                      ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

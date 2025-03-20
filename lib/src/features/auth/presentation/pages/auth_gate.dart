@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
@@ -27,8 +26,10 @@ class InitializePage extends StatelessWidget {
     });
 
     return Scaffold(
-      body: CircularProgressIndicator.adaptive(backgroundColor: AppColors.iconsColor,)
-          // Center(child: Lottie.asset('assets/animations/loading_hamster.json')),
-    );
+        body: CircularProgressIndicator.adaptive(
+      backgroundColor: AppColors.iconsColor,
+    )
+        // Center(child: Lottie.asset('assets/animations/loading_hamster.json')),
+        );
   }
 }
