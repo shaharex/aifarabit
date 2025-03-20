@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/widgets/custom_app_bar.dart';
@@ -13,9 +16,10 @@ import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/input_fiel
 import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.place, required this.destination});
+  const ChatPage({super.key, required this.place, required this.destination, required this.latLng});
   final String place;
   final String destination;
+  final LatLng latLng;
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +31,22 @@ class ChatPage extends StatelessWidget {
           ),
         ),
       )..add(SendMessage(Message(
-          content: 'расскажи мне о $place кратко максимум 50 слов',
+          content: 'расскажи мне о $place кратко.',
           role: 'user'))),
       child: ChatView(
         place: place,
         destination: destination,
+        latLng: latLng,
       ),
     );
   }
 }
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key, required this.place, required this.destination});
+  const ChatView({super.key, required this.place, required this.destination, required this.latLng});
   final String place;
   final String destination;
+  final LatLng latLng;
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -83,6 +89,7 @@ class _ChatViewState extends State<ChatView> {
             //     }
             //   },
             // ),
+            Platform.isIOS ? const SizedBox(height: 35) : const SizedBox(),
             CustomAppBar(
               text: widget.place,
             ),
@@ -166,6 +173,7 @@ class _ChatViewState extends State<ChatView> {
                           message: message.content,
                           index: index,
                           destination: widget.destination,
+                          latLng: widget.latLng,
                         );
                       } else {
                         return UserMessage(message: message.content);
