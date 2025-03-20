@@ -134,13 +134,6 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8),
-          child: CustomBackButton(
-            onTap: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            },
-          ),
         ),
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
@@ -154,42 +147,9 @@ class MainPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-
-              //     Container(
-              //       width: MediaQuery.of(context).size.width / 2 - 30,
-              //       height:  MediaQuery.of(context).size.width / 2 - 30,
-              //       decoration: BoxDecoration(
-              //         color: AppColors.iconsColor,
-              //         borderRadius: BorderRadius.circular(15)
-              //       ),
-              //       child: Center(
-              //         child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
-              //       ),
-              //     ),
-              //     Container(
-              //       width: MediaQuery.of(context).size.width / 2 - 30,
-              //       height:  MediaQuery.of(context).size.width / 2 - 30,
-              //       decoration: BoxDecoration(
-              //         // color: AppColors.iconsColor,
-              //         borderRadius: BorderRadius.circular(15),
-              //         border: Border.all(color: AppColors.iconsColor)
-              //       ),
-              //       child: Center(
-              //         child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
-              //       ),
-              //     )
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
               SizedBox(
                 height: placesList.length * 220,
                 child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return _buildPlacesList(placesList[index]);
                   },

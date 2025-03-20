@@ -7,7 +7,6 @@ import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/widgets/custom_app_bar.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/datasources/remote_data_source.dart';
-import 'package:jihc_hack/src/features/ai_farabi/data/models/message_model.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/repository/ai_repository_impl.dart';
 import 'package:jihc_hack/src/features/ai_farabi/domain/enitity/message.dart';
 import 'package:jihc_hack/src/features/ai_farabi/domain/usecases/send_message.dart';
@@ -56,16 +55,6 @@ class _ChatViewState extends State<ChatView> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _chatController = TextEditingController();
   bool iconShow = false;
-
-  late Future<MessageModel> futureMessage;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // futureMessage = RemoteDataSource(apiKey: ApiKey.apiKey)
-    //     .sendMessage('расскажи мне о ${widget.place} кратко максимум 50 слов');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +146,10 @@ class _ChatViewState extends State<ChatView> {
                                   child: Center(
                                     child: CircularProgressIndicator.adaptive(
                                       backgroundColor: AppColors.iconsColor,
+                                      valueColor:
+                                          const AlwaysStoppedAnimation<Color>(
+                                        Colors.grey,
+                                      ),
                                     ),
                                   ),
                                 )),
