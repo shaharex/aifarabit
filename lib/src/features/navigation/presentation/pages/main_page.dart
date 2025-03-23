@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
 // ignore: must_be_immutable
