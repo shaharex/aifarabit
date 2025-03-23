@@ -3,15 +3,21 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jihc_hack/src/core/constants/api_key.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/pages/city_info_page.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/widgets/custom_button.dart';
+import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/widgets/city_info_item.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/widgets/widgets.dart';
 
 class ChooseCityPage extends StatefulWidget {
   const ChooseCityPage({
     super.key,
     required this.preferences,
   });
-  final String preferences;
+  final List<String> preferences;
 
   @override
   State<ChooseCityPage> createState() => _ChooseCityPageState();
@@ -21,6 +27,19 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
   final TextEditingController _cityController = TextEditingController();
   List<Map<String, String>> cities = [];
   bool isLoading = false;
+  String dropdownCountry = 'Canada';
+  List<String> countriesList = [
+    'Canada',
+    'France',
+    'America',
+    'Germany',
+    'Denmark',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -31,8 +50,10 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
   Future<void> fetchCities() async {
     setState(() => isLoading = true);
     try {
-      cities =
-          await getCanadianCities(widget.preferences, _cityController.text);
+      cities = await getCanadianCities(
+        widget.preferences.toString(),
+        dropdownCountry,
+      );
     } catch (e) {
       log("Error fetching cities: $e");
     }
@@ -42,54 +63,117 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Choose City')),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Choose Country'),
-            TextField(controller: _cityController),
-            ElevatedButton(
-              onPressed: fetchCities,
-              child: Text('Choose country'),
-            ),
-            const SizedBox(height: 10),
-            Text('Your Preferences: ${widget.preferences}'),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Edit Preferences'),
-            ),
-            Expanded(
-              child: isLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: cities.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CityInfoPage(
-                                  city: cities[index]['city'] ?? '',
-                                  country: _cityController.text,
-                                  preferences: widget.preferences,
-                                ),
-                              ),
-                            );
-                          },
-                          child: ListTile(
-                            title: Text(cities[index]['city'] ?? ''),
-                            subtitle: Text(cities[index]['reason'] ?? ''),
-                          ),
-                        );
-                      },
+            BlocBuilder<CitiesBloc, CitiesState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => _buildInitialUI(context),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.grey,
+                      ),
                     ),
-            ),
+                  ),
+                  success: (cities) => _buildCitiesList(cities),
+                  failure: (message) => Text('Try Again: $message'),
+                );
+              },
+            )
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCitiesList(List<City> cities) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: cities.length,
+        itemBuilder: (context, index) {
+          final city = cities[index];
+          return CityItem(
+            title: city.city,
+            subtitle: city.description,
+          );
+        },
+      ),
+    );
+  }
+
+  Column _buildInitialUI(BuildContext context) {
+    return Column(
+      children: [
+        const Text(
+          'Выберите Страну',
+          style: TextStyle(
+            fontSize: 22,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.inactiveColor,
+          ),
+          child: DropdownButton<String>(
+            borderRadius: BorderRadius.circular(10),
+            value: dropdownCountry,
+            hint: const Text('Выберите Страну'),
+            icon: const Icon(Icons.arrow_downward),
+            isExpanded: true,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            onChanged: (String? value) {
+              setState(() {
+                dropdownCountry = value!;
+              });
+            },
+            items: countriesList.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          'Ваши предпочтения:',
+          style: TextStyle(fontSize: 20),
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: List.generate(
+            widget.preferences.length,
+            (index) => PreferencesChip(
+              text: widget.preferences[index],
+              preferences: true,
+              onTap: () {},
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        CustomButton(
+          text: 'Продолжить',
+          onTap: () {
+            context.read<CitiesBloc>().add(
+                  FetchCities(
+                      preferences: widget.preferences.toString(),
+                      country: dropdownCountry),
+                );
+          },
+          textColor: Colors.white,
+          btnColor: Colors.black,
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
@@ -130,6 +214,7 @@ Future<List<Map<String, String>>> getCanadianCities(
           jsonString.replaceAll("```json", "").replaceAll("```", "").trim();
     }
 
+    print(jsonString);
     return (jsonDecode(jsonString) as List)
         .map((item) => Map<String, String>.from(item))
         .toList();
