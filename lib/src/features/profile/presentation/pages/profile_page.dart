@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: AssetImage(
-                    'assets/astronavt.jpg',
+                    'assets/astronavt.jpeg',
                   ),
                   fit: BoxFit.cover,
                 ),
