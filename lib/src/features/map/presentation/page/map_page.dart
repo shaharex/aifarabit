@@ -32,6 +32,7 @@ class _MapPickPageState extends State<MapPickPage> {
     super.initState();
     _initializeMarker();
     _getAddressFromLatLng();
+
     // DefaultAssetBundle.of(context)
     //     .loadString("assets/map_theme/dark_theme.json")
     //     .then((value) {
@@ -42,6 +43,7 @@ class _MapPickPageState extends State<MapPickPage> {
   }
 
   void _initializeMarker() {
+    _getCurrentLocation();
     _markers.add(
       Marker(
         markerId: MarkerId('destination'),
