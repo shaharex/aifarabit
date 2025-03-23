@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.isObscure,
     required this.prefixIcon,
     this.maxLine = 1,
+    this.borderColor,
   });
 
   final String hintText;
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final bool? isObscure;
   final Widget? prefixIcon;
   final int? maxLine;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,9 @@ class CustomTextField extends StatelessWidget {
             Radius.circular(13),
           ),
         ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.all(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor ?? Colors.white, width: 1),
+          borderRadius: const BorderRadius.all(
             Radius.circular(13),
           ),
         ),
