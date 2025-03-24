@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
+import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/utils/structure_util.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 

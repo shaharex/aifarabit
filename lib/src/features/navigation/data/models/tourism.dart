@@ -7,6 +7,8 @@ part 'tourism.g.dart';
 class TourismData with _$TourismData {
   const factory TourismData({
     required String city,
+    double? longitude,
+    double? lattitude,
     required List<Hotel> hotels,
     required Emergency emergency,
     required List<Restaurant> restaurants,
@@ -22,8 +24,8 @@ class TourismData with _$TourismData {
 class Hotel with _$Hotel {
   const factory Hotel({
     required String name,
-    required int price,
-    required double rating,
+    int? price,
+    double? rating,
     required String address,
     required List<String> images,
   }) = _Hotel;

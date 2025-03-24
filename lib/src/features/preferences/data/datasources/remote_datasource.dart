@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/features/preferences/data/models/city.dart';
-
-import '../../../../core/constants/api_key.dart';
 
 class CityRemoteDatasource {
   final dio = Dio();

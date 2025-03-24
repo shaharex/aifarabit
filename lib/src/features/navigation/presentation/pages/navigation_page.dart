@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/city_info_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 import 'package:jihc_hack/src/features/transtator/translation_page.dart';
 
@@ -27,7 +28,7 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        MainPage(),
+        CityInfoPage(),
         MapPickPage(latLng: LatLng(0, 0)),
         TranslationPage(),
         ProfilePage(),

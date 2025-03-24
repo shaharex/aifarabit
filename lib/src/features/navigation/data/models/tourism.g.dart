@@ -9,6 +9,8 @@ part of 'tourism.dart';
 _$TourismDataImpl _$$TourismDataImplFromJson(Map<String, dynamic> json) =>
     _$TourismDataImpl(
       city: json['city'] as String,
+      longitude: (json['longitude'] as num?)?.toDouble(),
+      lattitude: (json['lattitude'] as num?)?.toDouble(),
       hotels: (json['hotels'] as List<dynamic>)
           .map((e) => Hotel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -24,6 +26,8 @@ _$TourismDataImpl _$$TourismDataImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$TourismDataImplToJson(_$TourismDataImpl instance) =>
     <String, dynamic>{
       'city': instance.city,
+      'longitude': instance.longitude,
+      'lattitude': instance.lattitude,
       'hotels': instance.hotels,
       'emergency': instance.emergency,
       'restaurants': instance.restaurants,
@@ -33,8 +37,8 @@ Map<String, dynamic> _$$TourismDataImplToJson(_$TourismDataImpl instance) =>
 
 _$HotelImpl _$$HotelImplFromJson(Map<String, dynamic> json) => _$HotelImpl(
       name: json['name'] as String,
-      price: (json['price'] as num).toInt(),
-      rating: (json['rating'] as num).toDouble(),
+      price: (json['price'] as num?)?.toInt(),
+      rating: (json['rating'] as num?)?.toDouble(),
       address: json['address'] as String,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
