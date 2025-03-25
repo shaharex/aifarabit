@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
 // ignore: must_be_immutable
@@ -13,31 +12,36 @@ class MainPage extends StatelessWidget {
       "Мавзолей Айши-Биби",
       "Священная красота",
       Icons.mosque,
-      "Айша-Биби, Kazakhstan"
+      "Айша-Биби, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Мавзолей Бабаджи-Хатун",
       "Мистическое наследие",
       Icons.account_balance,
-      "Айша-Биби, Kazakhstan"
+      "Айша-Биби, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Мавзолей Карахан",
       "Королевское наследие",
       Icons.location_city,
-      'Мавзолей Карахана, Taraz, Kazakhstan'
+      'Мавзолей Карахана, Taraz, Kazakhstan',
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Архитектурный комплекс «Тектурмас»",
       "Древняя панорама",
       Icons.landscape,
-      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "«Акиртас»",
       "Великолепный Дворцовый комплекс ",
       Icons.account_balance_outlined,
-      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan"
+      "Мавзолей Тектурмас, Тектұрмас көшесі, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -46,19 +50,22 @@ class MainPage extends StatelessWidget {
       "Рынок «Шахристан»",
       "Яркий базар",
       Icons.store,
-      "Шахристан, Taraz, Kazakhstan"
+      "Шахристан, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Центральный стадион Тараза",
       "Спортивный дух",
       Icons.sports_soccer,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Дендрологический парк",
       "Зелёный оазис",
       Icons.park,
-      "Шахристан, Taraz, Kazakhstan"
+      "Шахристан, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -67,19 +74,22 @@ class MainPage extends StatelessWidget {
       "Отель «Жамбыл»",
       "Элегантный комфорт",
       Icons.hotel,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Отель «Газовик»",
       "Тёплое гостеприимство",
       Icons.king_bed,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Отель «Уют»",
       "Уютное убежище",
       Icons.home,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -88,19 +98,22 @@ class MainPage extends StatelessWidget {
       "Ресторан «Арасан»",
       "Изысканные вкусы",
       Icons.restaurant,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Ресторан «Кишлак»",
       "Традиционный вкус",
       Icons.local_dining,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ],
     [
       "Кафе «Салам»",
       "Местные деликатесы",
       Icons.local_cafe,
-      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan"
+      "Орталық стадионы, Tole Bi Street, Taraz, Kazakhstan",
+      LatLng(42.871944, 71.345833)
     ]
   ];
 
@@ -116,85 +129,24 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          FirebaseAuth.instance.signOut();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-        }, icon: Icon(Icons.exit_to_app, color: AppColors.iconsColor,)),
+        leading: Padding(
+          padding: const EdgeInsets.all(8),
+        ),
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
-        title: Image.asset('assets/logo.png', width: 70,),
+        title: Image.asset(
+          'assets/logo.png',
+          width: 70,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2 - 30,
-                    height:  MediaQuery.of(context).size.width / 2 - 30,
-                    decoration: BoxDecoration(
-                      // color: AppColors.iconsColor,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: AppColors.iconsColor)
-                    ),
-                    child: Center(
-                      child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2 - 30,
-                    height:  MediaQuery.of(context).size.width / 2 - 30,
-                    decoration: BoxDecoration(
-                      color: AppColors.iconsColor,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Center(
-                      child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-                  
-              //     Container(
-              //       width: MediaQuery.of(context).size.width / 2 - 30,
-              //       height:  MediaQuery.of(context).size.width / 2 - 30,
-              //       decoration: BoxDecoration(
-              //         color: AppColors.iconsColor,
-              //         borderRadius: BorderRadius.circular(15)
-              //       ),
-              //       child: Center(
-              //         child: Text('New Journey', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
-              //       ),
-              //     ),
-              //     Container(
-              //       width: MediaQuery.of(context).size.width / 2 - 30,
-              //       height:  MediaQuery.of(context).size.width / 2 - 30,
-              //       decoration: BoxDecoration(
-              //         // color: AppColors.iconsColor,
-              //         borderRadius: BorderRadius.circular(15),
-              //         border: Border.all(color: AppColors.iconsColor)
-              //       ),
-              //       child: Center(
-              //         child: Text('Search place', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.iconsColor),),
-              //       ),
-              //     )
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              Container(
+              SizedBox(
                 height: placesList.length * 220,
                 child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  
                   itemBuilder: (context, index) {
                     return _buildPlacesList(placesList[index]);
                   },
@@ -220,7 +172,7 @@ class MainPage extends StatelessWidget {
             Text(
               placesInfo[0],
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 22,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -246,6 +198,7 @@ class MainPage extends StatelessWidget {
                 placeDescription: place[1],
                 placeDestination: place[3],
                 placeIcon: place[2],
+                latLng: place[4],
               );
             },
           ),

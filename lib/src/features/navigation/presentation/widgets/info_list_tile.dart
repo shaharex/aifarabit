@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
 
@@ -8,13 +9,13 @@ class InfoListTile extends StatelessWidget {
     required this.placeName,
     required this.placeDescription,
     required this.placeDestination,
-    required this.placeIcon,
+    required this.placeIcon, required this.latLng,
   });
   final String placeName;
   final String placeDescription;
   final String placeDestination;
   final IconData placeIcon;
-
+  final LatLng latLng;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,6 +24,7 @@ class InfoListTile extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
+                latLng: latLng,
                 place: placeName,
                 destination: placeDestination,
               ),
@@ -32,7 +34,7 @@ class InfoListTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -66,10 +68,11 @@ class InfoListTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
+                color: Color(0xffA0A0A5),
               ),
               child: Icon(
                 Icons.arrow_forward_rounded,
-                color: AppColors.iconsColor,
+                color: AppColors.primaryColor,
                 size: 20,
               ),
             )

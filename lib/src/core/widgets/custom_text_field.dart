@@ -11,7 +11,8 @@ class CustomTextField extends StatelessWidget {
     this.onObscure,
     this.isObscure,
     required this.prefixIcon,
-    this.maxLine,
+    this.maxLine = 1,
+    this.borderColor,
   });
 
   final String hintText;
@@ -20,7 +21,8 @@ class CustomTextField extends StatelessWidget {
   void Function()? onObscure;
   final bool? isObscure;
   final Widget? prefixIcon;
-  int? maxLine = 1;
+  final int? maxLine;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObscure ?? false,
       maxLines: maxLine,
       decoration: InputDecoration(
-        fillColor: Colors.black,
+        fillColor: AppColors.backgroundColor,
         filled: true,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Color(0xff494949)),
@@ -39,9 +41,9 @@ class CustomTextField extends StatelessWidget {
             Radius.circular(13),
           ),
         ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.all(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor ?? Colors.white, width: 1),
+          borderRadius: const BorderRadius.all(
             Radius.circular(13),
           ),
         ),
@@ -49,10 +51,15 @@ class CustomTextField extends StatelessWidget {
             ? null
             : IconButton(
                 onPressed: onObscure,
-                icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.white,)),
+                icon: const Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: Colors.white,
+                ),
+              ),
         prefixIcon: prefixIcon,
+        prefixIconColor: AppColors.inactiveColor,
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.iconsColor, fontSize: 16),
+        hintStyle: TextStyle(color: AppColors.inactiveColor, fontSize: 16),
       ),
     );
   }

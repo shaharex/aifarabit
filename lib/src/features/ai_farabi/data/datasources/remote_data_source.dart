@@ -5,20 +5,22 @@ import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/models/message_model.dart';
 
 class RemoteDataSource {
-  RemoteDataSource({required this.apiKey});
+  RemoteDataSource();
 
-  final Uri _uri = Uri.parse('https://api.groq.com/openai/v1/chat/completions');
-  final String apiKey;
+  final Uri _uri = Uri.parse('https://api.openai.com/v1/chat/completions');
+  final apiKey = '';
 
   Future<MessageModel> sendMessage(String message) async {
     try {
       final response = await http.post(
         _uri,
         headers: {
-          ApiHeaderKeys.authorization: ApiHeaderValues.bearer(apiKey),
-          ApiHeaderKeys.contentType: ApiHeaderValues.applicationJson,
+          "Authorization": "Bearer $apiKey",
+          "Content-Type": "application/json",
         },
         body: jsonEncode({
+          "temperature": 0.2,
+          "model": "gpt-4o-mini",
           "messages": [
             {
               "role": "system",
@@ -30,7 +32,6 @@ class RemoteDataSource {
               "content": "$message."
             }
           ],
-          "model": "llama-3.3-70b-versatile"
         }),
       );
 

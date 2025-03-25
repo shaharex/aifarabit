@@ -34,8 +34,7 @@ class UserMessage extends StatelessWidget {
               Expanded(
                 child: Text(
                   message,
-                  style:
-                      TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
             ],

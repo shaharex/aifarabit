@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     super.key,
     required this.text,
     required this.onTap,
     required this.textColor,
     required this.btnColor,
+    this.width,
+    this.height,
     this.borderRadius,
   });
 
@@ -15,15 +16,18 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final Color textColor;
   final Color btnColor;
+  final double? width;
+  final double? height;
   final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(borderRadius ?? 15),
       child: Container(
-        height: 55,
-        width: double.infinity,
+        height: height ?? 55,
+        width: width ?? double.infinity,
         decoration: BoxDecoration(
           color: btnColor,
           borderRadius: BorderRadius.circular(borderRadius ?? 15),

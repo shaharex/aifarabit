@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 
+// ignore: must_be_immutable
 class AiMessage extends StatelessWidget {
-  const AiMessage({
+  AiMessage({
     super.key,
     required this.message,
     required this.index,
     required this.destination,
+    required this.latLng,
   });
 
   final String message;
   final int index;
   final String destination;
+  final LatLng latLng;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class AiMessage extends StatelessWidget {
         vertical: 15,
         horizontal: 20,
       ),
-      decoration: const BoxDecoration(color: Colors.black),
+      decoration: BoxDecoration(color: AppColors.primaryColor),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,11 +39,6 @@ class AiMessage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Image.asset('assets/logo.png'),
-            // child: const Icon(
-            //   Icons.diversity_2,
-            //   size: 20,
-            //   color: Colors.black,
-            // ),
           ),
           const SizedBox(width: 15),
           Expanded(
@@ -49,8 +48,7 @@ class AiMessage extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   message,
-                  style:
-                      TextStyle(color: AppColors.iconsColor, fontSize: 20),
+                  style: TextStyle(color: AppColors.iconsColor, fontSize: 20),
                 ),
                 const SizedBox(height: 10),
                 index != 0
@@ -72,6 +70,7 @@ class AiMessage extends StatelessWidget {
                                       text: message,
                                     ),
                                   );
+                                  showCopyOverlay(context);
                                 },
                                 icon: Icon(
                                   Icons.copy,
@@ -85,7 +84,7 @@ class AiMessage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => MapPickPage(),
+                                      builder: (context) => MapPickPage(latLng: latLng),
                                     ),
                                   );
                                 },
@@ -106,5 +105,49 @@ class AiMessage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  OverlayEntry? overlayEntry;
+
+  void showCopyOverlay(BuildContext context) {
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 65,
+        left: 20,
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 3,
+                )
+              ],
+            ),
+            child: const Text(
+              "Сообщение успешно скопировано",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry!);
+    Future.delayed(const Duration(seconds: 1), () => removeOverlay());
+  }
+
+  void removeOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
   }
 }
