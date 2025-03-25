@@ -180,7 +180,7 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
 
 Future<List<Map<String, String>>> getCanadianCities(
     String preferences, String country) async {
-  const String apiKey = ApiKey.gptApiKey;
+  const String apiKey = 'ApiKey.gptApiKey';
   const String url = "https://api.openai.com/v1/chat/completions";
 
   final Dio dio = Dio();

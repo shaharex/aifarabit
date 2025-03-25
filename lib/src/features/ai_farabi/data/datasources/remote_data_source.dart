@@ -8,7 +8,7 @@ class RemoteDataSource {
   RemoteDataSource();
 
   final Uri _uri = Uri.parse('https://api.openai.com/v1/chat/completions');
-  final apiKey = ApiKey.gptApiKey;
+  final apiKey = '';
 
   Future<MessageModel> sendMessage(String message) async {
     try {

@@ -8,7 +8,7 @@ import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 class TourismDatasource {
   Future<TourismData> getTourismData(
       String city, String country, String preferences) async {
-    const apiKey = ApiKey.gptApiKey;
+    const apiKey = '';
     const String url = "https://api.openai.com/v1/chat/completions";
     var structure = StructureUtilHelper.structure;
 

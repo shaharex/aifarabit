@@ -8,7 +8,7 @@ class CityRemoteDatasource {
   final dio = Dio();
 
   Future<List<CityModel>> getCities(String preferences, String country) async {
-    const String apiKey = ApiKey.gptApiKey;
+    const String apiKey = 'ApiKey.gptApiKey';
     const String url = "https://api.openai.com/v1/chat/completions";
 
     final Dio dio = Dio();
