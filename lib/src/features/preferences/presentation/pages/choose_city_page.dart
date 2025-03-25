@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/widgets/custom_button.dart';
 import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
@@ -180,7 +180,7 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
 
 Future<List<Map<String, String>>> getCanadianCities(
     String preferences, String country) async {
-  const String apiKey = ApiKey.gptApiKey;
+  const String apiKey = 'ApiKey.gptApiKey';
   const String url = "https://api.openai.com/v1/chat/completions";
 
   final Dio dio = Dio();

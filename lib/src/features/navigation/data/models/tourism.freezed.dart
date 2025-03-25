@@ -21,6 +21,8 @@ TourismData _$TourismDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TourismData {
   String get city => throw _privateConstructorUsedError;
+  double? get longitude => throw _privateConstructorUsedError;
+  double? get lattitude => throw _privateConstructorUsedError;
   List<Hotel> get hotels => throw _privateConstructorUsedError;
   Emergency get emergency => throw _privateConstructorUsedError;
   List<Restaurant> get restaurants => throw _privateConstructorUsedError;
@@ -45,6 +47,8 @@ abstract class $TourismDataCopyWith<$Res> {
   @useResult
   $Res call(
       {String city,
+      double? longitude,
+      double? lattitude,
       List<Hotel> hotels,
       Emergency emergency,
       List<Restaurant> restaurants,
@@ -72,6 +76,8 @@ class _$TourismDataCopyWithImpl<$Res, $Val extends TourismData>
   @override
   $Res call({
     Object? city = null,
+    Object? longitude = freezed,
+    Object? lattitude = freezed,
     Object? hotels = null,
     Object? emergency = null,
     Object? restaurants = null,
@@ -83,6 +89,14 @@ class _$TourismDataCopyWithImpl<$Res, $Val extends TourismData>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      lattitude: freezed == lattitude
+          ? _value.lattitude
+          : lattitude // ignore: cast_nullable_to_non_nullable
+              as double?,
       hotels: null == hotels
           ? _value.hotels
           : hotels // ignore: cast_nullable_to_non_nullable
@@ -147,6 +161,8 @@ abstract class _$$TourismDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {String city,
+      double? longitude,
+      double? lattitude,
       List<Hotel> hotels,
       Emergency emergency,
       List<Restaurant> restaurants,
@@ -175,6 +191,8 @@ class __$$TourismDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? city = null,
+    Object? longitude = freezed,
+    Object? lattitude = freezed,
     Object? hotels = null,
     Object? emergency = null,
     Object? restaurants = null,
@@ -186,6 +204,14 @@ class __$$TourismDataImplCopyWithImpl<$Res>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      lattitude: freezed == lattitude
+          ? _value.lattitude
+          : lattitude // ignore: cast_nullable_to_non_nullable
+              as double?,
       hotels: null == hotels
           ? _value._hotels
           : hotels // ignore: cast_nullable_to_non_nullable
@@ -215,6 +241,8 @@ class __$$TourismDataImplCopyWithImpl<$Res>
 class _$TourismDataImpl implements _TourismData {
   const _$TourismDataImpl(
       {required this.city,
+      this.longitude,
+      this.lattitude,
       required final List<Hotel> hotels,
       required this.emergency,
       required final List<Restaurant> restaurants,
@@ -228,6 +256,10 @@ class _$TourismDataImpl implements _TourismData {
 
   @override
   final String city;
+  @override
+  final double? longitude;
+  @override
+  final double? lattitude;
   final List<Hotel> _hotels;
   @override
   List<Hotel> get hotels {
@@ -253,7 +285,7 @@ class _$TourismDataImpl implements _TourismData {
 
   @override
   String toString() {
-    return 'TourismData(city: $city, hotels: $hotels, emergency: $emergency, restaurants: $restaurants, attractions: $attractions, services: $services)';
+    return 'TourismData(city: $city, longitude: $longitude, lattitude: $lattitude, hotels: $hotels, emergency: $emergency, restaurants: $restaurants, attractions: $attractions, services: $services)';
   }
 
   @override
@@ -262,6 +294,10 @@ class _$TourismDataImpl implements _TourismData {
         (other.runtimeType == runtimeType &&
             other is _$TourismDataImpl &&
             (identical(other.city, city) || other.city == city) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.lattitude, lattitude) ||
+                other.lattitude == lattitude) &&
             const DeepCollectionEquality().equals(other._hotels, _hotels) &&
             (identical(other.emergency, emergency) ||
                 other.emergency == emergency) &&
@@ -278,6 +314,8 @@ class _$TourismDataImpl implements _TourismData {
   int get hashCode => Object.hash(
       runtimeType,
       city,
+      longitude,
+      lattitude,
       const DeepCollectionEquality().hash(_hotels),
       emergency,
       const DeepCollectionEquality().hash(_restaurants),
@@ -303,6 +341,8 @@ class _$TourismDataImpl implements _TourismData {
 abstract class _TourismData implements TourismData {
   const factory _TourismData(
       {required final String city,
+      final double? longitude,
+      final double? lattitude,
       required final List<Hotel> hotels,
       required final Emergency emergency,
       required final List<Restaurant> restaurants,
@@ -314,6 +354,10 @@ abstract class _TourismData implements TourismData {
 
   @override
   String get city;
+  @override
+  double? get longitude;
+  @override
+  double? get lattitude;
   @override
   List<Hotel> get hotels;
   @override
@@ -340,8 +384,8 @@ Hotel _$HotelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Hotel {
   String get name => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
 
@@ -361,8 +405,8 @@ abstract class $HotelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      int price,
-      double rating,
+      int? price,
+      double? rating,
       String address,
       List<String> images});
 }
@@ -383,8 +427,8 @@ class _$HotelCopyWithImpl<$Res, $Val extends Hotel>
   @override
   $Res call({
     Object? name = null,
-    Object? price = null,
-    Object? rating = null,
+    Object? price = freezed,
+    Object? rating = freezed,
     Object? address = null,
     Object? images = null,
   }) {
@@ -393,14 +437,14 @@ class _$HotelCopyWithImpl<$Res, $Val extends Hotel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      rating: null == rating
+              as int?,
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -422,8 +466,8 @@ abstract class _$$HotelImplCopyWith<$Res> implements $HotelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      int price,
-      double rating,
+      int? price,
+      double? rating,
       String address,
       List<String> images});
 }
@@ -442,8 +486,8 @@ class __$$HotelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? price = null,
-    Object? rating = null,
+    Object? price = freezed,
+    Object? rating = freezed,
     Object? address = null,
     Object? images = null,
   }) {
@@ -452,14 +496,14 @@ class __$$HotelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      price: null == price
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      rating: null == rating
+              as int?,
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -477,8 +521,8 @@ class __$$HotelImplCopyWithImpl<$Res>
 class _$HotelImpl implements _Hotel {
   const _$HotelImpl(
       {required this.name,
-      required this.price,
-      required this.rating,
+      this.price,
+      this.rating,
       required this.address,
       required final List<String> images})
       : _images = images;
@@ -489,9 +533,9 @@ class _$HotelImpl implements _Hotel {
   @override
   final String name;
   @override
-  final int price;
+  final int? price;
   @override
-  final double rating;
+  final double? rating;
   @override
   final String address;
   final List<String> _images;
@@ -543,8 +587,8 @@ class _$HotelImpl implements _Hotel {
 abstract class _Hotel implements Hotel {
   const factory _Hotel(
       {required final String name,
-      required final int price,
-      required final double rating,
+      final int? price,
+      final double? rating,
       required final String address,
       required final List<String> images}) = _$HotelImpl;
 
@@ -553,9 +597,9 @@ abstract class _Hotel implements Hotel {
   @override
   String get name;
   @override
-  int get price;
+  int? get price;
   @override
-  double get rating;
+  double? get rating;
   @override
   String get address;
   @override

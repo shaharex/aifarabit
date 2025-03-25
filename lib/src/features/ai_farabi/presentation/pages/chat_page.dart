@@ -26,7 +26,7 @@ class ChatPage extends StatelessWidget {
       create: (_) => AiBloc(
         SendMessageUseCase(
           AiRepositoryImpl(
-            remoteDataSource: RemoteDataSource(apiKey: ApiKey.apiKey),
+            remoteDataSource: RemoteDataSource(),
           ),
         ),
       )..add(SendMessage(Message(

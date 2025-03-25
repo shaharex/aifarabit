@@ -172,7 +172,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     try {
       User? user = await auth.registerWithEmailAndPassword(
-        username: 'username',
+        preferences: ['historical', 'cultural', 'religious', 'natural'],
+        username: 'Yernasip',
         password: password,
         email: email,
       );

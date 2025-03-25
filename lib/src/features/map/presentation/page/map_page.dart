@@ -42,6 +42,7 @@ class _MapPickPageState extends State<MapPickPage> {
   }
 
   void _initializeMarker() {
+    _getCurrentLocation();
     _markers.add(
       Marker(
         markerId: MarkerId('destination'),

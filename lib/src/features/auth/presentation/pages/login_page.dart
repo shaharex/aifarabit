@@ -4,7 +4,6 @@ import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/register_page.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
 
 class LoginPage extends StatefulWidget {

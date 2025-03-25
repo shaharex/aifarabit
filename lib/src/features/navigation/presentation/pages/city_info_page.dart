@@ -33,20 +33,6 @@ class _CityInfoPageState extends State<CityInfoPage> {
     super.initState();
   }
 
-  Future<void> fetchCityData() async {
-    try {
-      // cityData = await getCityData(
-      // city: widget.city,
-      // country: widget.country,
-      // preferences: widget.preferences,
-      // );
-      log("this city Data: $cityData");
-    } catch (e) {
-      log("Error fetching city data: $e");
-    }
-    setState(() => isLoading = false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +40,7 @@ class _CityInfoPageState extends State<CityInfoPage> {
         onTap: () {
           context.read<TourismBloc>().add(GetTourismData(country: 'France', city: 'Lyon', preferences: 'history, adventure, educational, museums, old vibes'));
         },
-        child: Text('wehre is tourism data'),)),
+        child: Text('where is tourism data'),)),
       body: BlocBuilder<TourismBloc, TourismState>(builder: (context, state) {
         return state.when(
           initial: () => Text('Init State botrthe'),

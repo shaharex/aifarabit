@@ -2,6 +2,8 @@ class StructureUtilHelper {
   static var structure = {
     {
       "city": "City Name",
+      "longitude": "",
+      "lattitude": "",
       "hotels": [
         {
           "name": "Hotel Name",
@@ -42,7 +44,8 @@ class StructureUtilHelper {
           "name": "Map Service Name",
           "link": "App Download Link",
         }
-      }
+      },
+      
     }
   };
 }
