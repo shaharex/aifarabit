@@ -590,8 +590,6 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({TourismData data});
-
-  $TourismDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -615,16 +613,6 @@ class __$$SuccessImplCopyWithImpl<$Res>
           : data // ignore: cast_nullable_to_non_nullable
               as TourismData,
     ));
-  }
-
-  /// Create a copy of TourismState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TourismDataCopyWith<$Res> get data {
-    return $TourismDataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value));
-    });
   }
 }
 

@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/city_info_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
+import 'package:jihc_hack/src/features/transtator/translation_page.dart';
+
+import '../../../profile/presentation/pages/profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});

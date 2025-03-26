@@ -1,104 +1,153 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class TourismData {
+  final String city;
+  final double longitude;
+  final double latitude;
+  final List<Hotel> hotels;
+  final List<Hospital> hospitals;
+  final List<Restaurant> restaurants;
+  final List<Attraction> attractions;
+  final Services services;
 
-part 'tourism.freezed.dart';
-part 'tourism.g.dart';
+  TourismData({
+    required this.city,
+    required this.longitude,
+    required this.latitude,
+    required this.hotels,
+    required this.hospitals,
+    required this.restaurants,
+    required this.attractions,
+    required this.services,
+  });
 
-@freezed
-class TourismData with _$TourismData {
-  const factory TourismData({
-    required String city,
-    double? longitude,
-    double? lattitude,
-    required List<Hotel> hotels,
-    required Emergency emergency,
-    required List<Restaurant> restaurants,
-    required Attractions attractions,
-    required Services services,
-  }) = _TourismData;
-
-  factory TourismData.fromJson(Map<String, dynamic> json) =>
-      _$TourismDataFromJson(json);
+  factory TourismData.fromJson(Map<String, dynamic> json) {
+    return TourismData(
+      city: json['city'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
+      hotels: (json['hotels'] as List).map((e) => Hotel.fromJson(e)).toList(),
+      hospitals:
+          (json['hospitals'] as List).map((e) => Hospital.fromJson(e)).toList(),
+      restaurants: (json['restaurants'] as List)
+          .map((e) => Restaurant.fromJson(e))
+          .toList(),
+      attractions: (json['attractions'] as List)
+          .map((e) => Attraction.fromJson(e))
+          .toList(),
+      services: Services.fromJson(json['services']),
+    );
+  }
 }
 
-@freezed
-class Hotel with _$Hotel {
-  const factory Hotel({
-    required String name,
-    int? price,
-    double? rating,
-    required String address,
-    required List<String> images,
-  }) = _Hotel;
+class Hotel {
+  final String name;
+  final int price;
+  final double rating;
+  final String address;
+  final List<String> images;
 
-  factory Hotel.fromJson(Map<String, dynamic> json) => _$HotelFromJson(json);
+  Hotel({
+    required this.name,
+    required this.price,
+    required this.rating,
+    required this.address,
+    required this.images,
+  });
+
+  factory Hotel.fromJson(Map<String, dynamic> json) {
+    return Hotel(
+      name: json['name'],
+      price: json['price'],
+      rating: json['rating'].toDouble(),
+      address: json['address'],
+      images: List<String>.from(json['images']),
+    );
+  }
 }
 
-@freezed
-class Emergency with _$Emergency {
-  const factory Emergency({
-    required List<Hospital> hospitals,
-  }) = _Emergency;
+class Hospital {
+  final String name;
+  final String address;
 
-  factory Emergency.fromJson(Map<String, dynamic> json) =>
-      _$EmergencyFromJson(json);
+  Hospital({required this.name, required this.address});
+
+  factory Hospital.fromJson(Map<String, dynamic> json) {
+    return Hospital(
+      name: json['name'],
+      address: json['address'],
+    );
+  }
 }
 
-@freezed
-class Hospital with _$Hospital {
-  const factory Hospital({
-    required String name,
-    required String address,
-  }) = _Hospital;
+class Restaurant {
+  final String name;
+  final String address;
+  final int price;
+  final double rating;
 
-  factory Hospital.fromJson(Map<String, dynamic> json) =>
-      _$HospitalFromJson(json);
+  Restaurant({
+    required this.name,
+    required this.address,
+    required this.price,
+    required this.rating,
+  });
+
+  factory Restaurant.fromJson(Map<String, dynamic> json) {
+    return Restaurant(
+      name: json['name'],
+      address: json['address'],
+      price: json['price'],
+      rating: json['rating'].toDouble(),
+    );
+  }
 }
 
-@freezed
-class Restaurant with _$Restaurant {
-  const factory Restaurant({
-    required String name,
-    required String address,
-    required String price,
-    required String rating,
-  }) = _Restaurant;
+class Attraction {
+  final String name;
+  final String desc;
+  final String type;
+  final List<String> images;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) =>
-      _$RestaurantFromJson(json);
+  Attraction({
+    required this.name,
+    required this.desc,
+    required this.type,
+    required this.images,
+  });
+
+  factory Attraction.fromJson(Map<String, dynamic> json) {
+    return Attraction(
+      name: json['name'],
+      desc: json['desc'],
+      type: json['type'],
+      images: List<String>.from(json['images']),
+    );
+  }
 }
 
-@freezed
-class Attractions with _$Attractions {
-  const factory Attractions({
-    required List<Attraction> historical,
-    required List<Attraction> nature,
-    required List<Attraction> sport,
-    required List<Attraction> entertain,
-  }) = _Attractions;
+class Services {
+  final ServiceItem taxi;
+  final ServiceItem map;
 
-  factory Attractions.fromJson(Map<String, dynamic> json) =>
-      _$AttractionsFromJson(json);
+  Services({required this.taxi, required this.map});
+
+  factory Services.fromJson(Map<String, dynamic> json) {
+    return Services(
+      taxi: ServiceItem.fromJson(json['taxi']),
+      map: ServiceItem.fromJson(json['map']),
+    );
+  }
 }
 
-@freezed
-class Attraction with _$Attraction {
-  const factory Attraction({
-    required String name,
-    required String desc,
-    required List<String> images,
-  }) = _Attraction;
+class ServiceItem {
+  final String name;
+  final String link;
 
-  factory Attraction.fromJson(Map<String, dynamic> json) =>
-      _$AttractionFromJson(json);
-}
+  ServiceItem({required this.name, required this.link});
 
-@freezed
-class Services with _$Services {
-  const factory Services({
-    required String taxi,
-    required List<String> map,
-  }) = _Services;
-
-  factory Services.fromJson(Map<String, dynamic> json) =>
-      _$ServicesFromJson(json);
+  factory ServiceItem.fromJson(Map<String, dynamic> json) {
+    return ServiceItem(
+      name: json['name'],
+      link: json['link'],
+    );
+  }
 }
