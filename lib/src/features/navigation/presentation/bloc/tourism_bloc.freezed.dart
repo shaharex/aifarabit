@@ -16,49 +16,46 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TourismEvent {
-  String get country => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get preferences => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String country, String city, String preferences)
         getTourismData,
+    required TResult Function() getLocalTourismData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String country, String city, String preferences)?
         getTourismData,
+    TResult? Function()? getLocalTourismData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String country, String city, String preferences)?
         getTourismData,
+    TResult Function()? getLocalTourismData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetTourismData value) getTourismData,
+    required TResult Function(GetLocalTourismData value) getLocalTourismData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetTourismData value)? getTourismData,
+    TResult? Function(GetLocalTourismData value)? getLocalTourismData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetTourismData value)? getTourismData,
+    TResult Function(GetLocalTourismData value)? getLocalTourismData,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of TourismEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TourismEventCopyWith<TourismEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -67,8 +64,6 @@ abstract class $TourismEventCopyWith<$Res> {
   factory $TourismEventCopyWith(
           TourismEvent value, $Res Function(TourismEvent) then) =
       _$TourismEventCopyWithImpl<$Res, TourismEvent>;
-  @useResult
-  $Res call({String country, String city, String preferences});
 }
 
 /// @nodoc
@@ -83,37 +78,13 @@ class _$TourismEventCopyWithImpl<$Res, $Val extends TourismEvent>
 
   /// Create a copy of TourismEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? country = null,
-    Object? city = null,
-    Object? preferences = null,
-  }) {
-    return _then(_value.copyWith(
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      preferences: null == preferences
-          ? _value.preferences
-          : preferences // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$GetTourismDataImplCopyWith<$Res>
-    implements $TourismEventCopyWith<$Res> {
+abstract class _$$GetTourismDataImplCopyWith<$Res> {
   factory _$$GetTourismDataImplCopyWith(_$GetTourismDataImpl value,
           $Res Function(_$GetTourismDataImpl) then) =
       __$$GetTourismDataImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String country, String city, String preferences});
 }
@@ -198,6 +169,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   TResult when<TResult extends Object?>({
     required TResult Function(String country, String city, String preferences)
         getTourismData,
+    required TResult Function() getLocalTourismData,
   }) {
     return getTourismData(country, city, preferences);
   }
@@ -207,6 +179,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String country, String city, String preferences)?
         getTourismData,
+    TResult? Function()? getLocalTourismData,
   }) {
     return getTourismData?.call(country, city, preferences);
   }
@@ -216,6 +189,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String country, String city, String preferences)?
         getTourismData,
+    TResult Function()? getLocalTourismData,
     required TResult orElse(),
   }) {
     if (getTourismData != null) {
@@ -228,6 +202,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetTourismData value) getTourismData,
+    required TResult Function(GetLocalTourismData value) getLocalTourismData,
   }) {
     return getTourismData(this);
   }
@@ -236,6 +211,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetTourismData value)? getTourismData,
+    TResult? Function(GetLocalTourismData value)? getLocalTourismData,
   }) {
     return getTourismData?.call(this);
   }
@@ -244,6 +220,7 @@ class _$GetTourismDataImpl implements GetTourismData {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetTourismData value)? getTourismData,
+    TResult Function(GetLocalTourismData value)? getLocalTourismData,
     required TResult orElse(),
   }) {
     if (getTourismData != null) {
@@ -259,19 +236,124 @@ abstract class GetTourismData implements TourismEvent {
       required final String city,
       required final String preferences}) = _$GetTourismDataImpl;
 
-  @override
   String get country;
-  @override
   String get city;
-  @override
   String get preferences;
 
   /// Create a copy of TourismEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetTourismDataImplCopyWith<_$GetTourismDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetLocalTourismDataImplCopyWith<$Res> {
+  factory _$$GetLocalTourismDataImplCopyWith(_$GetLocalTourismDataImpl value,
+          $Res Function(_$GetLocalTourismDataImpl) then) =
+      __$$GetLocalTourismDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetLocalTourismDataImplCopyWithImpl<$Res>
+    extends _$TourismEventCopyWithImpl<$Res, _$GetLocalTourismDataImpl>
+    implements _$$GetLocalTourismDataImplCopyWith<$Res> {
+  __$$GetLocalTourismDataImplCopyWithImpl(_$GetLocalTourismDataImpl _value,
+      $Res Function(_$GetLocalTourismDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TourismEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetLocalTourismDataImpl implements GetLocalTourismData {
+  const _$GetLocalTourismDataImpl();
+
+  @override
+  String toString() {
+    return 'TourismEvent.getLocalTourismData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetLocalTourismDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String country, String city, String preferences)
+        getTourismData,
+    required TResult Function() getLocalTourismData,
+  }) {
+    return getLocalTourismData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String country, String city, String preferences)?
+        getTourismData,
+    TResult? Function()? getLocalTourismData,
+  }) {
+    return getLocalTourismData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String country, String city, String preferences)?
+        getTourismData,
+    TResult Function()? getLocalTourismData,
+    required TResult orElse(),
+  }) {
+    if (getLocalTourismData != null) {
+      return getLocalTourismData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetTourismData value) getTourismData,
+    required TResult Function(GetLocalTourismData value) getLocalTourismData,
+  }) {
+    return getLocalTourismData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetTourismData value)? getTourismData,
+    TResult? Function(GetLocalTourismData value)? getLocalTourismData,
+  }) {
+    return getLocalTourismData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetTourismData value)? getTourismData,
+    TResult Function(GetLocalTourismData value)? getLocalTourismData,
+    required TResult orElse(),
+  }) {
+    if (getLocalTourismData != null) {
+      return getLocalTourismData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetLocalTourismData implements TourismEvent {
+  const factory GetLocalTourismData() = _$GetLocalTourismDataImpl;
 }
 
 /// @nodoc

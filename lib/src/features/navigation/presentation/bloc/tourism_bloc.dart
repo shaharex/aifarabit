@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:jihc_hack/src/core/hive/hive_serv.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/domain/usecases/get_tourism_data.dart';
 
@@ -15,10 +18,13 @@ class TourismBloc extends Bloc<TourismEvent, TourismState> {
     on<GetTourismData>((event, emit) async {
       try {
         emit(const TourismState.loading());
+
+
         final tourismData = await getTourismDataUseCase.execute(
-            country: event.country,
-            city: event.city,
-            preferences: event.preferences);
+          country: event.country,
+          city: event.city,
+          preferences: event.preferences,
+        );
 
         emit(TourismState.success(tourismData));
       } catch (e) {

@@ -7,4 +7,6 @@ class TourismEvent with _$TourismEvent {
     required String city,
     required String preferences,
   }) = GetTourismData;
+
+  const factory TourismEvent.getLocalTourismData() = GetLocalTourismData;
 }

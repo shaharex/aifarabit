@@ -22,6 +22,7 @@ import 'package:jihc_hack/src/features/preferences/domain/repository/city_reposi
 import 'package:jihc_hack/src/features/preferences/domain/usecases/get_city.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
