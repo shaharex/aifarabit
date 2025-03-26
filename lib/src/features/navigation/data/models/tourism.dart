@@ -59,15 +59,19 @@ class Hotel {
   final double rating;
   final String address;
   final List<String> images;
+  final String desc;
+  final String type;
 
   Hotel({
     required this.name,
     required this.longitude,
     required this.latitude,
+    required this.desc,
     required this.price,
     required this.rating,
     required this.address,
     required this.images,
+    required this.type,
   });
 
   factory Hotel.fromJson(Map<String, dynamic> json) {
@@ -75,10 +79,12 @@ class Hotel {
       name: json['name'],
       longitude: json['longitude'].toDouble(),
       latitude: json['latitude'].toDouble(),
+      desc: json['desc'] ?? '',
       price: json['price'],
       rating: json['rating'].toDouble(),
       address: json['address'],
       images: List<String>.from(json['images']),
+      type: json['type'] ?? '',
     );
   }
 
@@ -100,12 +106,16 @@ class Hospital {
   final double longitude;
   final double latitude;
   final String address;
+  final String desc;
+  final String type;
 
   Hospital({
     required this.name,
     required this.longitude,
     required this.latitude,
     required this.address,
+    required this.desc,
+    required this.type,
   });
 
   factory Hospital.fromJson(Map<String, dynamic> json) {
@@ -114,6 +124,8 @@ class Hospital {
       longitude: json['longitude'].toDouble(),
       latitude: json['latitude'].toDouble(),
       address: json['address'],
+      desc: json['desc'] ?? '',
+      type: json['type'] ?? '',
     );
   }
 
@@ -134,6 +146,8 @@ class Restaurant {
   final String address;
   final int price;
   final double rating;
+  final String desc;
+  final String type;
 
   Restaurant({
     required this.name,
@@ -142,6 +156,8 @@ class Restaurant {
     required this.address,
     required this.price,
     required this.rating,
+    required this.desc,
+    required this.type,
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
@@ -152,6 +168,8 @@ class Restaurant {
       address: json['address'],
       price: json['price'],
       rating: json['rating'].toDouble(),
+      desc: json['desc'] ?? '',
+      type: json['type'] ?? '',
     );
   }
 

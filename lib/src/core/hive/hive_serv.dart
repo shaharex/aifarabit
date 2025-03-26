@@ -28,7 +28,12 @@ class HiveService {
     return jsonData; 
   }
 
-  static Future<String?> getUsername() async {
+  static Future<void> updateUsername(String username) async {
+    final box = Hive.box('user');
+    await box.put('username', username);
+  }
+
+  static Future<String> getUsername() async {
     final value = Hive.box('user').get('username');
     return value?.toString() ?? '';
   }
