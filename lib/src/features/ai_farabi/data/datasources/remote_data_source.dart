@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:jihc_hack/src/core/constants/constants.dart';
+import 'package:jihc_hack/src/core/constants/api_key.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/models/message_model.dart';
 
 class RemoteDataSource {
   RemoteDataSource();
 
   final Uri _uri = Uri.parse('https://api.openai.com/v1/chat/completions');
-  final apiKey = '';
+  final apiKey = ApiKey.gptApiKey;
 
   Future<MessageModel> sendMessage(String message) async {
     try {

@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/features/map/presentation/page/map_page.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
-import 'package:jihc_hack/src/features/transtator/translation_page.dart';
-
-import '../../../profile/presentation/pages/profile_page.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/pages/city_info_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -20,21 +15,19 @@ class _NavigationPageState extends State<NavigationPage> {
   int currentIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        MainPage(),
+        CityInfoPage(),
         MapPickPage(latLng: LatLng(0, 0)),
-        TranslationPage(),
-        ProfilePage(),
+        const Center(
+          child: Text("The third page"),
+        ),
+        const Center(
+          child: Text("The fourth page"),
+        ),
       ][currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: AppColors.primaryColor,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -56,11 +49,8 @@ class _NavigationPageState extends State<NavigationPage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset('assets/icons/translator.svg'),
-              icon: SvgPicture.asset(
-                'assets/icons/translator.svg',
-                color: const Color(0xff9E9E9E),
-              ),
+              activeIcon: SvgPicture.asset('assets/icons/sel_history.svg'),
+              icon: SvgPicture.asset('assets/icons/un_history.svg'),
               label: '',
             ),
             BottomNavigationBarItem(

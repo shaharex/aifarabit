@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:jihc_hack/src/core/constants/constants.dart';
+import 'package:jihc_hack/src/core/constants/api_key.dart';
 import 'package:jihc_hack/src/features/preferences/data/models/city.dart';
 
 class CityRemoteDatasource {
   final dio = Dio();
 
   Future<List<CityModel>> getCities(String preferences, String country) async {
-    const String apiKey = 'ApiKey.gptApiKey';
+    const String apiKey = ApiKey.gptApiKey;
     const String url = "https://api.openai.com/v1/chat/completions";
 
     final Dio dio = Dio();

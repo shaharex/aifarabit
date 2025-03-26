@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 
 class CityInfoPage extends StatefulWidget {
@@ -99,48 +98,3 @@ final structure = {
     }
   }
 };
-
-Future<Map<String, dynamic>> getCityData({
-  required String city,
-  required String country,
-  required String preferences,
-}) async {
-  const String apiKey = ApiKey.gptApiKey;
-  const String url = "https://api.openai.com/v1/chat/completions";
-
-  final Dio dio = Dio();
-  final response = await dio.post(
-    url,
-    options: Options(
-      headers: {
-        "Authorization": "Bearer $apiKey",
-        "Content-Type": "application/json",
-      },
-    ),
-    data: jsonEncode({
-      "model": "gpt-4o-mini",
-      "messages": [
-        {"role": "system", "content": "You are an AI assistant."},
-        {
-          "role": "user",
-          "content":
-              "Provide detailed travel data in JSON format for $city in $country, considering $preferences. \nGenerate response strictly following this json structure, there can be up to 5 hotels, 5 attractions, 5 restaurants: $structure. Response should not contain any other symbols, words, sentences except JSON array."
-        }
-      ],
-      "temperature": 0.2,
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    String jsonString =
-        response.data["choices"][0]["message"]["content"].trim();
-    if (jsonString.startsWith("```json")) {
-      jsonString =
-          jsonString.replaceAll("```json", "").replaceAll("```", "").trim();
-    }
-    print(jsonString);
-    return jsonDecode(jsonString);
-  } else {
-    throw Exception("Failed to get response: \${response.statusCode}");
-  }
-}
