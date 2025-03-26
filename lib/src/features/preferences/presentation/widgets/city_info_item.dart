@@ -4,16 +4,18 @@ class CityItem extends StatelessWidget {
   const CityItem({
     required this.title,
     required this.subtitle,
+    required this.onTap,
     super.key,
   });
 
   final String title;
   final String subtitle;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         height: 125,

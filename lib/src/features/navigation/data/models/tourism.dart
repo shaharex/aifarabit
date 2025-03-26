@@ -40,6 +40,8 @@ class TourismData {
 
 class Hotel {
   final String name;
+  final double longitude;
+  final double latitude;
   final int price;
   final double rating;
   final String address;
@@ -47,6 +49,8 @@ class Hotel {
 
   Hotel({
     required this.name,
+    required this.longitude,
+    required this.latitude,
     required this.price,
     required this.rating,
     required this.address,
@@ -56,6 +60,8 @@ class Hotel {
   factory Hotel.fromJson(Map<String, dynamic> json) {
     return Hotel(
       name: json['name'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
       price: json['price'],
       rating: json['rating'].toDouble(),
       address: json['address'],
@@ -66,13 +72,22 @@ class Hotel {
 
 class Hospital {
   final String name;
+  final double longitude;
+  final double latitude;
   final String address;
 
-  Hospital({required this.name, required this.address});
+  Hospital({
+    required this.name,
+    required this.longitude,
+    required this.latitude,
+    required this.address,
+  });
 
   factory Hospital.fromJson(Map<String, dynamic> json) {
     return Hospital(
       name: json['name'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
       address: json['address'],
     );
   }
@@ -80,12 +95,16 @@ class Hospital {
 
 class Restaurant {
   final String name;
+  final double longitude;
+  final double latitude;
   final String address;
   final int price;
   final double rating;
 
   Restaurant({
     required this.name,
+    required this.longitude,
+    required this.latitude,
     required this.address,
     required this.price,
     required this.rating,
@@ -94,6 +113,8 @@ class Restaurant {
   factory Restaurant.fromJson(Map<String, dynamic> json) {
     return Restaurant(
       name: json['name'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
       address: json['address'],
       price: json['price'],
       rating: json['rating'].toDouble(),
@@ -103,12 +124,16 @@ class Restaurant {
 
 class Attraction {
   final String name;
+  final double longitude;
+  final double latitude;
   final String desc;
   final String type;
   final List<String> images;
 
   Attraction({
     required this.name,
+    required this.longitude,
+    required this.latitude,
     required this.desc,
     required this.type,
     required this.images,
@@ -117,6 +142,8 @@ class Attraction {
   factory Attraction.fromJson(Map<String, dynamic> json) {
     return Attraction(
       name: json['name'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
       desc: json['desc'],
       type: json['type'],
       images: List<String>.from(json['images']),
