@@ -57,6 +57,8 @@ class InfoListTile extends StatelessWidget {
             Text(
               textAlign: TextAlign.center,
               placeDescription,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   color: AppColors.iconsColor,
                   fontSize: 14,
