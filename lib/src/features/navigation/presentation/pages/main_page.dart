@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/hive/hive_serv.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
@@ -17,14 +18,20 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
+    super.initState();
+    getCity();
+  }
+
+  getCity() async {
+    String city = await HiveService.getCity();
+    List<String> prefs = await HiveService.getPrefs();
+    String country = await HiveService.getCountry();
     context.read<TourismBloc>().add(
           GetTourismData(
-              country: 'France',
-              city: 'Lyon',
-              preferences:
-                  'history, adventure, educational, museums, old vibes'),
+              country: country,
+              city: city,
+              preferences: prefs.join(', ')),
         );
-    super.initState();
   }
 
   @override
@@ -50,7 +57,7 @@ class _MainPageState extends State<MainPage> {
               return state.maybeWhen(
                 initial: () => Text("hello brothe"),
                 loading: () => Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height - 250,
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CircularProgressIndicator.adaptive(
@@ -104,11 +111,11 @@ class _MainPageState extends State<MainPage> {
             itemBuilder: (context, index) {
               final place = data.attractions[index];
               return InfoListTile(
-                placeName: place.name,
-                placeDescription: place.desc,
-                placeDestination: place.type,
+                placeName: place.name.toString(),
+                placeDescription: place.desc.toString(),
+                placeDestination: place.type.toString(),
                 placeIcon: Icons.golf_course,
-                latLng: LatLng(data.latitude, data.longitude),
+                latLng: LatLng(place.latitude, place.longitude),
               );
             },
           ),

@@ -21,14 +21,14 @@ import 'package:jihc_hack/src/features/preferences/data/repository/city_reposito
 import 'package:jihc_hack/src/features/preferences/domain/repository/city_repository.dart';
 import 'package:jihc_hack/src/features/preferences/domain/usecases/get_city.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/city_info_page.dart';
-
+import 'package:jihc_hack/src/core/hive/hive_serv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await HiveService.init();
   final getIt = GetIt.instance;
   await Geolocator.requestPermission();
 

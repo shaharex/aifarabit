@@ -6,31 +6,39 @@ class StructureUtilHelper {
       "lattitude": "",
       "hotels": [
         {
+          "longitude": "",
+          "lattitude": "",
           "name": "Hotel Name",
-          "price": "Price",
-          "rating": "Rating",
+          "price": "Price as int",
+          "rating": "Rating as double",
           "address": "Hotel Address",
           "images": ["Hotel Image URL"]
         }
       ],
       "hospitals": [
         {
+          "longitude": "",
+          "lattitude": "",
           "name": "Hospital Name",
           "address": "Hospital Address",
         }
       ],
       "restaurants": [
         {
+          "longitude": "",
+          "lattitude": "",
           "name": "Restaurant Name",
           "address": "Restaurant Address",
-          "price": "Price",
-          "rating": "Rating"
+          "price": "Price as int",
+          "rating": "Rating as double"
         }
       ],
       "attractions": [
         {
+          "longitude": "",
+          "lattitude": "",
           "name": "Attraction Name",
-          "desc": "Description",
+          "desc": "Description as String",
           "type": "historical",
           "images": ["Real Attraction Image URL"]
         }

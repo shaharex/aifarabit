@@ -5,6 +5,7 @@ import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({super.key});
@@ -168,20 +169,18 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _signUp() async {
     String password = _passwordController.text.trim();
     String email = _emailController.text.trim();
-    // String username = _usernameController.text.trim();
 
     try {
       User? user = await auth.registerWithEmailAndPassword(
-        preferences: ['historical', 'cultural', 'religious', 'natural'],
-        username: 'Yernasip',
         password: password,
         email: email,
       );
 
       if (user != null) {
+        print('user: $user');
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(builder: (context) => PreferencesPage()),
         );
       } else {
         _showErrorDialog('Что то пошло не так. Проваерьте данные!');
