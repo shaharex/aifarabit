@@ -29,7 +29,7 @@ class ChatPage extends StatelessWidget {
           ),
         ),
       )..add(SendMessage(Message(
-          content: 'расскажи мне о $place кратко.',
+          content: 'Tell me about $place.',
           role: 'user'))),
       child: ChatView(
         place: place,

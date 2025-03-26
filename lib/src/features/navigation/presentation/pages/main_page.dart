@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
 
@@ -67,7 +66,30 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                success: (data) => _buildPlacesList(data),
+                success: (data) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10,),
+                    const Text('Attractions', style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                    ),),
+                    _buildPlacesList(data.attractions),
+                    const SizedBox(height: 10,),
+                    const Text('Hotels', style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                    ),),
+                    _buildPlacesList(data.hotels),
+                    const SizedBox(height: 10,),
+                    const Text('Restaurants', style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                    ),),
+                    _buildPlacesList(data.restaurants),
+                    
+                  ],
+                ),
                 failure: (message) => Text(message),
                 orElse: () {
                   return Text('lkjfdljfkdfjlkd');
@@ -80,39 +102,23 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  _buildPlacesList(TourismData data) {
+  _buildPlacesList(List<dynamic> data) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              data.city,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_sharp,
-              color: AppColors.iconsColor,
-              size: 28,
-            ),
-          ],
-        ),
+        
         SizedBox(
           height: 250,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: data.attractions.length,
+            itemCount: data.length,
             separatorBuilder: (context, index) {
               return const SizedBox(width: 20);
             },
             itemBuilder: (context, index) {
-              final place = data.attractions[index];
+              final place = data[index];
               return InfoListTile(
                 placeName: place.name.toString(),
-                placeDescription: place.desc.toString(),
+                placeDescription: place.desc.toString() ?? '',
                 placeDestination: place.type.toString(),
                 placeIcon: Icons.golf_course,
                 latLng: LatLng(place.latitude, place.longitude),
