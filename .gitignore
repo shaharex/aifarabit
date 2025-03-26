@@ -33,7 +33,7 @@ migrate_working_dir/
 .pub/
 /build/
 /lib/src/core/constants/
-
+/lib/src/core/constants/api_key.dart
 # Symbolication related
 app.*.symbols
 

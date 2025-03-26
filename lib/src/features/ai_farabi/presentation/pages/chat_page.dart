@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/constants/constants.dart';
 import 'package:jihc_hack/src/core/widgets/custom_app_bar.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/datasources/remote_data_source.dart';
 import 'package:jihc_hack/src/features/ai_farabi/data/repository/ai_repository_impl.dart';
