@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -19,18 +21,18 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+
     getCity();
   }
 
   getCity() async {
-    String city = await HiveService.getCity();
-    List<String> prefs = await HiveService.getPrefs();
-    String country = await HiveService.getCountry();
+    String city = await HiveService.getCity() ?? '';
+    List<String?> prefs = await HiveService.getPrefs();
+    String country = await HiveService.getCountry() ?? '';
+
     context.read<TourismBloc>().add(
           GetTourismData(
-              country: country,
-              city: city,
-              preferences: prefs.join(', ')),
+              country: country, city: city, preferences: prefs.join(', ')),
         );
   }
 
@@ -55,7 +57,7 @@ class _MainPageState extends State<MainPage> {
           child: BlocBuilder<TourismBloc, TourismState>(
             builder: (context, state) {
               return state.maybeWhen(
-                initial: () => Text("hello brothe"),
+                initial: () => Center(child: Text("how are you")),
                 loading: () => Container(
                   height: MediaQuery.of(context).size.height - 250,
                   width: double.infinity,
