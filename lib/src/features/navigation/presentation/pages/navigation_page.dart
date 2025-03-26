@@ -22,7 +22,7 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        CityInfoPage(),
+        MainPage(),
         MapPickPage(latLng: LatLng(0, 0)),
         const Center(
           child: Text("The third page"),
