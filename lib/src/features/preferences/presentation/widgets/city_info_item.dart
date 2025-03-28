@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/widgets/widgets.dart';
 
 class CityItem extends StatelessWidget {
   const CityItem({
     required this.title,
     required this.subtitle,
     required this.onTap,
+    required this.imagePath,
     super.key,
   });
 
   final String title;
   final String subtitle;
   final VoidCallback onTap;
-
+  final String imagePath;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,17 +23,21 @@ class CityItem extends StatelessWidget {
         width: double.infinity,
         height: 125,
         decoration: BoxDecoration(
-          color: Colors.blue.withValues(alpha: 0.9),
+          color: Colors.white.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           children: [
             Container(
-              height: double.infinity,
+              height: 125,
               width: 125,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 15),
@@ -40,10 +47,11 @@ class CityItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 14,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
                     ),
-                    maxLines: 2,
                   ),
                   const SizedBox(height: 7),
                   RichText(
@@ -53,24 +61,11 @@ class CityItem extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.black.withValues(alpha: 0.5),
                       ),
-                      children: [
-                        TextSpan(
-                          text: 'Смотреть Еще...',
-                          style: TextStyle(
-                            color: Colors.black.withValues(alpha: 0.5),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      ],
                     ),
                   ),
-                  const SizedBox(height: 7),
-                  Text(
-                    'Регион:',
-                    style: TextStyle(
-                      color: Colors.black.withValues(alpha: 0.5),
-                    ),
-                  ),
+                  const SizedBox(height: 10),
+                  CustomButton(text: 'text', onTap: onTap, textColor: Colors.white, btnColor: AppColors.iconsColor, height: 30,)
+                  
                 ],
               ),
             ),
