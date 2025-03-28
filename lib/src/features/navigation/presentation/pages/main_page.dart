@@ -88,27 +88,15 @@ class _MainPageState extends State<MainPage> {
                         text: 'NEW JOURNEY',
                         btnText: 'Start',
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => PreferencesPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const PreferencesPage()));
                         },
                         imagePath: 'assets/hotel_2.jpg',
                       ),
                     ),
-                    // const SizedBox(width: 10),
-                    // Expanded(
-                    //   child: HeadLineWidget(
-                    //     icon: Icons.location_on,
-                    //     text: '${data.city} $country',
-                    //     btnText: 'Edit',
-                    //     onTap: () {
-                    //       Navigator.push(context, MaterialPageRoute(builder: (context) => PreferencesPage()));
-                    //     },
-                    //     imagePath: 'assets/restaurant.jpg',
-                    //   ),
-                    // ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                Container(
+                SizedBox(
                   height: data.hospitals.length * 50,
                   child: ListView.separated(
                     itemCount: data.hospitals.length,
@@ -133,18 +121,18 @@ class _MainPageState extends State<MainPage> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.local_hospital, color: Colors.red,size: 30,),
+                            const Icon(Icons.local_hospital, color: Colors.red,size: 30,),
                             const SizedBox(width: 10),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(data.hospitals[index].name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                                Text(data.hospitals[index].name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
                                 Text(data.hospitals[index].address.length > 30 ? data.hospitals[index].address.substring(0, 30) + '...' : data.hospitals[index].address, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),),
                               ],
                             ),
                             const Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
                           ]
                         ),
                       ),
@@ -167,10 +155,11 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height: 500,
+                  height: 2100,
                   child: TabBarView(
                     children: [
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
@@ -183,6 +172,7 @@ class _MainPageState extends State<MainPage> {
                         },
                       ),
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
@@ -195,6 +185,7 @@ class _MainPageState extends State<MainPage> {
                         },
                       ),
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);

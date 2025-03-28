@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 
