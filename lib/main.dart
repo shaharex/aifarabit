@@ -77,9 +77,7 @@ class MainApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: InitializePage(
-            // preferences: ['Adventure', 'Ecotourism', 'BAck to Back'],
-            ),
+        home: InitializePage(),
       ),
     );
   }
