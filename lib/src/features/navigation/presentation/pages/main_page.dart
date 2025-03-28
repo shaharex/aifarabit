@@ -1,14 +1,12 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
+import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
@@ -81,28 +79,100 @@ class _MainPageState extends State<MainPage> {
             length: 3,
             child: Column(
               children: [
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: HeadLineWidget(
                         text: 'NEW JOURNEY',
                         btnText: 'Start',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const PreferencesPage()));
+                        },
                         imagePath: 'assets/hotel_2.jpg',
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: HeadLineWidget(
-                        icon: Icons.location_on,
-                        text: '${data.city} $country',
-                        btnText: 'Edit',
-                        onTap: () {},
-                        imagePath: 'assets/restaurant.jpg',
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  height: data.hospitals.length * 50,
+                  child: ListView.separated(
+                    itemCount: data.hospitals.length,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 10);
+                    },
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                        // final Uri launchUri = Uri(
+                        //   scheme: 'tel',
+                        //   path: '87057402142',
+                        // );
+                        // launchUrl(launchUri);
+                        },
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.local_hospital, color: Colors.red,size: 30,),
+                            const SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data.hospitals[index].name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                                Text(data.hospitals[index].address.length > 30 ? data.hospitals[index].address.substring(0, 30) + '...' : data.hospitals[index].address, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),),
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
+                          ]
+                        ),
+                      ),
+                      );
+                    },
+                  )
+                ),
+                Divider(),
+                SizedBox(
+                  height: 50,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          
+                        },
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.local_taxi, color: Colors.blueGrey,size: 30,),
+                            const SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data.services.taxi.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
+                          ]
+                        ),
+                      ),
+                      )
+                ),
+                const SizedBox(height: 10),
                 TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
@@ -115,10 +185,11 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height: 500,
+                  height: 2100,
                   child: TabBarView(
                     children: [
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
@@ -131,6 +202,7 @@ class _MainPageState extends State<MainPage> {
                         },
                       ),
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
@@ -143,6 +215,7 @@ class _MainPageState extends State<MainPage> {
                         },
                       ),
                       ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
@@ -166,65 +239,6 @@ class _MainPageState extends State<MainPage> {
           },
         );
       },
-    );
-  }
-
-  _buildAttractionList(List<Attraction> data) {
-    return ListView.separated(
-      itemCount: data.length,
-      separatorBuilder: (context, index) {
-        return const SizedBox(width: 20);
-      },
-      itemBuilder: (context, index) {
-        final attraction = data[index];
-        return AttractionsListTile(
-          attraction: attraction,
-        );
-      },
-    );
-  }
-
-  _buildHotelsList(List<Hotel> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final hotel = data[index];
-              return HotelListTile(
-                hotel: hotel,
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  _buildRestaurantsList(List<Restaurant> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final restaurant = data[index];
-              return RestaurantsListTile(restaurant: restaurant);
-            },
-          ),
-        ),
-      ],
     );
   }
 }

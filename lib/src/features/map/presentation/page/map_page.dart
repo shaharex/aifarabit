@@ -210,13 +210,26 @@ class _MapPickPageState extends State<MapPickPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: () {},
-        child: IconButton(
-          onPressed: _getCurrentLocation,
-          icon: Icon(
-            Icons.location_on,
-            color: AppColors.iconsColor,
-          ),
+        onPressed: () async {
+          final position = await LocationService().getCurrentLocation();
+          final currentLatLng = LatLng(position.latitude, position.longitude);
+          
+          setState(() {
+            _markers.add(
+              Marker(
+                markerId: const MarkerId('current_location'),
+                position: currentLatLng,
+                infoWindow: const InfoWindow(title: 'Your Location'),
+              ),
+            );
+            _mapController.animateCamera(
+              CameraUpdate.newLatLngZoom(currentLatLng, 15),
+            );
+          });
+        },
+        child: Icon(
+          Icons.location_on,
+          color: AppColors.iconsColor,
         ),
       ),
       body: Stack(

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 
@@ -62,5 +60,9 @@ class HiveService {
 
   static Future<void> clearUser() async {
     await Hive.box('user').clear();
+  }
+
+  static Future<void> clearTourismData() async {
+    await Hive.box('user').delete('tourismData');
   }
 }

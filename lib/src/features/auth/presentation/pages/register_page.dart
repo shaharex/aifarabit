@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
+import 'package:jihc_hack/src/core/hive/hive_serv.dart';
 import 'package:jihc_hack/src/core/utils/utils.dart';
 import 'package:jihc_hack/src/core/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
@@ -178,6 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (user != null) {
         print('user: $user');
+        HiveService.clearTourismData();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => PreferencesPage()),
