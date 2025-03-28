@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
+import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/widgets/info_list_tile.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
+import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
@@ -17,22 +19,22 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+
   @override
   void initState() {
     super.initState();
-
     getCity();
   }
 
   getCity() async {
     String city = await HiveService.getCity() ?? '';
     List<String?> prefs = await HiveService.getPrefs();
-    String country = await HiveService.getCountry() ?? '';
+    String country = await HiveService.getCountry() ?? 'no data';
+    print("this is country: $country");
 
-    context.read<TourismBloc>().add(
-          GetTourismData(
-              country: country, city: city, preferences: prefs.join(', ')),
-        );
+    context.read<TourismBloc>().add(GetTourismData(
+        country: country, city: city, preferences: prefs.join(', ')));
   }
 
   @override
@@ -53,61 +55,138 @@ class _MainPageState extends State<MainPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: BlocBuilder<TourismBloc, TourismState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                initial: () => Center(child: Text("how are you")),
-                loading: () => Container(
-                  height: MediaQuery.of(context).size.height - 250,
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: CircularProgressIndicator.adaptive(
-                    backgroundColor: AppColors.iconsColor,
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.grey,
-                    ),
-                  ),
-                ),
-                success: (data) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10,),
-                    const Text('Attractions', style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                    ),),
-                    _buildPlacesList(data.attractions),
-                    const SizedBox(height: 10,),
-                    const Text('Hotels', style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                    ),),
-                    _buildPlacesList(data.hotels),
-                    const SizedBox(height: 10,),
-                    const Text('Restaurants', style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                    ),),
-                    _buildPlacesList(data.restaurants),
-                    
-                  ],
-                ),
-                failure: (message) => Text(message),
-                orElse: () {
-                  return Text('lkjfdljfkdfjlkd');
-                },
-              );
-            },
-          ),
+          child: _buildBloc(),
         ),
       ),
     );
   }
 
-  _buildPlacesList(List<dynamic> data) {
+  BlocBuilder<TourismBloc, TourismState> _buildBloc() {
+    return BlocBuilder<TourismBloc, TourismState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          initial: () => Container(),
+          loading: () => Container(
+            height: MediaQuery.of(context).size.height - 150,
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: CircularProgressIndicator.adaptive(
+              backgroundColor: AppColors.iconsColor,
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Colors.grey,
+              ),
+            ),
+          ),
+          success: (data, country, preferences) => DefaultTabController(
+            length: 3,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: HeadLineWidget(
+                        text: 'NEW JOURNEY',
+                        btnText: 'Start',
+                        onTap: () {},
+                        imagePath: 'assets/hotel_2.jpg',
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: HeadLineWidget(
+                        icon: Icons.location_on,
+                        text: '${data.city} $country',
+                        btnText: 'Edit',
+                        onTap: () {},
+                        imagePath: 'assets/restaurant.jpg',
+                      ),
+                    ),
+                  ],
+                ),
+                TabBar(
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: Colors.black,
+                  tabs: [
+                    Tab(text: "History"),
+                    Tab(text: "Attractions"),
+                    Tab(text: "To eat"),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  height: 500,
+                  child: TabBarView(
+                    children: [
+                      ListView.separated(
+                        itemCount: data.attractions.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 20);
+                        },
+                        itemBuilder: (context, index) {
+                          final attraction = data.attractions[index];
+                          return AttractionsListTile(
+                            attraction: attraction,
+                          );
+                        },
+                      ),
+                      ListView.separated(
+                        itemCount: data.attractions.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 20);
+                        },
+                        itemBuilder: (context, index) {
+                          final attraction = data.attractions[index];
+                          return AttractionsListTile(
+                            attraction: attraction,
+                          );
+                        },
+                      ),
+                      ListView.separated(
+                        itemCount: data.attractions.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 20);
+                        },
+                        itemBuilder: (context, index) {
+                          final attraction = data.attractions[index];
+                          return AttractionsListTile(
+                            attraction: attraction,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          failure: (message) => Text(message),
+          orElse: () {
+            return Text('Something went wrong. Try again later');
+          },
+        );
+      },
+    );
+  }
+
+  _buildAttractionList(List<Attraction> data) {
+    return ListView.separated(
+      itemCount: data.length,
+      separatorBuilder: (context, index) {
+        return const SizedBox(width: 20);
+      },
+      itemBuilder: (context, index) {
+        final attraction = data[index];
+        return AttractionsListTile(
+          attraction: attraction,
+        );
+      },
+    );
+  }
+
+  _buildHotelsList(List<Hotel> data) {
     return Column(
       children: [
-        
         SizedBox(
           height: 250,
           child: ListView.separated(
@@ -117,14 +196,31 @@ class _MainPageState extends State<MainPage> {
               return const SizedBox(width: 20);
             },
             itemBuilder: (context, index) {
-              final place = data[index];
-              return InfoListTile(
-                placeName: place.name.toString(),
-                placeDescription: place.desc.toString() ?? '',
-                placeDestination: place.type.toString(),
-                placeIcon: Icons.golf_course,
-                latLng: LatLng(place.latitude, place.longitude),
+              final hotel = data[index];
+              return HotelListTile(
+                hotel: hotel,
               );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  _buildRestaurantsList(List<Restaurant> data) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 250,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: data.length,
+            separatorBuilder: (context, index) {
+              return const SizedBox(width: 20);
+            },
+            itemBuilder: (context, index) {
+              final restaurant = data[index];
+              return RestaurantsListTile(restaurant: restaurant);
             },
           ),
         ),
