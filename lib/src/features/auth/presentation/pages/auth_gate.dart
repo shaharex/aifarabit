@@ -27,10 +27,15 @@ class InitializePage extends StatelessWidget {
     });
 
     return Scaffold(
-        body: CircularProgressIndicator.adaptive(
-      backgroundColor: AppColors.iconsColor,
-    )
-        // Center(child: Lottie.asset('assets/animations/loading_hamster.json')),
-        );
+      backgroundColor: AppColors.backgroundColor,
+      body: Center(
+        child: CircularProgressIndicator.adaptive(
+          backgroundColor: AppColors.iconsColor,
+          valueColor: const AlwaysStoppedAnimation<Color>(
+            Colors.grey,
+          ),
+        ),
+      ),
+    );
   }
 }

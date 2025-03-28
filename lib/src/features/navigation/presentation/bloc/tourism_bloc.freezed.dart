@@ -362,7 +362,9 @@ mixin _$TourismState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TourismData data) success,
+    required TResult Function(
+            TourismData data, String country, String preferences)
+        success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -370,7 +372,8 @@ mixin _$TourismState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(TourismData data)? success,
+    TResult? Function(TourismData data, String country, String preferences)?
+        success,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -378,7 +381,8 @@ mixin _$TourismState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TourismData data)? success,
+    TResult Function(TourismData data, String country, String preferences)?
+        success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -474,7 +478,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TourismData data) success,
+    required TResult Function(
+            TourismData data, String country, String preferences)
+        success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -485,7 +491,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(TourismData data)? success,
+    TResult? Function(TourismData data, String country, String preferences)?
+        success,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -496,7 +503,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TourismData data)? success,
+    TResult Function(TourismData data, String country, String preferences)?
+        success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -591,7 +599,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TourismData data) success,
+    required TResult Function(
+            TourismData data, String country, String preferences)
+        success,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -602,7 +612,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(TourismData data)? success,
+    TResult? Function(TourismData data, String country, String preferences)?
+        success,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -613,7 +624,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TourismData data)? success,
+    TResult Function(TourismData data, String country, String preferences)?
+        success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -671,7 +683,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({TourismData data});
+  $Res call({TourismData data, String country, String preferences});
 }
 
 /// @nodoc
@@ -688,12 +700,22 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = null,
+    Object? country = null,
+    Object? preferences = null,
   }) {
     return _then(_$SuccessImpl(
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as TourismData,
+      null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -701,14 +723,18 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.data);
+  const _$SuccessImpl(this.data, this.country, this.preferences);
 
   @override
   final TourismData data;
+  @override
+  final String country;
+  @override
+  final String preferences;
 
   @override
   String toString() {
-    return 'TourismState.success(data: $data)';
+    return 'TourismState.success(data: $data, country: $country, preferences: $preferences)';
   }
 
   @override
@@ -716,11 +742,14 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.data, data) || other.data == data));
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.preferences, preferences) ||
+                other.preferences == preferences));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode => Object.hash(runtimeType, data, country, preferences);
 
   /// Create a copy of TourismState
   /// with the given fields replaced by the non-null parameter values.
@@ -735,10 +764,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TourismData data) success,
+    required TResult Function(
+            TourismData data, String country, String preferences)
+        success,
     required TResult Function(String message) failure,
   }) {
-    return success(data);
+    return success(data, country, preferences);
   }
 
   @override
@@ -746,10 +777,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(TourismData data)? success,
+    TResult? Function(TourismData data, String country, String preferences)?
+        success,
     TResult? Function(String message)? failure,
   }) {
-    return success?.call(data);
+    return success?.call(data, country, preferences);
   }
 
   @override
@@ -757,12 +789,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TourismData data)? success,
+    TResult Function(TourismData data, String country, String preferences)?
+        success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(data);
+      return success(data, country, preferences);
     }
     return orElse();
   }
@@ -806,9 +839,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements TourismState {
-  const factory _Success(final TourismData data) = _$SuccessImpl;
+  const factory _Success(final TourismData data, final String country,
+      final String preferences) = _$SuccessImpl;
 
   TourismData get data;
+  String get country;
+  String get preferences;
 
   /// Create a copy of TourismState
   /// with the given fields replaced by the non-null parameter values.
@@ -887,7 +923,9 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TourismData data) success,
+    required TResult Function(
+            TourismData data, String country, String preferences)
+        success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -898,7 +936,8 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(TourismData data)? success,
+    TResult? Function(TourismData data, String country, String preferences)?
+        success,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -909,7 +948,8 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TourismData data)? success,
+    TResult Function(TourismData data, String country, String preferences)?
+        success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

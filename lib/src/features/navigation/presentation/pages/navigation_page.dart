@@ -28,7 +28,7 @@ class _NavigationPageState extends State<NavigationPage> {
       ][currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.primaryColor,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           onTap: (value) {

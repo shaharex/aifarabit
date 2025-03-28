@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 
@@ -21,12 +23,16 @@ class HiveService {
     await box.put('tourismData', data.toJson());
   }
 
-  static Future<String?> getTourismData() async {
-    final box = Hive.box('user');
-    final jsonData = box.get('tourismData');
-    if (jsonData == null) return null; 
-    return jsonData; 
+  static Future<TourismData?> getTourismData() async {
+  final box = Hive.box('user');
+  final jsonData = box.get('tourismData', defaultValue: null);
+
+  if (jsonData != null) {
+    return TourismData.fromJson(jsonData);
   }
+  return null;
+}
+
 
   static Future<void> updateUsername(String username) async {
     final box = Hive.box('user');

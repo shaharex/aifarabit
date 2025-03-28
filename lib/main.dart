@@ -55,11 +55,13 @@ void main() async {
       () => CitiesBloc(getCityUseCase: getIt<GetCityUseCase>()));
 
   getIt.registerLazySingleton<TourismDatasource>(() => TourismDatasource());
-  getIt.registerLazySingleton<TourismRepository>(
-    () => TourismRepositoryImpl(tourismDatasource: getIt<TourismDatasource>()));
+  getIt.registerLazySingleton<TourismRepository>(() =>
+      TourismRepositoryImpl(tourismDatasource: getIt<TourismDatasource>()));
 
-  getIt.registerLazySingleton<GetTourismDataUseCase>(() => GetTourismDataUseCase(tourismRepository: getIt<TourismRepository>()));
-  getIt.registerLazySingleton<TourismBloc>(() => TourismBloc(getTourismDataUseCase: getIt<GetTourismDataUseCase>()));
+  getIt.registerLazySingleton<GetTourismDataUseCase>(() =>
+      GetTourismDataUseCase(tourismRepository: getIt<TourismRepository>()));
+  getIt.registerLazySingleton<TourismBloc>(
+      () => TourismBloc(getTourismDataUseCase: getIt<GetTourismDataUseCase>()));
 
   runApp(const MainApp());
 }
@@ -77,11 +79,8 @@ class MainApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: InitializePage(
-            // preferences: ['Adventure', 'Ecotourism', 'BAck to Back'],
-            ),
+        home: InitializePage(),
       ),
     );
   }
 }
-  
