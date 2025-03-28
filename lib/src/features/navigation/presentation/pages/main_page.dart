@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
@@ -106,11 +105,11 @@ class _MainPageState extends State<MainPage> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                        final Uri launchUri = Uri(
-                          scheme: 'tel',
-                          path: '87057402142',
-                        );
-                        launchUrl(launchUri);
+                        // final Uri launchUri = Uri(
+                        //   scheme: 'tel',
+                        //   path: '87057402142',
+                        // );
+                        // launchUrl(launchUri);
                         },
                         child: Container(
                           height: 50,
@@ -140,9 +139,40 @@ class _MainPageState extends State<MainPage> {
                     },
                   )
                 ),
+                Divider(),
                 SizedBox(
-                  height: 10,
+                  height: 50,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          
+                        },
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.local_taxi, color: Colors.blueGrey,size: 30,),
+                            const SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data.services.taxi.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
+                          ]
+                        ),
+                      ),
+                      )
                 ),
+                const SizedBox(height: 10),
                 TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
@@ -210,72 +240,5 @@ class _MainPageState extends State<MainPage> {
         );
       },
     );
-  }
-
-  _buildAttractionList(List<Attraction> data) {
-    return ListView.separated(
-      itemCount: data.length,
-      separatorBuilder: (context, index) {
-        return const SizedBox(width: 20);
-      },
-      itemBuilder: (context, index) {
-        final attraction = data[index];
-        return AttractionsListTile(
-          attraction: attraction,
-        );
-      },
-    );
-  }
-
-  _buildHotelsList(List<Hotel> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final hotel = data[index];
-              return HotelListTile(
-                hotel: hotel,
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  _buildRestaurantsList(List<Restaurant> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final restaurant = data[index];
-              return RestaurantsListTile(restaurant: restaurant);
-            },
-          ),
-        ),
-      ],
-    );
-  }
-  
-  Future<void> launchUrl(Uri launchUri) async {
-    if (await canLaunchUrl(launchUri)) {
-      await launchUrl(launchUri);
-    } else {
-      throw Exception('Could not launch $launchUri');
-    }
   }
 }
