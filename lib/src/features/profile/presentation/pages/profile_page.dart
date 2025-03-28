@@ -144,6 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
               text: 'Logout',
               iconPath: 'logout',
               onTap: () async {
+                await HiveService.clearUser();
                 await FirebaseAuth.instance.signOut();
                 Navigator.pushReplacement(
                   context,

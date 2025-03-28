@@ -19,7 +19,7 @@ class TourismData {
     required this.services,
   });
 
-  factory TourismData.fromJson(Map<String, dynamic> json) {
+  factory TourismData.fromJson(Map<dynamic, dynamic> json) {
     return TourismData(
       city: json['city'],
       longitude: json['longitude'].toDouble(),
@@ -74,7 +74,7 @@ class Hotel {
     required this.type,
   });
 
-  factory Hotel.fromJson(Map<String, dynamic> json) {
+  factory Hotel.fromJson(Map<dynamic, dynamic> json) {
     return Hotel(
       name: json['name'],
       longitude: json['longitude'].toDouble(),
@@ -93,10 +93,12 @@ class Hotel {
       'name': name,
       'longitude': longitude,
       'latitude': latitude,
+      'desc': desc,
       'price': price,
       'rating': rating,
       'address': address,
       'images': images,
+      'type': type,
     };
   }
 }
@@ -118,7 +120,7 @@ class Hospital {
     required this.type,
   });
 
-  factory Hospital.fromJson(Map<String, dynamic> json) {
+  factory Hospital.fromJson(Map<dynamic, dynamic> json) {
     return Hospital(
       name: json['name'],
       longitude: json['longitude'].toDouble(),
@@ -135,6 +137,8 @@ class Hospital {
       'longitude': longitude,
       'latitude': latitude,
       'address': address,
+      'desc': desc,
+      'type': type,
     };
   }
 }
@@ -160,7 +164,7 @@ class Restaurant {
     required this.type,
   });
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) {
+  factory Restaurant.fromJson(Map<dynamic, dynamic> json) {
     return Restaurant(
       name: json['name'],
       longitude: json['longitude'].toDouble(),
@@ -181,6 +185,8 @@ class Restaurant {
       'address': address,
       'price': price,
       'rating': rating,
+      'desc': desc,
+      'type': type,
     };
   }
 }
@@ -202,7 +208,7 @@ class Attraction {
     required this.images,
   });
 
-  factory Attraction.fromJson(Map<String, dynamic> json) {
+  factory Attraction.fromJson(Map<dynamic, dynamic> json) {
     return Attraction(
       name: json['name'],
       longitude: json['longitude'].toDouble(),
@@ -231,7 +237,7 @@ class Services {
 
   Services({required this.taxi, required this.map});
 
-  factory Services.fromJson(Map<String, dynamic> json) {
+  factory Services.fromJson(Map<dynamic, dynamic> json) {
     return Services(
       taxi: ServiceItem.fromJson(json['taxi']),
       map: ServiceItem.fromJson(json['map']),
@@ -252,7 +258,7 @@ class ServiceItem {
 
   ServiceItem({required this.name, required this.link});
 
-  factory ServiceItem.fromJson(Map<String, dynamic> json) {
+  factory ServiceItem.fromJson(Map<dynamic, dynamic> json) {
     return ServiceItem(
       name: json['name'],
       link: json['link'],

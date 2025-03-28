@@ -53,10 +53,11 @@ class _MapPickPageState extends State<MapPickPage> {
   }
 
   Future<void> _getAddressFromLatLng() async {
-    final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=${widget.latLng.latitude},${widget.latLng.longitude}&key=$_googleApiKey';
-    
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=${widget.latLng.latitude},${widget.latLng.longitude}&key=$_googleApiKey';
+
     final response = await http.get(Uri.parse(url));
-    
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       if (data['results'].isNotEmpty) {
@@ -110,10 +111,10 @@ class _MapPickPageState extends State<MapPickPage> {
           print('Distance: $_distance, Duration: $_duration');
 
           List<LatLng> newPolylineCoordinates = [];
-          
+
           final points = data['routes'][0]['overview_polyline']['points'];
           newPolylineCoordinates = _decodePolyline(points);
-          
+
           setState(() {
             _polylineCoordinates = newPolylineCoordinates;
           });
@@ -129,7 +130,8 @@ class _MapPickPageState extends State<MapPickPage> {
                 data['routes'][0]['bounds']['northeast']['lng'],
               ),
             );
-            _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+            _mapController
+                .animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
           }
         } else {
           print('No routes found');
@@ -182,12 +184,13 @@ class _MapPickPageState extends State<MapPickPage> {
   Future<void> _getCurrentLocation() async {
     final position = await LocationService().getCurrentLocation();
     print('Current location: ${position.toString()}');
-    
+
     // Get address from coordinates
-    final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$_googleApiKey';
-    
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=$_googleApiKey';
+
     final response = await http.get(Uri.parse(url));
-    
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       if (data['results'].isNotEmpty) {
@@ -208,7 +211,13 @@ class _MapPickPageState extends State<MapPickPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {},
-        child: IconButton( onPressed: _getCurrentLocation, icon: Icon(Icons.location_on, color: AppColors.iconsColor,)),
+        child: IconButton(
+          onPressed: _getCurrentLocation,
+          icon: Icon(
+            Icons.location_on,
+            color: AppColors.iconsColor,
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -249,8 +258,7 @@ class _MapPickPageState extends State<MapPickPage> {
                     child: Text(
                       'Distance: $_distance\nDuration: $_duration',
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                     width: MediaQuery.of(context).size.width * 0.6,
                   ),
@@ -287,7 +295,6 @@ class _MapPickPageState extends State<MapPickPage> {
                   prefixIcon: const Icon(Icons.search),
                 ),
                 const SizedBox(height: 10),
-                
                 CustomButton(
                   btnColor: Colors.black,
                   textColor: Colors.white,
@@ -327,7 +334,6 @@ class _MapPickPageState extends State<MapPickPage> {
                           '${prediction.description},',
                           style: TextStyle(color: Colors.black),
                         ),
-                        
                       ),
                     );
                   }).toList(),

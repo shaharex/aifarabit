@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
@@ -18,15 +16,18 @@ class TourismBloc extends Bloc<TourismEvent, TourismState> {
     on<GetTourismData>((event, emit) async {
       try {
         emit(const TourismState.loading());
+        final localData = await HiveService.getTourismData();
 
-
-        final tourismData = await getTourismDataUseCase.execute(
+        final tourismData = localData ?? await getTourismDataUseCase.execute(
           country: event.country,
           city: event.city,
           preferences: event.preferences,
         );
 
-        emit(TourismState.success(tourismData));
+        await HiveService.saveTourismData(tourismData);
+
+        print(tourismData);
+        emit(TourismState.success(tourismData, event.country, event.preferences));
       } catch (e) {
         emit(TourismState.failure(e.toString()));
       }
