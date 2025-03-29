@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:deepl_dart/deepl_dart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:ai_farabi/src/core/constants/api_key.dart';
 import 'package:ai_farabi/src/core/widgets/translate_text_field.dart';
 import 'package:ai_farabi/src/core/widgets/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_tts/flutter_tts.dart';
 
 class TranslationPage extends StatefulWidget {
   const TranslationPage({super.key});
@@ -22,6 +22,29 @@ class _TranslationPageState extends State<TranslationPage> {
   String _sourceLang = "EN";
   String _targetLang = "RU";
   final String _baseUrl = 'https://api-free.deepl.com/v2/translate';
+  final FlutterTts flutterTts = FlutterTts();
+
+  Map<String, String> languageCodes = {
+    "EN": "en-US",
+    "RU": "ru-RU",
+    "DE": "de-DE",
+    "FR": "fr-FR",
+    "ZH": "zh-CN",
+    "KO": "ko-KR",
+    "TR": "tr-TR",
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _initTts();
+  }
+
+  Future<void> _initTts() async {
+    await flutterTts.setVolume(1.0);
+    await flutterTts.setSpeechRate(1);
+    await flutterTts.setPitch(1.0);
+  }
 
   Future<String> translateTextWeb() async {
     final response = await http.post(
@@ -49,17 +72,6 @@ class _TranslationPageState extends State<TranslationPage> {
   Future<void> _translateText() async {
     if (_inputController.text.isEmpty) return;
     DeepL deepl = DeepL(authKey: DeepLKey.apiKey);
-    // final translated= deepl.translate.translateText(
-    //   _inputController.text,
-    //   _targetLang,
-    //   sourceLang: _sourceLang,
-    //   // targetLang: _targetLang,
-    // );
-    // final translation = await deepl.translate(
-    //   _inputController.text,
-    //   sourceLang: _sourceLang,
-    //   targetLang: _targetLang,
-    // );
     TextResult result = await deepl.translate.translateText(
       _inputController.text,
       _targetLang,
@@ -69,11 +81,44 @@ class _TranslationPageState extends State<TranslationPage> {
     });
   }
 
+  Future<void> _speak() async {
+    if (_translatedText.isEmpty) return;
+
+    try {
+      String? languageCode = languageCodes[_targetLang];
+      if (languageCode != null) {
+        await flutterTts.setLanguage(languageCode);
+        var result = await flutterTts.speak(_translatedText);
+        if (result == 1) {
+
+        } else {
+          _showError("Failed to initialize speech");
+        }
+      }
+    } catch (e) {
+      _showError("Error during text-to-speech: $e");
+    }
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      // appBar: AppBar(title: const Text("Translator")),
       body: LayoutBuilder(builder: (_, constraints) {
         return SingleChildScrollView(
           child: ConstrainedBox(
@@ -157,14 +202,6 @@ class _TranslationPageState extends State<TranslationPage> {
                     hintText: "Напишите",
                     controller: _inputController,
                   ),
-                  // TextField(
-                  //   controller: _inputController,
-                  //   decoration: const InputDecoration(
-                  //     border: OutlineInputBorder(),
-                  //     hintText: "Enter text to translate",
-                  //   ),
-                  //   maxLines: 5,
-                  // ),
                   const SizedBox(height: 16),
                   CustomButton(
                       text: 'Translate',
@@ -187,15 +224,26 @@ class _TranslationPageState extends State<TranslationPage> {
                             color: _translatedText.isEmpty
                                 ? Colors.grey
                                 : AppColors.iconsColor)),
-                    child: Text(
-                      _translatedText.isEmpty ? 'Translation' : _translatedText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: _translatedText.isEmpty
-                            ? Colors.grey
-                            : AppColors.iconsColor,
-                      ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            _translatedText.isEmpty ? 'Translation' : _translatedText,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: _translatedText.isEmpty
+                                  ? Colors.grey
+                                  : AppColors.iconsColor,
+                            ),
+                          ),
+                        ),
+                        if (_translatedText.isNotEmpty)
+                          IconButton(
+                            icon: Icon(Icons.volume_up, color: AppColors.iconsColor),
+                            onPressed: _speak,
+                          ),
+                      ],
                     ),
                   )
                 ],

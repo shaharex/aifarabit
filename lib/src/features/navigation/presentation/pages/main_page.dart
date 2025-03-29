@@ -106,11 +106,7 @@ class _MainPageState extends State<MainPage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            // final Uri launchUri = Uri(
-                            //   scheme: 'tel',
-                            //   path: '87057402142',
-                            // );
-                            // launchUrl(launchUri);
+                           
                           },
                           child: Container(
                             height: 50,

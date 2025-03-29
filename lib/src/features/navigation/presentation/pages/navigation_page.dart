@@ -49,8 +49,8 @@ class _NavigationPageState extends State<NavigationPage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              activeIcon: SvgPicture.asset('assets/icons/sel_history.svg'),
-              icon: SvgPicture.asset('assets/icons/un_history.svg'),
+              activeIcon: Icon(Icons.translate, color: AppColors.iconsColor),
+              icon: Icon(Icons.translate, color: Colors.black38),
               label: '',
             ),
             BottomNavigationBarItem(
