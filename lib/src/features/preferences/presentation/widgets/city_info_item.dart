@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
 
 class CityItem extends StatelessWidget {
   const CityItem({

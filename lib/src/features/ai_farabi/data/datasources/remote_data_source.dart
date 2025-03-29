@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:jihc_hack/src/core/constants/api_key.dart';
-import 'package:jihc_hack/src/features/ai_farabi/data/models/message_model.dart';
+import 'package:ai_farabi/src/core/constants/api_key.dart';
+import 'package:ai_farabi/src/features/ai_farabi/data/models/message_model.dart';
 
 class RemoteDataSource {
   RemoteDataSource();

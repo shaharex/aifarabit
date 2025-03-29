@@ -1,10 +1,10 @@
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/features/auth/presentation/pages/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/utils/utils.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/register_page.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
+import 'package:ai_farabi/src/core/utils/utils.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/pages/navigation_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});

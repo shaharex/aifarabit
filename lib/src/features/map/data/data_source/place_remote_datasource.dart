@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
+import 'package:ai_farabi/src/features/map/data/models/location_model/place_model.dart';
 
 
 abstract class PlaceRemoteDataSource {

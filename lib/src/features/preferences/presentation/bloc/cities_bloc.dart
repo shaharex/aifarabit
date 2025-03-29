@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
-import 'package:jihc_hack/src/features/preferences/domain/usecases/get_city.dart';
+import 'package:ai_farabi/src/features/preferences/domain/entity/city.dart';
+import 'package:ai_farabi/src/features/preferences/domain/usecases/get_city.dart';
 
 part 'cities_event.dart';
 part 'cities_state.dart';

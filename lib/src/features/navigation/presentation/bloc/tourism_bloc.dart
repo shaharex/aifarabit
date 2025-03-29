@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
-import 'package:jihc_hack/src/features/navigation/domain/usecases/get_tourism_data.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/features/navigation/data/models/tourism.dart';
+import 'package:ai_farabi/src/features/navigation/domain/usecases/get_tourism_data.dart';
 
 part 'tourism_event.dart';
 part 'tourism_state.dart';

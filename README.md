@@ -1,3 +1,3 @@
-# jihc_hack
+# ai_farabi
 
 A new Flutter project.

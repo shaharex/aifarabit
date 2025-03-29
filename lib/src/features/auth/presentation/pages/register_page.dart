@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/core/utils/utils.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/core/utils/utils.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/features/auth/presentation/pages/login_page.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/pages/preferences_page.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({super.key});

@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/widgets/custom_button.dart';
+import 'package:ai_farabi/src/core/widgets/custom_button.dart';
 
 class HeadLineWidget extends StatelessWidget {
   const HeadLineWidget({

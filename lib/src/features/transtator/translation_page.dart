@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:deepl_dart/deepl_dart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
-import 'package:jihc_hack/src/core/widgets/translate_text_field.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/constants/api_key.dart';
+import 'package:ai_farabi/src/core/widgets/translate_text_field.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class TranslationPage extends StatefulWidget {

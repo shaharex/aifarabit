@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/custom_button.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/widgets/custom_button.dart';
+import 'package:ai_farabi/src/features/ai_farabi/presentation/pages/chat_page.dart';
+import 'package:ai_farabi/src/features/navigation/data/models/tourism.dart';
 
 class AttractionsListTile extends StatelessWidget {
   const AttractionsListTile({

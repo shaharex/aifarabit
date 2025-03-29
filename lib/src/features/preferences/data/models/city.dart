@@ -1,4 +1,4 @@
-import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
+import 'package:ai_farabi/src/features/preferences/domain/entity/city.dart';
 
 class CityModel {
   final String city;

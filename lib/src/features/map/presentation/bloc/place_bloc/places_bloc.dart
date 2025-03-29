@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
-import 'package:jihc_hack/src/features/map/domain/use_case/get_place_usecase.dart';
+import 'package:ai_farabi/src/features/map/data/models/location_model/place_model.dart';
+import 'package:ai_farabi/src/features/map/domain/use_case/get_place_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

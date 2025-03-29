@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/custom_app_bar.dart';
-import 'package:jihc_hack/src/features/ai_farabi/data/datasources/remote_data_source.dart';
-import 'package:jihc_hack/src/features/ai_farabi/data/repository/ai_repository_impl.dart';
-import 'package:jihc_hack/src/features/ai_farabi/domain/enitity/message.dart';
-import 'package:jihc_hack/src/features/ai_farabi/domain/usecases/send_message.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/bloc/ai_bloc.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/input_field.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/widgets/custom_app_bar.dart';
+import 'package:ai_farabi/src/features/ai_farabi/data/datasources/remote_data_source.dart';
+import 'package:ai_farabi/src/features/ai_farabi/data/repository/ai_repository_impl.dart';
+import 'package:ai_farabi/src/features/ai_farabi/domain/enitity/message.dart';
+import 'package:ai_farabi/src/features/ai_farabi/domain/usecases/send_message.dart';
+import 'package:ai_farabi/src/features/ai_farabi/presentation/bloc/ai_bloc.dart';
+import 'package:ai_farabi/src/features/ai_farabi/presentation/widgets/input_field.dart';
+import 'package:ai_farabi/src/features/ai_farabi/presentation/widgets/widgets.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key, required this.place, required this.destination, required this.latLng});

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/auth_gate.dart';
-import 'package:jihc_hack/src/features/profile/presentation/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/features/auth/presentation/pages/auth_gate.dart';
+import 'package:ai_farabi/src/features/profile/presentation/widgets/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
