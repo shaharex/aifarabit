@@ -1,11 +1,7 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
@@ -19,8 +15,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
-
   @override
   void initState() {
     super.initState();
@@ -103,13 +97,13 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ],
                 ),
-                TabBar(
+                const TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
                   indicatorColor: Colors.black,
                   tabs: [
-                    Tab(text: "History"),
                     Tab(text: "Attractions"),
+                    Tab(text: "History"),
                     Tab(text: "To eat"),
                   ],
                 ),
@@ -131,26 +125,26 @@ class _MainPageState extends State<MainPage> {
                         },
                       ),
                       ListView.separated(
-                        itemCount: data.attractions.length,
+                        itemCount: data.hotels.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
                         },
                         itemBuilder: (context, index) {
-                          final attraction = data.attractions[index];
-                          return AttractionsListTile(
-                            attraction: attraction,
+                          final hotel = data.hotels[index];
+                          return HotelListTile(
+                            hotel: hotel,
                           );
                         },
                       ),
                       ListView.separated(
-                        itemCount: data.attractions.length,
+                        itemCount: data.restaurants.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
                         },
                         itemBuilder: (context, index) {
-                          final attraction = data.attractions[index];
-                          return AttractionsListTile(
-                            attraction: attraction,
+                          final restaurant = data.restaurants[index];
+                          return RestaurantListTile(
+                            restaurant: restaurant,
                           );
                         },
                       ),
@@ -162,69 +156,10 @@ class _MainPageState extends State<MainPage> {
           ),
           failure: (message) => Text(message),
           orElse: () {
-            return Text('Something went wrong. Try again later');
+            return const Text('Something went wrong. Try again later');
           },
         );
       },
-    );
-  }
-
-  _buildAttractionList(List<Attraction> data) {
-    return ListView.separated(
-      itemCount: data.length,
-      separatorBuilder: (context, index) {
-        return const SizedBox(width: 20);
-      },
-      itemBuilder: (context, index) {
-        final attraction = data[index];
-        return AttractionsListTile(
-          attraction: attraction,
-        );
-      },
-    );
-  }
-
-  _buildHotelsList(List<Hotel> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final hotel = data[index];
-              return HotelListTile(
-                hotel: hotel,
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  _buildRestaurantsList(List<Restaurant> data) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
-            itemBuilder: (context, index) {
-              final restaurant = data[index];
-              return RestaurantsListTile(restaurant: restaurant);
-            },
-          ),
-        ),
-      ],
     );
   }
 }

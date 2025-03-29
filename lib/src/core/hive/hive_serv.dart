@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 
@@ -7,6 +5,7 @@ class HiveService {
   static Future<void> init() async {
     await Hive.initFlutter();
     await Hive.openBox('user');
+    await Hive.openBox('imagesCache');
   }
 
   static Future<void> saveUser(

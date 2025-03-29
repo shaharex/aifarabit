@@ -20,7 +20,6 @@ class CityItem extends StatelessWidget {
         width: double.infinity,
         height: 125,
         decoration: BoxDecoration(
-          color: Colors.blue.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
