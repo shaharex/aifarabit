@@ -64,8 +64,13 @@ class CityItem extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  CustomButton(text: 'text', onTap: onTap, textColor: Colors.white, btnColor: AppColors.iconsColor, height: 30,)
-                  
+                  CustomButton(
+                    text: 'Choose City',
+                    onTap: onTap,
+                    textColor: Colors.white,
+                    btnColor: AppColors.iconsColor,
+                    height: 30,
+                  )
                 ],
               ),
             ),
