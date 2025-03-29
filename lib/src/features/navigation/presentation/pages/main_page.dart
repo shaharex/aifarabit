@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/bloc/tourism_bloc.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/widgets/headline_widget.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/widgets/widgets.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/pages/preferences_page.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {

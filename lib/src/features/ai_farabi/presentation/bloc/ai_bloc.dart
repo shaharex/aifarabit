@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/features/ai_farabi/domain/enitity/message.dart';
-import 'package:jihc_hack/src/features/ai_farabi/domain/usecases/send_message.dart';
+import 'package:ai_farabi/src/features/ai_farabi/domain/enitity/message.dart';
+import 'package:ai_farabi/src/features/ai_farabi/domain/usecases/send_message.dart';
 
 part 'ai_event.dart';
 part 'ai_state.dart';

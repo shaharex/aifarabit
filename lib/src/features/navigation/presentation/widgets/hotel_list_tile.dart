@@ -1,12 +1,12 @@
+import 'package:ai_farabi/src/core/constants/api_key.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/widgets/custom_button.dart';
+import 'package:ai_farabi/src/features/ai_farabi/presentation/pages/chat_page.dart';
+import 'package:ai_farabi/src/features/navigation/data/models/tourism.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/custom_button.dart';
-import 'package:jihc_hack/src/features/ai_farabi/presentation/pages/chat_page.dart';
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelListTile extends StatefulWidget {
@@ -138,17 +138,24 @@ class _HotelListTileState extends State<HotelListTile> {
                   ),
                 ),
               ),
-              Align(
+               Align(
                 alignment: Alignment.bottomRight,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.star, color: Colors.black, size: 16),
-                    Text(' ${widget.hotel.rating}',
-                        style: const TextStyle(fontSize: 16)),
+                    Text(' ${widget.hotel.rating}', style: const TextStyle(fontSize: 16)),
                   ],
                 ),
               )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Price'),
+              Text("\$ ${widget.hotel.price}"),
+              Text("${widget.hotel.rating}"),
             ],
           ),
           Text(widget.hotel.address),

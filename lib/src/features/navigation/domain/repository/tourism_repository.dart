@@ -1,4 +1,4 @@
-import 'package:jihc_hack/src/features/navigation/data/models/tourism.dart';
+import 'package:ai_farabi/src/features/navigation/data/models/tourism.dart';
 
 abstract class TourismRepository {
   Future<TourismData> getTourismData({

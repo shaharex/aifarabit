@@ -1,7 +1,7 @@
 
-import 'package:jihc_hack/src/features/map/data/data_source/place_remote_datasource.dart';
-import 'package:jihc_hack/src/features/map/data/models/location_model/place_model.dart';
-import 'package:jihc_hack/src/features/map/domain/repositories/place_repository.dart';
+import 'package:ai_farabi/src/features/map/data/data_source/place_remote_datasource.dart';
+import 'package:ai_farabi/src/features/map/data/models/location_model/place_model.dart';
+import 'package:ai_farabi/src/features/map/domain/repositories/place_repository.dart';
 
 class PlaceRepositoryImpl implements PlaceRepository {
   final PlaceRemoteDataSource remoteDataSource;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/core/widgets/custom_button.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
-import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/widgets/city_info_item.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/core/widgets/custom_button.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/pages/navigation_page.dart';
+import 'package:ai_farabi/src/features/preferences/domain/entity/city.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/bloc/cities_bloc.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/widgets/city_info_item.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/widgets/widgets.dart';
 
 class ChooseCityPage extends StatefulWidget {
   const ChooseCityPage({

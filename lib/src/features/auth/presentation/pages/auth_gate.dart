@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/hive/hive_serv.dart';
-import 'package:jihc_hack/src/features/auth/presentation/pages/login_page.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/hive/hive_serv.dart';
+import 'package:ai_farabi/src/features/auth/presentation/pages/login_page.dart';
+import 'package:ai_farabi/src/features/navigation/presentation/pages/navigation_page.dart';
 
 class InitializePage extends StatelessWidget {
   const InitializePage({super.key});

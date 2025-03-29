@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/widgets/custom_button.dart';
-import 'package:jihc_hack/src/core/widgets/custom_text_field.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/pages/choose_city_page.dart';
-import 'package:jihc_hack/src/features/preferences/presentation/widgets/preferences_chip.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/widgets/custom_button.dart';
+import 'package:ai_farabi/src/core/widgets/custom_text_field.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/pages/choose_city_page.dart';
+import 'package:ai_farabi/src/features/preferences/presentation/widgets/preferences_chip.dart';
 
 class PreferencesPage extends StatefulWidget {
   const PreferencesPage({super.key});

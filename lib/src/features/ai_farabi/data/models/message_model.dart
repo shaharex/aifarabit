@@ -1,4 +1,4 @@
-import 'package:jihc_hack/src/features/ai_farabi/domain/enitity/message.dart';
+import 'package:ai_farabi/src/features/ai_farabi/domain/enitity/message.dart';
 
 class MessageModel {
   final String content;

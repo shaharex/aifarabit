@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:jihc_hack/src/core/constants/app_colors.dart';
-import 'package:jihc_hack/src/core/utils/utils.dart';
-import 'package:jihc_hack/src/core/widgets/widgets.dart';
+import 'package:ai_farabi/src/core/constants/app_colors.dart';
+import 'package:ai_farabi/src/core/utils/utils.dart';
+import 'package:ai_farabi/src/core/widgets/widgets.dart';
 
 class MapPickPage extends StatefulWidget {
   final LatLng latLng;
