@@ -1,10 +1,11 @@
+import 'package:ai_farabi/src/features/image_detect/presentation/pages/image_detect_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ai_farabi/src/core/constants/app_colors.dart';
 import 'package:ai_farabi/src/features/map/map_page.dart';
 import 'package:ai_farabi/src/features/navigation/presentation/pages/main_page.dart';
-import 'package:ai_farabi/src/features/profile/presentation/pages/profile_page.dart';
+import 'package:ai_farabi/src/features/profile/pages/profile_page.dart';
 import 'package:ai_farabi/src/features/transtator/translation_page.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _NavigationPageState extends State<NavigationPage> {
       body: [
         MainPage(),
         MapPickPage(latLng: LatLng(0, 0)),
+        ImageDetectPage(),
         TranslationPage(),
         ProfilePage(),
       ][currentIndex],
@@ -46,6 +48,11 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset('assets/icons/sel_map.svg'),
               icon: SvgPicture.asset('assets/icons/un_map.svg'),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: Icon(Icons.camera, color: AppColors.iconsColor),
+              icon: Icon(Icons.camera, color: Colors.black38),
               label: '',
             ),
             BottomNavigationBarItem(

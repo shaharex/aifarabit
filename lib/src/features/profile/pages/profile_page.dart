@@ -4,7 +4,7 @@ import 'package:ai_farabi/src/core/constants/app_colors.dart';
 import 'package:ai_farabi/src/core/hive/hive_serv.dart';
 import 'package:ai_farabi/src/core/widgets/widgets.dart';
 import 'package:ai_farabi/src/features/auth/auth_gate.dart';
-import 'package:ai_farabi/src/features/profile/presentation/widgets/widgets.dart';
+import 'package:ai_farabi/src/features/profile/widgets/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

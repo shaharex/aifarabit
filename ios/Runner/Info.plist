@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Доступ к камере необходим для сканирования изображений.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Доступ к микрофону необходим для записи видео.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 		<string>This application needs the speech recognition permission</string>
 	<key>NSMicrophoneUsageDescription</key>
