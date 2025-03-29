@@ -85,7 +85,6 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -96,31 +95,44 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
               borderRadius: BorderRadius.circular(12),
               color: Colors.grey.shade300,
             ),
-            child: isLoading
-                ? Center(
-                    child: CircularProgressIndicator.adaptive(
-                      backgroundColor: AppColors.iconsColor,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        Colors.grey,
-                      ),
-                    ),
-                  )
-                : imageUrl != null
-                    ? CachedNetworkImage(
-                        imageUrl: imageUrl!,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator.adaptive(
-                            backgroundColor: AppColors.iconsColor,
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              Colors.grey,
-                            ),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                isLoading
+                    ? Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: AppColors.iconsColor,
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                            Colors.grey,
                           ),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.image_not_supported, size: 50),
                       )
-                    : Image.asset('assets/restaurant.jpg', fit: BoxFit.cover),
+                    : imageUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: imageUrl!,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator.adaptive(
+                                backgroundColor: AppColors.iconsColor,
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  Colors.grey,
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.image_not_supported, size: 50),
+                          )
+                        : Image.asset(
+                            'assets/restaurant.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                Container(
+                    child: Text(
+                  widget.restaurant.type,
+                  style: TextStyle(color: Colors.white),
+                ))
+              ],
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -138,9 +150,9 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
                     fontSize: 22,
                   ),
                 ),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     const Text(
                       'Estimated Check:',
@@ -160,6 +172,7 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
                     )
                   ],
                 ),
+                const SizedBox(height: 10),
                 CustomButton(
                   text: 'Learn more',
                   onTap: () {

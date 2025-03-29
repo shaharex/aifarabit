@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:jihc_hack/src/core/constants/api_key.dart';
 
 class UnsplashService {
   static const String _baseUrl = "https://api.unsplash.com";
-  static const String _accessKey = "YOUR_UNSPLASH_ACCESS_KEY";
+  static const String _accessKey = ApiKey.unsplashApiKey;
 
   final Dio _dio = Dio();
 

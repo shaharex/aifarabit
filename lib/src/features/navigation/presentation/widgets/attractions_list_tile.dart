@@ -138,13 +138,13 @@ class _AttractionsListTileState extends State<AttractionsListTile> {
                   ),
                 ),
               ),
-              const Align(
+               Align(
                 alignment: Alignment.bottomRight,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.star, color: Colors.black, size: 16),
-                    Text(' 4.99', style: TextStyle(fontSize: 16)),
+                    const Icon(Icons.star, color: Colors.black, size: 16),
+                    Text(widget.attraction.latitude.toString(), style: TextStyle(fontSize: 16)),
                   ],
                 ),
               )

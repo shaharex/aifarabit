@@ -6,7 +6,6 @@ import 'package:jihc_hack/src/features/navigation/presentation/bloc/tourism_bloc
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/headline_widget.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/widgets/widgets.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/pages/preferences_page.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
@@ -85,7 +84,11 @@ class _MainPageState extends State<MainPage> {
                         text: 'NEW JOURNEY',
                         btnText: 'Start',
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const PreferencesPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PreferencesPage()));
                         },
                         imagePath: 'assets/hotel_2.jpg',
                       ),
@@ -94,83 +97,115 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height: data.hospitals.length * 50,
-                  child: ListView.separated(
-                    itemCount: data.hospitals.length,
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(width: 10);
-                    },
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                        // final Uri launchUri = Uri(
-                        //   scheme: 'tel',
-                        //   path: '87057402142',
-                        // );
-                        // launchUrl(launchUri);
-                        },
-                        child: Container(
-                          height: 50,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.local_hospital, color: Colors.red,size: 30,),
-                            const SizedBox(width: 10),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(data.hospitals[index].name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                                Text(data.hospitals[index].address.length > 30 ? data.hospitals[index].address.substring(0, 30) + '...' : data.hospitals[index].address, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),),
-                              ],
+                    height: data.hospitals.length * 50,
+                    child: ListView.separated(
+                      itemCount: data.hospitals.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(width: 10);
+                      },
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            // final Uri launchUri = Uri(
+                            //   scheme: 'tel',
+                            //   path: '87057402142',
+                            // );
+                            // launchUrl(launchUri);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            const Spacer(),
-                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
-                          ]
-                        ),
-                      ),
-                      );
-                    },
-                  )
-                ),
+                            child: Row(children: [
+                              const Icon(
+                                Icons.local_hospital,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        data.hospitals[index].name,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        data.hospitals[index].address,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 30),
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey,
+                                size: 15,
+                              ),
+                            ]),
+                          ),
+                        );
+                      },
+                    )),
                 Divider(),
                 SizedBox(
-                  height: 50,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          
-                        },
-                        child: Container(
-                          height: 50,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
+                    height: 50,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {},
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.local_taxi, color: Colors.blueGrey,size: 30,),
-                            const SizedBox(width: 10),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(data.services.taxi.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Icon(Icons.arrow_forward_ios, color: Colors.grey,size: 15,),
-                          ]
-                        ),
+                        child: Row(children: [
+                          const Icon(
+                            Icons.local_taxi,
+                            color: Colors.blueGrey,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.services.taxi.name,
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                            size: 15,
+                          ),
+                        ]),
                       ),
-                      )
-                ),
-                const SizedBox(height: 10),
+                    )),
                 const TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
@@ -202,7 +237,6 @@ class _MainPageState extends State<MainPage> {
                       ListView.separated(
                         itemCount: data.hotels.length,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: data.attractions.length,
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 20);
                         },
