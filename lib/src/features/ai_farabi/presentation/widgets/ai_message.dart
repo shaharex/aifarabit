@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ai_farabi/src/core/constants/app_colors.dart';
-import 'package:ai_farabi/src/features/map/presentation/page/map_page.dart';
+import 'package:ai_farabi/src/features/map/map_page.dart';
 
 // ignore: must_be_immutable
 class AiMessage extends StatelessWidget {

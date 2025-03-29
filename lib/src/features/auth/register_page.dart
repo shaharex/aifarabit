@@ -4,7 +4,7 @@ import 'package:ai_farabi/src/core/constants/app_colors.dart';
 import 'package:ai_farabi/src/core/hive/hive_serv.dart';
 import 'package:ai_farabi/src/core/utils/utils.dart';
 import 'package:ai_farabi/src/core/widgets/widgets.dart';
-import 'package:ai_farabi/src/features/auth/presentation/pages/login_page.dart';
+import 'package:ai_farabi/src/features/auth/login_page.dart';
 import 'package:ai_farabi/src/features/preferences/presentation/pages/preferences_page.dart';
 
 class RegisterPage extends StatefulWidget {

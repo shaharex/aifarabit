@@ -5,12 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ai_farabi/firebase_options.dart';
-import 'package:ai_farabi/src/features/auth/presentation/pages/auth_gate.dart';
-import 'package:ai_farabi/src/features/map/data/data_source/place_remote_datasource.dart';
-import 'package:ai_farabi/src/features/map/data/repositories/place_repository_impl.dart';
-import 'package:ai_farabi/src/features/map/domain/repositories/place_repository.dart';
-import 'package:ai_farabi/src/features/map/domain/use_case/get_place_usecase.dart';
-import 'package:ai_farabi/src/features/map/presentation/bloc/place_bloc/places_bloc.dart';
+import 'package:ai_farabi/src/features/auth/auth_gate.dart';
 import 'package:ai_farabi/src/features/navigation/data/datasources/tourism_datasource.dart';
 import 'package:ai_farabi/src/features/navigation/data/repository/tourism_repository_impl.dart';
 import 'package:ai_farabi/src/features/navigation/domain/repository/tourism_repository.dart';
@@ -34,17 +29,6 @@ void main() async {
   await Geolocator.requestPermission();
 
   getIt.registerLazySingleton<Dio>(() => Dio());
-  getIt.registerLazySingleton<PlaceRemoteDataSource>(
-      () => PlaceRemoteDataSourceImpl(getIt<Dio>()));
-
-  getIt.registerLazySingleton<PlaceRepository>(
-      () => PlaceRepositoryImpl(getIt<PlaceRemoteDataSource>()));
-
-  getIt.registerLazySingleton<GetPlacesUseCase>(
-      () => GetPlacesUseCase(getIt<PlaceRepository>()));
-
-  getIt.registerLazySingleton(() => PlacesBloc(getIt<GetPlacesUseCase>()));
-
   getIt.registerLazySingleton<CityRemoteDatasource>(
       () => CityRemoteDatasource());
   getIt.registerLazySingleton<CityRepository>(() =>
@@ -73,7 +57,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => GetIt.instance<PlacesBloc>()),
         BlocProvider(create: (context) => GetIt.instance<CitiesBloc>()),
         BlocProvider(create: (context) => GetIt.instance<TourismBloc>()),
       ],

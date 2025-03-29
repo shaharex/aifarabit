@@ -1,5 +1,5 @@
 import 'package:ai_farabi/src/core/constants/app_colors.dart';
-import 'package:ai_farabi/src/features/auth/presentation/pages/register_page.dart';
+import 'package:ai_farabi/src/features/auth/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_farabi/src/core/utils/utils.dart';
