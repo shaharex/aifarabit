@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool isObscure = true;
   final FirebaseServices _auth = FirebaseServices();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -57,53 +58,84 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomTextField(
-                        hintText: "Почта",
-                        controller: _emailController,
-                        textChanged: (text) {
-                          setState(() {});
-                        },
-                        prefixIcon: Icon(
-                          Icons.email_outlined,
-                          color: AppColors.iconsColor,
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomTextField(
+                          validator: (v) {
+                            if(v == null || v.isEmpty){
+                              return 'Please fill up all fields';
+                            }
+                              final RegExp emailRegExp = RegExp(
+                                r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                              );
+                              if (!emailRegExp.hasMatch(v)) {
+                                return 'Please wride valid email';
+                              }
+                            else{
+                              return null;
+                            }
+                          },
+                          hintText: "Почта",
+                          controller: _emailController,
+                          textChanged: (text) {
+                            setState(() {});
+                          },
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: AppColors.iconsColor,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(
-                        hintText: "Пароль",
-                        controller: _passwordController,
-                        textChanged: (text) {
-                          setState(() {});
-                        },
-                        isObscure: isObscure,
-                        onObscure: () {
-                          setState(() {
-                            isObscure = !isObscure;
-                          });
-                        },
-                        prefixIcon: Icon(
-                          Icons.lock_outline,
-                          color: AppColors.iconsColor,
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          validator: (v) {
+                            if(v == null || v.isEmpty){
+                              return 'Please fill up all fields';
+                            } if(v.length < 8){
+                              return 'Password length must be at least 8';
+                            }
+                            else{
+                              return null;
+                            }
+                          },
+                          hintText: "Пароль",
+                          controller: _passwordController,
+                          textChanged: (text) {
+                            setState(() {});
+                          },
+                          isObscure: isObscure,
+                          onObscure: () {
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          },
+                          prefixIcon: Icon(
+                            Icons.lock_outline,
+                            color: AppColors.iconsColor,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      CustomButton(
-                        onTap: _stateLogin,
-                        text: "Войти",
-                        textColor: _passwordController.text.isEmpty ||
-                                _emailController.text.isEmpty
-                            ? const Color(0xffB1B1B1)
-                            : Colors.white,
-                        btnColor: _passwordController.text.isEmpty ||
-                                _emailController.text.isEmpty
-                            ? const Color(0xffE3E3E3)
-                            : Colors.black,
-                      ),
-                      const SizedBox(height: 10),
-                    ],
+                        const SizedBox(height: 20),
+                        CustomButton(
+                          onTap: (){
+                            if(_formKey.currentState!.validate()){
+                              _stateLogin();
+                            }
+                          },
+                          text: "Войти",
+                          textColor: _passwordController.text.isEmpty ||
+                                  _emailController.text.isEmpty
+                              ? const Color(0xffB1B1B1)
+                              : Colors.white,
+                          btnColor: _passwordController.text.isEmpty ||
+                                  _emailController.text.isEmpty
+                              ? const Color(0xffE3E3E3)
+                              : Colors.black,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,7 +223,12 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => NavigationPage()));
     } else {
-      print("failed");
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Your account not registered or valida password', style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.black,
+      ),
+    );
     }
   }
 }

@@ -69,7 +69,7 @@ class HeadLineWidget extends StatelessWidget {
                 ),
                 CustomButton(
                   text: btnText,
-                  onTap: () {},
+                  onTap: onTap,
                   height: 30,
                   textColor: icon == null ? Colors.white : Colors.black,
                   btnColor: icon == null ? Colors.black : Colors.white,

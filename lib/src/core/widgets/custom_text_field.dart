@@ -4,6 +4,7 @@ import 'package:jihc_hack/src/core/constants/app_colors.dart';
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   CustomTextField({
+
     super.key,
     required this.hintText,
     required this.controller,
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.prefixIcon,
     this.maxLine = 1,
     this.borderColor,
+    this.validator
   });
 
   final String hintText;
@@ -23,10 +25,12 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final int? maxLine;
   final Color? borderColor;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       style: TextStyle(color: AppColors.iconsColor),
       controller: controller,
       onChanged: textChanged,

@@ -1,14 +1,8 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
 import 'package:jihc_hack/src/core/constants/app_colors.dart';
 import 'package:jihc_hack/src/core/hive/hive_serv.dart';
 import 'package:jihc_hack/src/core/widgets/custom_button.dart';
-import 'package:jihc_hack/src/features/navigation/presentation/pages/main_page.dart';
 import 'package:jihc_hack/src/features/navigation/presentation/pages/navigation_page.dart';
 import 'package:jihc_hack/src/features/preferences/domain/entity/city.dart';
 import 'package:jihc_hack/src/features/preferences/presentation/bloc/cities_bloc.dart';
@@ -37,6 +31,18 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
     'America',
     'Germany',
     'Denmark',
+    'Kazakhstan',
+    'Russia',
+    'Uzbekistan',
+    'Tajikistan',
+    'Kyrgyzstan',
+    'Turkey',
+    'Azerbaijan',
+    'Georgia',
+    'Brazil',
+    'Argentina',
+    'Mexico',
+    'Colombia',
   ];
 
   @override
@@ -93,15 +99,17 @@ class _ChooseCityPageState extends State<ChooseCityPage> {
         itemBuilder: (context, index) {
           final city = cities[index];
           return CityItem(
-              title: city.city,
-              subtitle: city.description,
-              onTap: () {
+            imagePath: 'assets/city.jpg',
+            title: city.city,
+            subtitle: city.description,
+            onTap: () {
                 HiveService.saveUser(
-                  'Yernasip',
+                  '',
                   city.city,
                   widget.preferences,
                   dropdownCountry
                 );
+                HiveService.clearTourismData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

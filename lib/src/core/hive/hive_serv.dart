@@ -62,4 +62,8 @@ class HiveService {
   static Future<void> clearUser() async {
     await Hive.box('user').clear();
   }
+
+  static Future<void> clearTourismData() async {
+    await Hive.box('user').delete('tourismData');
+  }
 }

@@ -45,11 +45,11 @@ class StructureUtilHelper {
       ],
       "services": {
         "taxi": {
-          "name": "Taxi Service Name",
+          "name": "Taxi Service Name like Yandex or Indrive or Uber",
           "link": "App Download Link",
         },
         "map": {
-          "name": "Map Service Name",
+          "name": "Map Service Name like Google Maps or Yandex Maps or Apple Maps",
           "link": "App Download Link",
         }
       },
