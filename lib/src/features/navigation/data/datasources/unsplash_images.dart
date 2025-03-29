@@ -1,5 +1,5 @@
+import 'package:ai_farabi/src/core/constants/api_key.dart';
 import 'package:dio/dio.dart';
-import 'package:jihc_hack/src/core/constants/api_key.dart';
 
 class UnsplashService {
   static const String _baseUrl = "https://api.unsplash.com";
