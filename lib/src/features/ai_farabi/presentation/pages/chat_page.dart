@@ -12,6 +12,7 @@ import 'package:ai_farabi/src/features/ai_farabi/domain/usecases/send_message.da
 import 'package:ai_farabi/src/features/ai_farabi/presentation/bloc/ai_bloc.dart';
 import 'package:ai_farabi/src/features/ai_farabi/presentation/widgets/input_field.dart';
 import 'package:ai_farabi/src/features/ai_farabi/presentation/widgets/widgets.dart';
+import 'package:lottie/lottie.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key, required this.place, required this.destination, required this.latLng});
@@ -63,20 +64,6 @@ class _ChatViewState extends State<ChatView> {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
-            // FutureBuilder<MessageModel>(
-            //   future: futureMessage,
-            //   builder: (context, snapshot) {
-            //     if (snapshot.connectionState == ConnectionState.waiting) {
-            //       return CircularProgressIndicator();
-            //     } else if (snapshot.hasError) {
-            //       return Text("Ошибка: ${snapshot.error}");
-            //     } else if (snapshot.hasData) {
-            //       return Text(snapshot.data!.content);
-            //     } else {
-            //       return Text("Нет данных");
-            //     }
-            //   },
-            // ),
             Platform.isIOS ? const SizedBox(height: 35) : const SizedBox(),
             CustomAppBar(
               text: widget.place,
@@ -132,26 +119,19 @@ class _ChatViewState extends State<ChatView> {
                     itemBuilder: (context, index) {
                       if (index == state.messages.length) {
                         if (state is Thinking) {
-                          return Center(
-                            child: Padding(
-                                padding: const EdgeInsets.all(0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.backgroundColor,
-                                    // borderRadius: BorderRadius.circular(15)
-                                  ),
-                                  child: Center(
-                                    child: CircularProgressIndicator.adaptive(
-                                      backgroundColor: AppColors.iconsColor,
-                                      valueColor:
-                                          const AlwaysStoppedAnimation<Color>(
-                                        Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                )),
+                          return Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                            child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset('assets/logo.png', width: 35, height: 35,),
+                              Lottie.asset('assets/animations/thinking.json', width: 36, height: 36)
+                            ],
+                          ),
                           );
                         } else {
                           return SizedBox();

@@ -218,7 +218,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height: 2100,
+                  height: 1800,
                   child: TabBarView(
                     children: [
                       ListView.separated(

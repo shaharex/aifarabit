@@ -88,7 +88,7 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 150,
+            height: 250,
             width: 150,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Estimated Check:',
+                      'Cost:',
                       style: TextStyle(
                         fontSize: 18,
                       ),
@@ -165,14 +165,18 @@ class _RestaurantListTileState extends State<RestaurantListTile> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('${widget.restaurant.price}',
+                          Text('${widget.restaurant.price}\$',
                               style: const TextStyle(fontSize: 16)),
                         ],
                       ),
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10,),
+                Text('Address:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                Text('${widget.restaurant.address}\$',
+                              style: const TextStyle(fontSize: 16)),
+                const SizedBox(height: 20),
                 CustomButton(
                   text: 'Learn more',
                   onTap: () {

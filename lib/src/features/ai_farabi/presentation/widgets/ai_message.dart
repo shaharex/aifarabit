@@ -48,7 +48,7 @@ class AiMessage extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   message,
-                  style: TextStyle(color: AppColors.iconsColor, fontSize: 20),
+                  style: TextStyle(color: AppColors.iconsColor, fontSize: 17),
                 ),
                 const SizedBox(height: 10),
                 index != 0
